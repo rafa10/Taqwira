@@ -1,6 +1,8 @@
-arenafootball
+TAQWIRA
 ==============
 
 A Symfony project created on Oct, 2017.
-"# Taqwira " 
-" Taqwira " 
+
+- Taqwira: Plateforme management and booking football arena
+ 
+Created by Rafa
