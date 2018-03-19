@@ -1,0 +1,106 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
+    <div class="modal-content">
+        <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau terrain</h5><br>
+        {#<div class="divider"></div><br>#}
+        {{ form_row(form._token) }}
+        <div class="row">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <div class="input-field col s12">
+                    <label class="active">Centre*</label>
+                    {{ form_widget(form.center) }}
+                </div>
+            {% else %}
+                <div class="input-field col s12 hide">
+                    <input type="hidden" id="field_center" name="field[center]" required="required" value="{{ app.user.center.id }}"/>
+                </div>
+            {% endif %}
+            <div class="input-field col m6 s12">
+                <label for="field_name" class="">Nom*</label>
+                {{ form_widget(form.name, {'attr': {'data-error': '.name'}}) }}
+                <div class="name"></div>
+            </div>
+            <div class="input-field col m6 s12">
+                <label for=field_capacity" class="">Capacité*</label>
+                {{ form_widget(form.capacity, {'attr': {'data-error': '.capacity'}}) }}
+                <div class="capacity"></div>
+            </div>
+            <div class="input-field col s12">
+                {{ form_widget(form.description, {'attr': {'data-error': '.description'}}) }}
+                <label for="field_description" class="">Description*</label>
+                <div class="description"></div>
+            </div>
+            <div class="input-field col s12">
+                {{ form_widget(form.session, {'attr': {'data-error': '.session'}}) }}
+                <label for="field_session">Séances*</label>
+                <div class="session"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+        <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+    </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+<script>
+
+//    $(document).ready(function(){
+
+        $("#formValidate").validate({
+            rules: {
+                'field[name]' : {
+                    required: true,
+                    minlength: 2
+                },
+                'field[capacity]': {
+                    required: true,
+                    maxlength: 2
+                },
+                'field[description]': {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 300
+                },
+                'field[session][]': {
+                    required: true
+                }
+            },
+            //For custom messages
+            messages: {
+                'field[name]':{
+                    required: "Saisier le nom de terrain",
+                    minlength: "minimum 2 characteres"
+                },
+                'field[capacity]':{
+                    required: "Saisier la capacité du terrain",
+                    maxlength: "maximum 2 nombre"
+                },
+                'field[description]':{
+                    required: "Saisier une description pour ce terrain ",
+                    minlength: "minimum 2 characteres",
+                    maxlength: "maximum 300 characters"
+                },
+                'field[session][]':{
+                    required: "Selectionner une séances"
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
+//    });
+
+</script>
+

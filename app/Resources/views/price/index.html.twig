@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% set hideClass = null %} {% if not is_granted('ROLE_SUPER_ADMIN') %}  {% set hideClass = 'hide' %} {% endif %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <h5 class="breadcrumbs-title">Tarifs</h5>
+                        <ol class="breadcrumbs">
+                            <li><a href="/">Dashboard</a></li>
+                            {#<li><a href="#">Utilisateurs</a></li>#}
+                            <li class="active">Tarifs</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs end-->
+
+        <!--start container-->
+        <div class="container">
+            <div class="section">
+                {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
+                <div class="divider"></div>
+                <!--DataTables example-->
+                <div id="table-datatables" class="card-panel">
+                    <p class= "tools"><button type="button" data-href="{{ path('price_new') }}" class="btn-floating waves-effect waves-light green modal_trigger"><i class="mdi-content-add-circle green-text text-lighten-4"></i></button></p>
+                    <div class="row">
+                        <div class="col s12">
+                            <table id="data-table-simple" class="responsive-table display" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Type</th>
+                                    <th>Jours</th>
+                                    <th>Temps</th>
+                                    <th>Montant</th>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}<th>Centre</th>{% endif %}
+                                    <th class="center-align">Actions</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {% for price in prices %}
+                                    <tr>
+                                        <td>{{ price.id }}</td>
+                                        <td>{{ price.bookingType }}</td>
+                                        <td> {% for item in price.day %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %} </td>
+                                        <td> <div class="chip">De <b>{{ price.Session|first }}</b> à <b>{{ price.Session|last }}</b></div> </td>
+                                        <td>{{ price.amount }} €</td>
+                                        {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ price.center.name }}</div></td>{% endif %}
+                                        <td class="center-align">
+                                            <button type="button" data-href="{{ path('price_edit', { 'id': price.id }) }}" class="btn-floating waves-effect waves-light grey lighten-3 modal_trigger"><i class="mdi-editor-mode-edit grey-text"></i></button>
+                                            <button type="button" data-href="{{ path('price_delete', { 'id': price.id }) }}" class="btn-floating waves-effect waves-light grey lighten-3 red btn-warning-confirm"><i class="mdi-action-delete grey-text"></i></button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--end container-->
+
+    </section>
+    <!-- END CONTENT -->
+
+    <!-- Loader -->
+    {% include 'AppBundle:loader:loader_form.html.twig' %}
+    <!-- end Loader -->
+
+{% endblock body %}

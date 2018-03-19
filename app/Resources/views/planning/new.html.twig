@@ -1,0 +1,71 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form) }}
+    <div class="modal-content">
+        <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau période</h5><br>
+        {#<div class="divider"></div><br>#}
+        {{ form_row(form._token) }}
+        <div class="row">
+            <div class="input-field col s12">
+                <label for=name" class="active">Terrain*</label>
+                {{ form_widget(form.field, {'attr':{'class': 'fieldClass'}}) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s12">
+                <label for=name" class="">Description*</label>
+                {{ form_widget(form.description) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s12">
+                <label for="timepicker" class="active">Date de départ*</label>
+                {{ form_widget(form.date_start, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s12">
+                <label for="time_end" class="active">Date de fin*</label>
+                {{ form_widget(form.date_end, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
+                <div class="errorTxt1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+        <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+    </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+<script>
+    $(function () {
+//        jQuery(document).ready(function() {
+//            console.log("jQuery est prêt !");
+//
+//            $("#appbundle_planning_field").change(function() {
+//                mafonctionchange('timeStart','field');
+//            }).trigger('change');
+//
+//            function mafonctionchange(timeStart, field)
+//            {
+//                $.ajax({
+//                    url: '/edsa-Takwira/web/app_dev.php/planning/time_by_field',
+//                    type: 'POST',
+//                    data:
+//                        {
+//                            id : $("select."+field+"Class option:selected").val(),
+//                            select : timeStart
+//                        },
+//                    dataType: 'json',
+//                    success: function(reponse) {
+//                        $('.'+timeStart+'Class').empty();
+//                        $.each(reponse, function(index, element) {
+//                            $('.'+timeStart+'Class').append('<option value="'+ element.id +'"> '+ element.name +' </option>');
+//                        });
+//                    }
+//                });
+//            }
+//        });
+    });
+</script>
+

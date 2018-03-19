@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{% block title %} Taqwira | Plateforme {% endblock %}</title>
+    <!-- ICONS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CORE CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="invoice">
+            <div class="invoice-header">
+                <div class="row section">
+                    <div class="col s12 m6 l6">
+                        {#<img src="{{ absolute_url(asset('uploads/avatars/'~booking.bill.center.avatar)) }}" width="50" height="50" alt="center logo">#}
+                        <p>Client
+                            <br>
+                            <span class="strong">{{ booking.customer.sexe ~' '~ booking.customer.firstname ~' '~ booking.customer.lastname }}</span>
+                            <br>
+                            <span>{{ booking.customer.email }}</span>
+                            <br>
+                            <span>{{ booking.customer.phone }}</span>
+                            <br>
+                            {#<span></span>#}
+                        </p>
+                    </div>
+
+                    <div class="col s12 m6 l6">
+                        <div class="invoce-company-address right-align">
+                            <span class="invoice-icon"><i class="material-icons blue-grey-text">location_city</i></span>
+
+                            <p><span class="strong">{{ booking.bill.center.name }}</span>
+                                <br>
+                                <span>{{ booking.bill.center.address }}</span>
+                                <br>
+                                <span>{{ booking.bill.center.city ~', '~ booking.bill.center.region }}</span>
+                                <br>
+                                <span>{{ booking.bill.center.cp }}</span>
+                            </p>
+                        </div>
+
+                        <div class="invoce-company-contact right-align">
+                            <span class="invoice-icon"><i class="material-icons blue-grey-text">contact_mail</i></span>
+                            <p><span class="strong">www.taqwira.com</span>
+                                <br>
+                                <span>{{ user.email }}</span>
+                                <br>
+                                {#<span>admin@exampledomain.com</span>#}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="invoice-lable">
+                <div class="row">
+                    <div class="col s12 m3 l3">
+                        <h4 class="black-text invoice-text"><b>Facture</b></h4>
+                    </div>
+                    <div class="col s12 m3 l3 black-text">
+                        <p class="strong">Numéro: <h4 class="header">{{ booking.bill.number }}</h4></p>
+                    </div>
+                    <div class="col s12 m3 l3 black-text">
+                        <p class="strong">Date: <h4 class="header">{{ booking.bill.created|date('d/m/Y') }}</h4></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="invoice-table">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <table class="striped">
+                            <thead>
+                            <tr>
+                                <th data-field="reference">Référence</th>
+                                <th data-field="field">Terrain</th>
+                                <th data-field="date">Date</th>
+                                <th data-field="time">Temps</th>
+                                <th data-field="price">Prix HT</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ booking.reference }}</td>
+                                <td>{{ booking.field.name }}</td>
+                                <td>{{ booking.date|date('d/m/Y') }}</td>
+                                <td>{{ booking.timeStart|date('H:i') }}</td>
+                                <td>{{ booking.price }}</td>
+                            </tr>
+                            {% set tax = booking.price*11/100 %}
+                            {% set amount = booking.price - tax %}
+                            <tr>
+                                <td colspan="3"></td>
+                                <td><b>Sous Total:</b></td>
+                                <td>€{{ amount }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td><b>Tax 11.00%</b></td>
+                                <td>€{{ tax }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"></td>
+                                <td class="blue-grey white-text">Total TTC</td>
+                                <td class="blue-grey strong white-text">€ {{ booking.price }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="invoice-footer">
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <p class="strong">Mode de paiement</p>
+                        {#<p>Please make the cheque to: AMANDA ORTON</p>#}
+                        {#<p class="strong">Termes &amp; conditions</p>#}
+                        {#<ul>#}
+                            {#<li>You know, being a test pilot isn't always the healthiest business in the world.</li>#}
+                            {#<li>We predict too much for the next year and yet far too little for the next 10.</li>#}
+                        {#</ul>#}
+                    </div>
+                    <div class="col s12 m6 l6 center-align">
+                        <p>Approuvé par</p>
+                        {#<img src="{{ absolute_url(asset('public/images/signature-scan.png')) }}" alt="signature">#}
+                        <p class="header">{{ user.firstname ~' '~ user.firstname }}</p>
+                        <p>Propriétaire du centre</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

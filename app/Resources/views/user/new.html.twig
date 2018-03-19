@@ -1,0 +1,56 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form, {'action': '/register/'}) }}<form name="fos_user_registration_form" method="post" action="/register/" class="fos_user_registration_register register-form">
+        <div class="modal-content">
+            <h5 class="header2"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau utilisateur</h5><br>
+            {#<div class="divider"></div><br>#}
+            {{ form_row(form._token) }}
+            <div class="row">
+                <div class="input-field col s12">
+                    {#<i class="mdi-social-person-outline prefix"></i>#}
+                    {{ form_widget(form.center) }}
+                    <label for="username" class="center-align">Centre</label>
+                </div>
+                <div class="input-field col s6">
+                    {#<i class="mdi-social-person-outline prefix"></i>#}
+                    {{ form_widget(form.firstname) }}
+                    <label for="username" class="center-align">Nom</label>
+                </div>
+                <div class="input-field col s6">
+                    {#<i class="mdi-social-person-outline prefix"></i>#}
+                    {{ form_widget(form.lastname) }}
+                    <label for="username" class="center-align">Prénom</label>
+                </div>
+                <div class="input-field col s6">
+                    {#<i class="mdi-social-person-outline prefix"></i>#}
+                    {{ form_widget(form.username) }}
+                    <label for="username" class="center-align">Nom d'utilisateur</label>
+                </div>
+                <div class="input-field col s6">
+                    {#<i class="mdi-communication-email prefix"></i>#}
+                    {{ form_widget(form.email) }}
+                    <label for="email" class="center-align">Email</label>
+                </div>
+                <div class="input-field col s6">
+                    {#<i class="mdi-action-lock-outline prefix"></i>#}
+                    {{ form_widget(form.plainPassword.first) }}
+                    <label for="password">Mot de passe</label>
+                </div>
+                <div class="input-field col s6">
+                    {#<i class="mdi-action-lock-outline prefix"></i>#}
+                    {{ form_widget(form.plainPassword.second) }}
+                    <label for="password-again">Mot de passe à nouveau</label>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer ">
+            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn z-depth-0" id="save">Enregistrer</button>
+            <button type="button" class="modal-action modal-close waves-effect grey lighten-3  black-text btn z-depth-0" id="cancel">Annuler</button>
+        </div>
+    </form>
+
+{% endblock body %}
+
+

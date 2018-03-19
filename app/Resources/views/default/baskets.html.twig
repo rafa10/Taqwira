@@ -1,0 +1,23 @@
+<li>
+    <h5>Pannier</h5>
+</li>
+<li class="divider"></li>
+{% set total = null %}
+{% for basket in app.session.get('basket') %}
+    <li>
+        <a href="#!" class="red-text text-accent-3">
+            <i class="medium mdi-image-timer"></i> Séance : {{ loop.index }}
+            <i class="medium mdi-action-view-array"></i> Terrain : {{ basket.field.name }}
+            <span class="black-text" style="margin-left: 3rem"><b>{{ basket.price }} €</b></span></a>
+        <time class="media-meta"> {{ basket.date|date('d-m-Y') }} <b>à</b> {{ basket.timeStart|date('H:i') }}</time></a>
+    </li>
+    <li class="divider"></li>
+    {% set total = total + basket.price %}
+{% endfor %}
+<li> <h5>Total <span style="margin-left: 16.5rem"></span>{{ total }}€</h5> </li>
+{% if app.session.get('basket')|length != null %}
+    <li class="divider"></li>
+    <li class="grey darken-3">
+        <a href="{{ path('subscription_basket_show') }}" class="grey-text text-lighten-5 center-align">VOIR PANNIER</a>
+    </li>
+{% endif %}

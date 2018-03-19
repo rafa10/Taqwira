@@ -1,0 +1,85 @@
+<div id="customer_details">
+    <!-- Modal Structure -->
+    {{ form_start(form) }}
+        <div class="modal-content">
+            <h4 class="header2">Réservez un match</h4><br>
+            {#<div class="divider"></div><br>#}
+            {{ form_row(form._token) }}
+            <div class="row">
+                <div class="col s12">
+                    <p class="checkbox">
+                        <input type="checkbox" name="new_customer" class="filled-in" data-href="{{ path('booking_match_new_customer') }}" id="filled-in-box" checked="checked" />
+                        <label for="filled-in-box">Nouveau client ?</label>
+                    </p>
+                </div>
+                <br><br><br>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <div class="input-field col s12">
+                        <label class="">Centre*</label>
+                        {{ form_widget(form.center) }}
+                    </div>
+                {% else %}
+                    <div class="input-field col s12 hide">
+                        <input type="hidden" id="customer_center" name="appbundle_customer[center]" required="required" value="{{ app.user.center.id }}"/>
+                    </div>
+                {% endif %}
+                <div class="input-field col s2">
+                    <label for="time_end" class="active">Sexe*</label>
+                    {{ form_widget(form.sexe) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s5">
+                    <label for="time_end" class="active">Nom*</label>
+                    {{ form_widget(form.firstname) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s5">
+                    <label for="time_end" class="active">Prénom*</label>
+                    {{ form_widget(form.lastname) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s12">
+                    <label for="time_end" class="active">Email*</label>
+                    {{ form_widget(form.email) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s12">
+                    <label for="time_end" class="active">Téléphone*</label>
+                    {{ form_widget(form.phone) }}
+                    <div class="errorTxt1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save_customer">Enregistrer</button>
+            <button type="reset" class="modal-action modal-close waves-effect btn-flat">Annuler</button>
+        </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+</div>
+
+
+<script>
+
+    $(document).ready(function() {
+
+        //========================================================================
+        $('.filled-in').click(function () {
+            url = $('#form_modal').data('href') ;
+            $.getJSON(url, function(data) {}).done(function(data) {
+//                $('.checkbox').remove();
+                $('#form_modal').html(data.html);
+                $('#customer_details').remove();
+                $('select').material_select();
+            });
+        });
+    });
+
+</script>
+
+
+
+
+
+
+
+

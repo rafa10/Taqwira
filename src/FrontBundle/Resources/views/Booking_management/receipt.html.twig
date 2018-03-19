@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{% block title %} Taqwira | Plateforme {% endblock %}</title>
+    <!-- ICONS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CORE CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+</head>
+<body>
+
+<div id="booking-login" class="block">
+    <div class="row">
+        <div class="col s12 m8 offset-m2" style="margin-top: 1rem">
+            <div class="row">
+                <div class="col s12 card-panel z-depth-1">
+                    <h5 class="flow-text"><i class="small material-icons left">receipt</i>Réservation Réf°:<span><b>{{ booking.reference }}</b></span></h5>
+                </div>
+                {# == Coordonnées du client ======================================================================#}
+                <div class="col s12 m4 card-panel z-depth-1 info-row hide-on-small-only">
+                    <h2 class="flow-text">Coordonnées du client</h2><hr class="style10">
+                    <div class="row">
+                        <div class="col s3">Nom:</div><div class="col s9"><b>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</b></div>
+                        <div class="col s3">E-mail:</div><div class="col s9"><b>{{ booking.customer.email }}</b></div>
+                        <div class="col s3">Téléphone:</div><div class="col s9"><b>{{ booking.customer.phone }}</b></div>
+                    </div>
+                </div>
+                {#=== Détails de ma réservation ==================================================================#}
+                <div class="col s12 m8 card-panel z-depth-1">
+                    <h2 class="flow-text">Détails de ma réservation</h2><hr class="style10">
+                    <div class="row card-panel z-depth-0 grey lighten-3 booking-row">
+                        <div class="col s6">
+                            <h5 class=""><i class="small material-icons left">business</i> {{ booking.field.center.name }}</h5>
+                            <i class="material-icons left">view_array</i> {{ booking.field.name }}
+                        </div>
+                        <div class="col s6 datetime-col">
+                            <p><i class="material-icons left">event</i>{{ booking.date|date('m/d/Y') }}</p>
+                            <p><i class="material-icons left">timer</i><b>{{ booking.timeStart|date('H:i') }}</b></p>
+                        </div>
+                        <div class="col s12 m6 ">
+                            <p class="bold"><b>Bénéficiaire</b></p>
+                        </div>
+                        <div class="col s12 m6">
+                            <p><i class="material-icons left">person</i> {{ booking.customer.firstname }} {{ booking.customer.lastname }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr class="style10">
+                        {#<div class="col s6 right-align">TVA </div><div class="col s6 right-align"><b>7.36 €</b></div>#}
+                        <div class="col s6 right-align"><b>Prix TTC</b> </div><div class="col s6 right-align"><b>{{ booking.price }} €</b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Staff
+ *
+ * @ORM\Table(name="staff")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\StaffRepository")
+ */
+class Staff
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please provide a firstname")
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i",
+     *     htmlPattern = "^[a-zA-Z]+$"
+     * )
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please provide a lastname")
+     * @Assert\Regex(
+     *     pattern     = "/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i",
+     *     htmlPattern = "^[a-zA-Z]+$"
+     * )
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $sexe;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     * @Assert\NotBlank(message="Please provide an dob")
+     */
+    private $dob;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please provide an email")
+     * @Assert\Email()
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\NotBlank(message="Please provide a phone")
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please provide an formation")
+     */
+    private $formation;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Assert\NotBlank(message="Please provide an function")
+     */
+    private $function;
+
+    /**
+     * @ORM\Column(type="float", length=3, nullable=true)
+     * @Assert\NotBlank(message="Please provide an weight")
+     */
+    private $weight;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Please provide an size")
+     */
+    private $size;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="staff")
+     * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $center;
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+//        return $this->$firstname;
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set firstname
+     *
+     * @param string $firstname
+     *
+     * @return Staff
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     *
+     * @return Staff
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set sexe
+     *
+     * @param string $sexe
+     *
+     * @return Staff
+     */
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe
+     *
+     * @return string
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Set dob
+     *
+     * @param \DateTime $dob
+     *
+     * @return Staff
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+
+        return $this;
+    }
+
+    /**
+     * Get dob
+     *
+     * @return \DateTime
+     */
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Staff
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Staff
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set formation
+     *
+     * @param string $formation
+     *
+     * @return Staff
+     */
+    public function setFormation($formation)
+    {
+        $this->formation = $formation;
+
+        return $this;
+    }
+
+    /**
+     * Get formation
+     *
+     * @return string
+     */
+    public function getFormation()
+    {
+        return $this->formation;
+    }
+
+    /**
+     * Set function
+     *
+     * @param string $function
+     *
+     * @return Staff
+     */
+    public function setFunction($function)
+    {
+        $this->function = $function;
+
+        return $this;
+    }
+
+    /**
+     * Get function
+     *
+     * @return string
+     */
+    public function getFunction()
+    {
+        return $this->function;
+    }
+
+    /**
+     * Set center
+     *
+     * @param \AppBundle\Entity\Center $center
+     *
+     * @return Staff
+     */
+    public function setCenter(\AppBundle\Entity\Center $center = null)
+    {
+        $this->center = $center;
+
+        return $this;
+    }
+
+    /**
+     * Get center
+     *
+     * @return \AppBundle\Entity\Center
+     */
+    public function getCenter()
+    {
+        return $this->center;
+    }
+}

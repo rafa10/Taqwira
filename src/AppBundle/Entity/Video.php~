@@ -1,0 +1,54 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping AS ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="video")
+ */
+class Video
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Please provide an video url")
+     */
+    private $url;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Booking", inversedBy="video")
+     * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $booking;
+
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+//        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->field = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->session = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->price = new \Doctrine\Common\Collections\ArrayCollection();
+//        $this->customer = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->url;
+    }
+
+}

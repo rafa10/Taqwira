@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <h5 class="breadcrumbs-title">Réservation Abonnement</h5>
+                        <ol class="breadcrumbs">
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
+                            <li><a href="#">Réservations</a></li>
+                            <li><a href="{{ path('booking_subscription_index') }}">Abonnement</a></li>
+                            <li class="active">Réservation</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--start container-->
+        <div class="container">
+            <div class="section">
+                <!--booking form-->
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <div class="card-panel ">
+                            <div class="row form-booking-search">
+                                <form name="form" method="POST" action="{{ path('search_subscription') }}" class="col s12">
+                                    {#<h4 class="header2">Réservation</h4>#}
+                                    {{ form_row(form._token) }}
+                                    <div class="row">
+                                        <div class="input-field col s4 offset-s1">
+                                            {#<i class="mdi-action-view-array prefix"></i>#}
+                                            {{ form_widget(form.field) }}
+                                            {{ form_label(form.field, 'Terrain') }}
+                                        </div>
+                                        <div class="input-field col s4">
+                                            <i class="mdi-action-today prefix"></i>
+                                            {{ form_widget(form.date, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
+                                            {{ form_label(form.date, 'Date') }}
+                                        </div>
+                                        <div class="input-field col s2">
+                                            <div class="input-field col s12">
+                                                <button type="button" class="btn waves-effect waves-light yellow accent-4 black-text" name="action" id="search-match"> Rechecher</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end booking form-->
+                <div class="divider"></div>
+
+                <div id="preloader-page-content" class="card-panel center-align z-depth-0" style="position: absolute; top: 50%; left: 50%;">
+                    <div class="preloader-wrapper small active">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div><div class="gap-patch">
+                                <div class="circle"></div>
+                            </div><div class="circle-clipper right">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div><br>S'il vous plaît, attendez...
+                </div>
+                {# == List all booking subscription to day == #}
+                <div id="booking-to_day" data-route="{{ path('booking_subscription_to_day') }}"></div>
+                {# == List all booking subscription by date == #}
+                <div id="booking-search"></div>
+
+            </div>
+        </div>
+        <!--end container-->
+
+    </section>
+    <!-- END CONTENT -->
+
+    <style>
+        .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
+            margin-right: 0px;
+        }
+        .btn.disabled {
+            background-color: #DFDFDF !important;
+            box-shadow: none;
+            color: #000 !important;
+            cursor: default;
+        }
+    </style>
+
+
+{% endblock body %}
+
+
+
+
+
+

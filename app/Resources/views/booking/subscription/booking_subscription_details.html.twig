@@ -1,0 +1,105 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    <div id="booking_details"> {# ** form booking details ** #}
+        {{ form_start(form) }}
+            <div class="modal-content">
+                <h4 class="header2">Réservez un abonnement</h4><br>
+                {#<div class="divider"></div><br>#}
+                {{ form_row(form._token) }}
+                {# =================== form customer ======================#}
+                <div class="row form_customer">
+                    {# *** customer exist in database *** #}
+                    <div id="form_customer_exist">
+                        <div class="input-field col s12"><label for="time_end" class="active">Client*</label>{{ form_widget(form.customer) }}<div class="errorTxt1"></div></div>
+                    </div>
+                    {# *** check customer form *** #}
+                    <div class="col s12">
+                        <p class="checkbox">
+                            <input type="checkbox" name="new_customer" class="filled-in" data-href="{{ path('booking_match_new_customer') }}" id="filled-in-box" />
+                            <label for="filled-in-box">Nouveau client ?</label>
+                        </p>
+                    </div>
+                    <br><br><br>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+                <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+            </div>
+        {{ form_end(form, { 'render_rest': false } ) }}
+    </div>
+
+    {# ** create a new customer ** #}
+    <div id="form_new_customer"> </div>
+
+{% endblock %}
+
+<script>
+
+    $(document).ready(function() {
+
+            //========================================================================
+            $('.filled-in').click(function () {
+                url = $('#form_modal').data('href') ;
+                if ($('input[name=new_customer]').is(':checked')) {
+                    $('#form_customer_exist').slideUp('slow');
+                    //On lance un ajax pour charger le formulaire
+                    $.getJSON($(this).attr("data-href"), function(data) {})
+                        .done(function(data) {
+                            $('#booking_details').remove();
+                            $('#form_new_customer').html(data.html);
+                            $('select').material_select();
+                        });
+                    $('#form_new_customer').removeClass('hide');
+
+                    $("#form_new_customer").on("click",'#save_customer',function(){
+                        form = $(this).closest('form');
+                        $.ajax({
+                            data: new FormData(form[0]),
+                            url: form.attr('action'),
+                            type: 'POST',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function(){},
+                            success: function(data_json){
+                                data = $.parseJSON(data_json);
+                                if (data.status=="ok") {
+                                    if (data.page=="refresh") {
+                                        $('#form_modal').closeModal();
+//                                        location.reload();
+
+                                        $.getJSON(url, function(data) {}).done(function(data) {
+                                            $('#form_modal').html(data.html);
+                                            $('select').material_select();
+                                            $('#form_modal').openModal();
+                                            $('.checkbox').remove();
+                                        });
+
+                                    } else {
+                                        $('#form_new_customer').html(data.html);
+                                        $('#form_new_customer').openModal();
+
+                                    }
+                                }
+                            },
+                            error: function() {
+                                alert('Une erreur est survenue');
+                                $('#form_new_customer').closeModal();
+
+                            }
+
+                        });
+                    });
+
+                } else {
+                    $('#form_customer_exist').slideDown('slow');
+                    $('#form_new_customer').addClass('hide');
+
+                }
+            });
+    });
+
+</script>

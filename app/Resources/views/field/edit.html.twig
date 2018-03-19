@@ -1,0 +1,53 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form) }}
+    <div class="modal-content">
+        <h5 class="flow-text"><i class="small left mdi-editor-border-color"></i> Modifier terrain</h5><br>
+        {#<div class="divider"></div><br>#}
+        {{ form_row(form._token) }}
+        <div class="row">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <div class="input-field col s12">
+                    <label class="active">Centre*</label>
+                    {{ form_widget(form.center) }}
+                </div>
+            {% else %}
+                <div class="input-field col s12 hide">
+                    <input type="hidden" id="field_center" name="field[center]" required="required" value="{{ app.user.center.id }}"/>
+                </div>
+            {% endif %}
+            <div class="input-field col m6 s12">
+                <label for="name" class="active">Nom*</label>
+                {{ form_widget(form.name) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col m6 s12">
+                <label for="capacity" class="active">Capacité*</label>
+                {{ form_widget(form.capacity) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s12">
+                <label form="session" class="active">Séances*</label>
+                {{ form_widget(form.session) }}
+            </div>
+            <div class="input-field col s12">
+                <div class="right-align">{% for item in field.session %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %}</div>
+            </div>
+            <div class="input-field col s12">
+                {{ form_widget(form.description) }}
+                <label for="textarea1" class="active">Description*</label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+        <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+    </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+
+
+

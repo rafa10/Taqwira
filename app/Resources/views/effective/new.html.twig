@@ -1,0 +1,152 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
+    <div class="modal-content">
+        <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajoutez un nouveau effectif</h5><br>
+        {{ form_row(form._token) }}
+        <div class="row">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <div class="input-field col s12">
+                    <label class="active">Centre*</label>
+                    {{ form_widget(form.center) }}
+                </div>
+            {% else %}
+                <div class="input-field col s12 hide">
+                    <input type="hidden" id="effective_center" name="effective[center]" required="required" value="{{ app.user.center.id }}"/>
+                </div>
+            {% endif %}
+            <div class="input-field col s2">
+                <label for="sexe" class="active">Sexe*</label>
+                {{ form_widget(form.sexe, {'attr': {'data-error': '.sexe'}}) }}
+                <div class="sexe"></div>
+            </div>
+            <div class="input-field col s4">
+                <label for="firstname" class="active">Nom*</label>
+                {{ form_widget(form.firstname, {'attr': {'data-error': '.firstname'}}) }}
+                <div class="firstname"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="lastname" class="active">Prénom*</label>
+                {{ form_widget(form.lastname, {'attr': {'data-error': '.lastname'}}) }}
+                <div class="lastname"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="dob" class="active">Date de naissance*</label>
+                {{ form_widget(form.dob, {'attr': {'data-error': '.dob'}}) }}
+                <div class="phone"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="email" class="active">Email*</label>
+                {{ form_widget(form.email, {'attr': {'data-error': '.email'}}) }}
+                <div class="email"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="phone" class="active">Téléphone*</label>
+                {{ form_widget(form.phone, {'attr': {'data-error': '.phone'}}) }}
+                <div class="phone"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="address" class="active">Adresse*</label>
+                {{ form_widget(form.address, {'attr': {'data-error': '.address'}}) }}
+                <div class="phone"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="function" class="active">Fonction*</label>
+                {{ form_widget(form.function) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="weight" class="active">Poids*</label>
+                {{ form_widget(form.weight) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="size" class="active">Taille*</label>
+                {{ form_widget(form.size) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s6">
+                <label for="school_level" class="active">Niveau scolaire*</label>
+                {{ form_widget(form.school_level) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="input-field col s12">
+                <label for="educational_establishment" class="active">Etablissement scolaire*</label>
+                {{ form_widget(form.educational_establishment) }}
+                <div class="errorTxt1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+        <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+    </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+<script>
+
+    // $(document).ready(function(){
+    //
+    //     $("#formValidate").validate({
+    //         rules: {
+    //             'customer[sexe]' : {
+    //                 required: true
+    //             },
+    //             'customer[firstname]': {
+    //                 required: true,
+    //                 minlength: 2
+    //             },
+    //             'customer[lastname]': {
+    //                 required: true,
+    //                 minlength: 2
+    //             },
+    //             'customer[email]': {
+    //                 required: true,
+    //                 email: true
+    //             },
+    //             'customer[phone]': {
+    //                 required: true,
+    //                 number: true
+    //             }
+    //         },
+    //         //For custom messages
+    //         messages: {
+    //             'customer[sexe]' : {
+    //                 required: "Selectionner une sexe"
+    //             },
+    //             'customer[firstname]': {
+    //                 required: "Saisier le nom",
+    //                 minlength: "minimum 2 characteres"
+    //             },
+    //             'customer[lastname]': {
+    //                 required: "Saisier le prénom",
+    //                 minlength: "minimum 2 characteres"
+    //             },
+    //             'customer[email]': {
+    //                 required: "Saisier l'adresse mail",
+    //                 email: "format non valide"
+    //             },
+    //             'customer[phone]': {
+    //                 required: "Saisier le numéro de téléphone",
+    //                 number: "format non valide"
+    //             }
+    //         },
+    //         errorElement : 'div',
+    //         errorPlacement: function(error, element) {
+    //             var placement = $(element).data('error');
+    //             if (placement) {
+    //                 $(placement).append(error)
+    //             } else {
+    //                 error.insertAfter(element);
+    //             }
+    //         }
+    //     });
+    //
+    // });
+
+</script>
+
+

@@ -1,0 +1,36 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    twig.extension.intl:
+            class: Twig_Extensions_Extension_Intl
+            tags:
+                - { name: twig.extension }
+
+    AjaxMethods:
+            class: AppBundle\Extensions\AjaxMethods
+            arguments: [ "@doctrine.orm.entity_manager" , "@service_container" ]
+
+    # service send mailer
+    app.mailer:
+            class : AppBundle\Services\Mailer
+            arguments: [ "@mailer" , "@templating"]
+
+    # Redirect to back_office after login
+    app.redirect_after_login:
+            class: AppBundle\EventListener\AfterLoginRedirection
+            arguments:  ["@router", "@security.authorization_checker"]
+            tags:
+                - { name: 'monolog.logger', channel: 'security' }
+
+    # Redirect to login page after logout
+    app.redirect_after_logout:
+            class: AppBundle\EventListener\AfterLogoutRedirection
+            arguments:  ["@router", "@security.authorization_checker"]
+            tags:
+                - { name: 'monolog.logger', channel: 'security' }

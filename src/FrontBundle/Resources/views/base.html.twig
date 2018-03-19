@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Taqwira c'est un site de réservation de terrain de football, plateforme de gestion pour les centre de football. ">
+    <meta name="keywords" content="Taqwira, centre de football en tunisie, Réservation terrain">
+    <title>{% block title %} Réservez un terrain | Taqwira {% endblock %}</title>
+    <!-- Favicons-->
+    <link rel="icon" href="{{ asset('public/images/favicon/favicon-32x32.png') }}" sizes="32x32">
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('public/images/favicon/apple-touch-icon-152x152.png') }}">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="{{ asset('public/images/favicon/mstile-144x144.png') }}">
+    <!-- ICONS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- CORE CSS-->
+    <!-- Compiled and minified CSS -->
+    <link href="{{ asset('public/css/materialize_front.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Materialize Stepper -->
+    <link href="{{ asset('public/css/materialize-stepper/materialize-stepper.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS file -->
+    <link href="{{ asset('public/css/custom/custom.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+</head>
+<body>
+
+<!-- Start Page Loading -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+<!-- === End Page Loading === -->
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START HEADER -->
+<header id="header">
+    <!-- start header nav-->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper grey darken-3">
+                <a href="{{ path('home') }}" class="brand-logo darken-1" style="margin-top: 0.65rem"><img src="{{ asset('public/images/logo-takwira.png') }}" alt="Taqwira logo"></a>
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    {% set vidLink = null %}{% set bilLink = null %}{% set btnLink = null %}{% set homLink = null %}{% set plaLink = 'hide' %}
+                    {% if app.request.attributes.get('_route') == 'home' %}{% set homLink = 'hide' %}{% set plaLink = null %}{% endif %}
+                    <li class="{{ homLink }}"><a href="{{ path('home') }}"></i>Accueil</a></li>
+                    <li class="{{ plaLink }}"><a href="#plateforme"></i>Plateforme</a></li>
+                    <li class="{{ vidLink }}"><a href="{{ path('video_login') }}">Match en vidéo</a></li>
+                    <li class="{{ bilLink }}"><a href="{{ path('booking_login') }}">Mes billets</a></li>
+                    <li class="{{ btnLink }}" style="margin-right: 0.5rem"><a class="btn waves-effect waves-light yellow accent-4 black-text" href="{{ path('fos_user_security_login') }}">S'identifier</a></li>
+                </ul>
+                <ul class="side-nav" id="mobile-demo">
+                    {% set vidLink = null %}{% set bilLink = null %}{% set btnLink = null %}{% set homLink = null %}{% set plaLink = 'hide' %}
+                    {% if app.request.attributes.get('_route') == 'home' %}{% set homLink = 'hide' %}{% set plaLink = null %}{% endif %}
+                    <li class="{{ homLink }}"><a href="{{ path('home') }}" class="left"> <i class="left material-icons">home</i>Accueil</a></li>
+                    <li class="{{ plaLink }}"><a href="#plateforme" class="left"><i class="left material-icons">apps</i> Plateforme</a></li>
+                    <li class="{{ vidLink }}"><a href="{{ path('video_login') }}" class="left"><i class="left material-icons">ondemand_video</i> Match en vidéo</a></li>
+                    <li class="{{ bilLink }}"><a href="{{ path('booking_login') }}" class="left"><i class="left material-icons">receipt</i>Mes billets</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- end header nav-->
+</header>
+<!-- END HEADER -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+{% block body %}
+    <!-- START MAIN -->
+    <!-- END MAIN -->
+{% endblock body %}
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START FOOTER -->
+<footer class="page-footer grey darken-2" style="margin: 0">
+    {% if app.request.attributes.get('_route') == 'home' %}
+    <div class="container">
+        <div class="row">
+            <div class="col l4 s12">
+                <h5 class="white-text">Région inscrit</h5>
+                <p class="grey-text text-lighten-4">We hope you have enjoyed using Materialize and if you feel like it has helped you out and want to support the team you can help us by donating or backing us on Patreon. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                <a class="btn waves-effect waves-light yellow black-text " href="/support-us.html">Support Us</a>
+            </div>
+            <div class="col l4 s12">
+                <h5 class="white-text">Join the Discussion</h5>
+                <p class="grey-text text-lighten-4">We have a Gitter chat room set up where you can talk directly with us. Come in and discuss new features, future goals, general problems or questions, or anything else you can think of.</p>
+                {#<a class="btn waves-effect waves-light red lighten-3" target="_blank" href="https://gitter.im/Dogfalo/materialize">Chat</a>#}
+            </div>
+            <div class="col l4 s12" style="overflow: hidden;">
+                <h5 class="white-text">Connect</h5>
+                <iframe src="https://ghbtns.com/github-btn.html?user=dogfalo&repo=materialize&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
+                <br>
+                <a href="https://twitter.com/MaterializeCSS" class="twitter-follow-button" data-show-count="true" data-size="large" data-dnt="true">Follow @MaterializeCSS</a>
+                <br>
+                <div class="g-follow" data-annotation="bubble" data-height="24" data-href="https://plus.google.com/108619793845925798422" data-rel="publisher"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <h5 class="white-text">Partenaire</h5>
+            </div>
+            <div class="col l3 s12">
+                <div class="patreon-footer-ad">
+                    <a href="http://lucidocean.com" target="_blank">
+                        {#<img src="https://s8.postimg.org/762csselh/logo_full_size.png" alt="Lucid Ocean">#}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="footer-copyright grey darken-3">
+        <div class="container">
+            © 2015 - {{ 'now'|date('Y') }} Taqwira, All rights reserved.
+            {#<a class="grey-text text-lighten-4 right" href="https://github.com/Dogfalo/materialize/blob/master/LICENSE">MIT License</a>#}
+        </div>
+    </div>
+</footer>
+<!-- END FOOTER -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- Form modal -->
+{#<div id="form_modal" data-href="" class="modal"> </div>#}
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SCRIPT -->
+
+<!-- jQuery Library -->
+{#<script type="text/javascript" src="{{ asset('public/js/plugins/jquery-1.11.2.min.js') }}"></script>#}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+{#<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>#}
+<!--materialize js-->
+<script src="{{ asset('public/js/materialize_front.min.js') }}"></script>
+<!--prism-->
+<script type="text/javascript" src="{{ asset('public/js/plugins/prism/prism.js') }}"></script>
+<!--scrollbar-->
+<script type="text/javascript" src="{{ asset('public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<!-- jQueryValidation Plugin -->
+<script type="text/javascript" src="{{ asset('public/js/plugins/jquery-validation/jquery.validate.js') }}"></script>
+<!-- materialize-stepper -->
+<script type="text/javascript" src="{{ asset('public/js/materialize-stepper/materialize-stepper.min.js') }}"></script>
+<!--sweetalert -->
+<script type="text/javascript" src="{{ asset('public/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+<!-- Google Places API Web Service -->
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzcdGh66x78hQXNiI96wzmgDG_RBbE-ts&callback=initMap" async defer></script>
+<!--custom-script.js - Add your own theme custom JS-->
+<script type="text/javascript" src="{{ asset('public/js/custom-script-front.js') }}"></script>
+<!-- END SCRIPT -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+</body>
+</html>

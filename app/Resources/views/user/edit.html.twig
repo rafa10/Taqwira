@@ -1,0 +1,29 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form) }}
+    <div class="modal-content">
+        <h5 class="flow-text"><i class="small left mdi-editor-border-color"></i> Ajouter un nouveau centre</h5><br>
+        <div class="divider"></div><br>
+        {{ form_row(form._token) }}
+        <div class="row">
+            <div class="input-field col s12">
+                <label for=name" class="">Nom*</label>
+                {{ form_widget(form.name) }}
+                <div class="errorTxt1"></div>
+            </div>
+            <div class="col s12">
+                <p>
+                    {{ form_widget(form.is_active, {'id': 'filled-in-box', 'attr': {'class': 'filled-in'}}) }}
+                    <label for="filled-in-box">Active ?</label>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat">Annuler</button>
+        <button type="button" class="modal-action waves-effect waves-green btn-flat" id="save">Enregistrer</button>
+    </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}

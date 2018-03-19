@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <h5 class="breadcrumbs-title">Configuration</h5>
+                        <ol class="breadcrumbs">
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
+                            <li class="active">Configuration</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs end-->
+
+        <!--start container-->
+        <div class="container">
+            <div class="section">
+                <h4 class="header">Paratager programme du centre</h4>
+                <div class="divider"></div>
+                <div id="input-switches" class="section">
+                    <div class="row">
+                        <div class="col s12 m8 l9">
+                            <p class="caption">Dans cette option le stadier partager son planning terrains au public et autorise la réservation en ligne de la part du client</p>
+                        </div>
+                        <div class="col s12 m4 l3">
+                            <!-- Enable Switch -->
+                            <div class="switch" style="margin-top: 1.5rem">
+                                <label>
+                                    Désactiver
+                                    {% if center.shareProgram == true %}
+                                        <input type="checkbox" class="center_share_program" data-href="{{ path('share_program_disable', {'id': center.id}) }}" checked>
+                                    {% else %}
+                                        <input type="checkbox" class="center_share_program" data-href="{{ path('share_program_enable', {'id': center.id}) }}">
+                                    {% endif %}
+                                    <span class="lever"></span>
+                                    Activer
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end container-->
+
+    </section>
+    <!-- END CONTENT -->
+
+
+{% endblock body %}

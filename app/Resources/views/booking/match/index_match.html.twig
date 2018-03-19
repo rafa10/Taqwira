@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <h5 class="breadcrumbs-title">Matchs</h5>
+                        <ol class="breadcrumbs">
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
+                            <li><a href="#">Réservations</a></li>
+                            <li class="active">Matchs</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs end-->
+
+
+        <!--start container-->
+        <div class="container">
+            <div class="section">
+                {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
+                <div class="divider"></div>
+                <!--DataTables example-->
+                <div id="table-datatables" class="card-panel">
+                    {#<p class= "header right-align"><a href="{{ path('booking_match_new') }}" class="btn waves-effect waves-light lime black-text modal_trigger">Réservez un match</a></p>#}
+                    <div class="row">
+                        <div class="col s12">
+                            <table id="data-table-simple" class="responsive-table display" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Référence</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Temps</th>
+                                    <th>Terrain</th>
+                                    <th>Prix</th>
+                                    <th>Statut</th>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}<th>Centre</th>{% endif %}
+                                    <th class="center-align">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for booking in bookings %}
+                                    <tr>
+                                        <td>{{ booking.id }}</td>
+                                        <td>{{ booking.reference }}</td>
+                                        {#<td>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</td>#}
+                                        <td>{{ booking.customer.email }}</td>
+                                        <td>{{ booking.date|date('d/m/Y') }}</td>
+                                        <td>De <b>{{ booking.timeStart|date('H:i') }}</b> à <b>{{ booking.timeEnd|date('H:i') }}</b></td>
+                                        <td>{{ booking.field.name }}</td>
+                                        <td><b>{{ booking.price }} €</b> </td>
+                                        <td>{% if booking.bill == true %}<span class="task-cat green">Payée</span>{% else %}<span class="task-cat grey">Non payée</span>{% endif %}</td>
+                                        {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ booking.field.center.name }}</div></td>{% endif %}
+                                        <td class="right-align">
+                                            {% if booking.bill == false %}
+                                                <button type="button" data-href="{{ path('bill_match_paid', { 'id': booking.id }) }}" class="btn-floating btn-booking-paid waves-effect waves-light blue lighten-4"><i class="mdi-action-credit-card blue-text"></i></button>
+                                            {% else %}
+                                                <a role="button" href="{{ path('bill_match_pdf', { 'id': booking.id }) }}" class="btn-floating waves-effect waves-light grey lighten-4"><i class="mdi-action-description  blue-grey-text"></i></a>
+                                            {% endif %}
+                                            <button type="button" data-href="{{ path('booking_match_delete', { 'id': booking.id }) }}" class="btn-floating btn-warning-confirm waves-effect waves-light grey lighten-3"><i class="mdi-action-delete grey-text"></i></button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--end container-->
+
+    </section>
+    <!-- END CONTENT -->
+
+{% endblock %}

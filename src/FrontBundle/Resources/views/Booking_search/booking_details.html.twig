@@ -1,0 +1,193 @@
+{% extends "FrontBundle::base.html.twig" %}
+
+{% block title %} Réservation terrain | Taqwira {% endblock title %}
+
+{% block body %}
+
+    <div id="booking-details" class="block grey lighten-3">
+        <div class="row">
+            <div class="col s12 m8 offset-m2">
+                <div class="card">
+                    <div class="card-content">
+                        {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
+                        <ul class="stepper horizontal" id="horizontal">
+                            <li class="step active">
+                                <div data-step-label="informations" class="step-title waves-effect waves-dark">Étape 1</div>
+                                <div class="step-content">
+                                    <div class="row">
+                                        {{ form_row(form._token) }}
+                                        <div class="input-field col s6">
+                                            <label for=name" class="active">Terrain*</label>
+                                            {{ form_widget(form.field, {'attr': {'class': 'hide'}}) }}
+                                            <input disabled value="{{ name }}" id="disabled" type="text">
+                                            <div class="errorTxt1"></div>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <label for="timepicker" class="active">Date de départ*</label>
+                                            {{ form_widget(form.date) }}
+                                            <div class="errorTxt1"></div>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <label for="time_end" class="active">Début*</label>
+                                            {{ form_widget(form.timeStart) }}
+                                            <div class="errorTxt1"></div>
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <label for="time_end" class="active">Fin*</label>
+                                            {{ form_widget(form.timeEnd) }}
+                                            <div class="errorTxt1"></div>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <label for="time_end" class="active">Prix*</label>
+                                            {{ form_widget(form.price) }}
+                                            <div class="errorTxt1"></div>
+                                        </div>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn yellow accent-4 black-text next-step">SUIVANT</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div data-step-label="Coordonnées" class="step-title waves-effect waves-dark">Étape 2</div>
+                                <div class="step-content">
+                                    <div class="row">
+                                        {#<div class="row" id="form_customer_exist" data-href="{{ path('get_customer', {'center': center.id}) }}">#}
+                                            {#<div class="input-field col s12" id="autocompelet-customer">#}
+                                                {#<label for="time_end" class="active">Déjà client*</label>#}
+                                                {#<input type="search" id="search_customer" name="search[customer]" required="required" class="autocomplete-customer">#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                        <div class="input-field col s2">
+                                            <label for="time_end" class="active">Sexe*</label>
+                                            {{ form_widget(form.customer.sexe, {'attr': {'data-error': '.sexe'}}) }}
+                                            {{ form_errors(form.customer.sexe) }}
+                                            <div class="sexe"></div>
+                                        </div>
+                                        <div class="input-field col s5">
+                                            <label for="time_end" class="active">Nom*</label>
+                                            {{ form_widget(form.customer.firstname, {'attr': {'data-error': '.firstname'}}) }}
+                                            {{ form_errors(form.customer.firstname) }}
+                                            <div class="firstname"></div>
+                                        </div>
+                                        <div class="input-field col s5">
+                                            <label for="time_end" class="active">Prénom*</label>
+                                            {{ form_widget(form.customer.lastname, {'attr': {'data-error': '.lastname'}}) }}
+                                            {{ form_errors(form.customer.lastname) }}
+                                            <div class="lastname"></div>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <label for="time_end" class="active">Email*</label>
+                                            {{ form_widget(form.customer.email, {'attr': {'data-error': '.email'}}) }}
+                                            {{ form_errors(form.customer.email) }}
+                                            <div class="email"></div>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            <label for="time_end" class="active">Téléphone*</label>
+                                            {{ form_widget(form.customer.phone, {'attr': {'data-error': '.phone'}}) }}
+                                            {{ form_errors(form.customer.phone) }}
+                                            <div class="phone"></div>
+                                        </div>
+                                    </div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn yellow accent-4 black-text next-step" data-validator="validateCustomerDB">SUIVANT</button>
+                                        <button class="waves-effect waves-dark btn-flat previous-step">PRÉCÉDENT</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="step">
+                                <div data-step-label="Validation" class="step-title waves-effect waves-dark">Étape 3</div>
+                                <div class="step-content">
+                                    <div class="center-align flow-text" style="margin-top: 3rem">Confirmer votre réservation!</div>
+                                    <div class="step-actions">
+                                        <button class="waves-effect waves-dark btn yellow accent-4 black-text" type="submit">TERMINER</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        {{ form_end(form, { 'render_rest': false } ) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# === CSS STYLE === #}
+    <style>
+        body{
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        html, body, .block {
+            flex: 1 0 auto;
+        }
+        footer {
+            padding-left: 0;
+        }
+    </style>
+
+    <script>
+
+        function validateCustomerDB(){
+
+            // $("#formValidate").validate({
+            //     rules: {
+            //         'appbundle_booking[customer][sexe]' : {
+            //             required: true
+            //         },
+            //         'appbundle_booking[customer][firstname]': {
+            //             required: true,
+            //             minlength: 2
+            //         },
+            //         'appbundle_booking[customer][lastname]': {
+            //             required: true,
+            //             minlength: 2
+            //         },
+            //         'appbundle_booking[customer][email]': {
+            //             required: true,
+            //             email: true
+            //         },
+            //         'appbundle_booking[customer][phone]': {
+            //             required: true,
+            //             number: true
+            //         }
+            //     },
+            //     //For custom messages
+            //     messages: {
+            //         'appbundle_booking[customer][sexe]' : {
+            //             required: "Selectionner une sexe"
+            //         },
+            //         'appbundle_booking[customer][firstname]': {
+            //             required: "Saisier le nom",
+            //             minlength: "minimum 2 characteres"
+            //         },
+            //         'appbundle_booking[customer][lastname]': {
+            //             required: "Saisier le prénom",
+            //             minlength: "minimum 2 characteres"
+            //         },
+            //         'appbundle_booking[customer][email]': {
+            //             required: "Saisier l'adresse mail",
+            //             email: "format non valide"
+            //         },
+            //         'appbundle_booking[customer][phone]': {
+            //             required: "Saisier le numéro de téléphone",
+            //             number: "format non valide"
+            //         }
+            //     },
+            //     errorElement : 'div',
+            //     errorPlacement: function(error, element) {
+            //         var placement = $(element).data('error');
+            //         if (placement) {
+            //             $(placement).append(error)
+            //         } else {
+            //             error.insertAfter(element);
+            //         }
+            //     }
+            // });
+
+        };
+
+    </script>
+
+{% endblock body %}

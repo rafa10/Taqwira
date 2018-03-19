@@ -1,0 +1,33 @@
+<?php
+namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="cover_test_unit_requirement")
+ */
+class FieldSession
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer", length=11)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Field", inversedBy="fieldSession")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $field;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Session", inversedBy="fieldSession")
+     * @ORM\JoinColumn(name="session_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $session;
+
+
+
+
+}

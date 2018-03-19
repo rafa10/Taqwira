@@ -1,0 +1,120 @@
+{% extends "FrontBundle::base.html.twig" %}
+
+{% block title %} Mes billets | Taqwira {% endblock title %}
+
+{% block body %}
+
+    <div id="booking-login" class="block grey lighten-3">
+        <div class="row">
+            <div class="col s12 m6 offset-m3">
+                <h1 class="flow-text grey lighten-3 z-depth-0 card-panel">GÉRER MES RÉSERVATIONS</h1>
+                <div id="profile-page-wall-share" class="row">
+                    <div class="col s12">
+                        <ul class="tabs z-depth-1">
+                            <li class="tab col s3"><a class="black-text waves-effect waves-light active" href="#reference">J’ai la référence de réservation.</a></li>
+                            <li class="tab col s3"><a class="black-text waves-effect waves-light" href="#reference_name">J’ai la référence de réservation et le<br>nom de bénéficiaire.</a></li>
+                            {#<li class="tab col s3"><a class="black-text waves-effect waves-light" href="#forget_reference">J’ai perdu la référence <br>de réservation ou<br> l'e-mail de confirmation.</a></li>#}
+                            <div class="indicator" style="right: -1px; left: 546px;"></div>
+                        </ul>
+                        <!-- Reference-->
+                        <div class="form-login-booking">
+                            {{ form_start(form_mail) }}
+                                <div id="reference" class="tab-content col s12  grey lighten-4">
+                                    <div class="row mess-error-mail"></div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            {{ form_widget(form_mail.reference_one) }}
+                                            <label for="reference" class="">Référence de réservation *</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            {{ form_widget(form_mail.email) }}
+                                            <label for="email" class="">E-mail *</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 right-align">
+                                            <button type="button" class=" waves-effect waves-light yellow accent-4 black-text btn btn-check-booking">Connexion</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ form_row(form_mail._token) }}
+                            {{ form_end(form_mail, { 'render_rest': false } ) }}
+                        </div>
+                        <!-- Reference&Name -->
+                        <div class="form-login-booking">
+                            {{ form_start(form_name) }}
+                                <div id="reference_name" class="tab-content col s12  grey lighten-4" style="display: none;">
+                                    <div class="row mess-error-name"></div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            {{ form_widget(form_name.reference_tow) }}
+                                            <label for="reference" class="">Référence de réservation *</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            {{ form_widget(form_name.lastname) }}
+                                            <label for="email" class="">Prénom *</label>
+                                        </div>
+                                        <div class="input-field col s12">
+                                            {{ form_widget(form_name.firstname) }}
+                                            <label for="email" class="">Nom *</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 right-align">
+                                            <button type="button" class=" waves-effect waves-light yellow accent-4 black-text btn btn-check-booking">Connexion</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{ form_row(form_name._token) }}
+                            {{ form_end(form_name, { 'render_rest': false } ) }}
+                        </div>
+                        <!-- Forget_reference -->
+                        {#<div id="forget_reference" class="tab-content col s12  grey lighten-4" style="display: block;">#}
+                            {#<div class="row mess-error-forget"></div>#}
+                            {#<div class="row">#}
+                                {#<div class="input-field col s12">#}
+                                    {#<input id="email" type="text" class="validate">#}
+                                    {#<label for="email" class="">E-mail *</label>#}
+                                {#</div>#}
+                                {#<div class="input-field col s12">#}
+                                    {#<input id="email" type="text" class="validate">#}
+                                    {#<label for="email" class="">Center *</label>#}
+                                {#</div>#}
+                                {#<div class="input-field col s12">#}
+                                    {#<input id="email" type="text" class="validate">#}
+                                    {#<label for="email" class="">Date de match *</label>#}
+                                {#</div>#}
+                                {#<div class="input-field col s12">#}
+                                    {#<input id="email" type="text" class="validate">#}
+                                    {#<label for="email" class="">Temps de match *</label>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="row">#}
+                                {#<div class="col s12 right-align">#}
+                                    {#<a class="waves-effect waves-light btn"><i class=""></i>Renvoyer la réservation</a>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# === CSS STYLE === #}
+    <style>
+        body{
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        html, body, .block {
+            flex: 1 0 auto;
+        }
+        footer {
+            padding-left: 0;
+        }
+
+    </style>
+{% endblock body %}
+

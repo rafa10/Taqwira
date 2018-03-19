@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <h5 class="breadcrumbs-title">Voir pannier</h5>
+                        <ol class="breadcrumbs">
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
+                            <li class="active">Pannier abonnement</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs end-->
+
+        <!--start container-->
+        <div class="container">
+            <div class="section">
+                {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
+                <div class="divider"></div>
+            <div id="invoice">
+
+                {#<div class="invoice-header">#}
+                    {#<div class="row section">#}
+                        {#<div class="col s12 m6 l6">#}
+                            {#<img src="{{ asset('public/images/generic-logo.png') }}" alt="company logo">#}
+                            {#<p>To,#}
+                                {#<br/>#}
+                                {#<span class="strong">Jonathan Doe</span>#}
+                                {#<br/>#}
+                                {#<span>125, ABC Street,</span>#}
+                                {#<br/>#}
+                                {#<span>New Yourk, USA</span>#}
+                                {#<br/>#}
+                                {#<span>+91-(444)-(333)-(221)</span>#}
+                            {#</p>#}
+                        {#</div>#}
+
+                        {#<div class="col s12 m6 l6">#}
+                            {#<div class="invoce-company-address right-align">#}
+                                {#<span class="invoice-icon"><i class="mdi-social-location-city cyan-text"></i></span>#}
+
+                                {#<p><span class="strong">Company Name LLC</span>#}
+                                    {#<br/>#}
+                                    {#<span>125, ABC Street,</span>#}
+                                    {#<br/>#}
+                                    {#<span>New Yourk, USA</span>#}
+                                    {#<br/>#}
+                                    {#<span>+91-(444)-(333)-(221)</span>#}
+                                {#</p>#}
+                            {#</div>#}
+
+                            {#<div class="invoce-company-contact right-align">#}
+                                {#<span class="invoice-icon"><i class="mdi-communication-quick-contacts-mail cyan-text"></i></span>#}
+                                {#<p><span class="strong">www.exampledomain.com</span>#}
+                                    {#<br/>#}
+                                    {#<span>info@exampledomain.com</span>#}
+                                    {#<br/>#}
+                                    {#<span>admin@exampledomain.com</span>#}
+                                {#</p>#}
+                            {#</div>#}
+
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+                <div class="invoice-table card-panel">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <table class="striped">
+                                <thead>
+                                <tr>
+                                    <th data-filed="seance">Séance</th>
+                                    <th data-field="reference">Référence</th>
+                                    <th data-field="field">Terrain</th>
+                                    <th data-field="date">Date</th>
+                                    <th data-field="time">Temps</th>
+                                    <th data-filed="action">Action</th>
+                                    <th data-field="price" class="right-align">Prix</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% set total = null %}
+                                {% for basket in app.session.get('basket') %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>{{ basket.reference }}</td>
+                                        <td>{{ basket.field.name }}</td>
+                                        <td><b>{{ basket.date|date('d/m/Y') }}</b></td>
+                                        <td>De <b>{{ basket.timeStart|date('H:i') }}</b> à <b>{{ basket.timeEnd|date('H:i') }}</b></td>
+                                        <td><a role="button" data-href="{{ path('subscription_basket_delete', { 'id': basket.reference }) }}" class="btn-warning-confirm task-cat red lighten-1 " >Supprimer</a></td>
+                                        <td class="right-align"><b>{{ basket.price }} €</b> </td>
+                                    </tr>
+                                    {% set total = total + basket.price %}
+                                {% endfor %}
+                                <tr style="font-size: 1.5rem">
+                                    <td colspan="4"></td>
+                                    <td class="grey darken-1 white-text">&nbsp;Total</td>
+                                    <td class="grey darken-1 white-text">&nbsp;</td>
+                                    <td class="grey darken-1 white-text right-align"><strong>{{ total }} €</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="btn-validation right">
+                    <button type="button" data-href="{{ path('booking_subscription_details') }}" class="waves-effect waves-light btn yellow accent-4 black-text modal_trigger">Valider le pannier</button>
+                </div>
+                {#<div class="invoice-footer">#}
+                    {#<div class="row">#}
+                        {#<div class="col s12 m6 l6">#}
+                            {#<p class="strong">Payment Method</p>#}
+                            {#<p>Please make the cheque to: AMANDA ORTON</p>#}
+                            {#<p class="strong">Terms & Condition</p>#}
+                            {#<ul>#}
+                                {#<li>You know, being a test pilot isn't always the healthiest business in the world.</li>#}
+                                {#<li>We predict too much for the next year and yet far too little for the next 10.</li>#}
+                            {#</ul>#}
+                        {#</div>#}
+                        {#<div class="col s12 m6 l6 center-align">#}
+                            {#<p>Approved By</p>#}
+                            {#<img src="images/signature-scan.png" alt="signature">#}
+                            {#<p class="header">AMANDA ORTON</p>#}
+                            {#<p>Managing Director</p>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+            </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- END CONTENT -->
+
+{% endblock %}

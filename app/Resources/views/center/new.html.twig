@@ -1,0 +1,110 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form) }}
+        <div class="modal-content">
+            <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau centre</h5><br>
+            {#<div class="divider"></div><br>#}
+            {{ form_row(form._token) }}
+            <div class="row">
+                <div class="input-field col s4 ">
+                    <label for="logo" class="">Logo*</label>
+                    {{ form_widget(form.avatar) }}
+                </div>
+                <div class="input-field col s8">
+                    <label for="name" class="">Nom*</label>
+                    {{ form_widget(form.name) }}
+                </div>
+                {#<div id="mycp" class="file-field col s8">#}
+                    {#<div class="btn"><label for=name" class="">Couleur</label></div>#}
+                    {#<div class="file-path-wrapper">#}
+                        {#{{ form_widget(form.color) }}#}
+                    {#</div>#}
+                {#</div>#}
+                <div class="input-field col s8">
+                    <label for="region" class="active">Région*</label>
+                    {{ form_widget(form.region) }}
+                </div><br>
+                <div class="input-field col s8">
+                    <label for="city" class="active">Ville*</label>
+                    {{ form_widget(form.city) }}
+                </div>
+                <div class="input-field col s6">
+                    <label for="address" class="">Adresse*</label>
+                    {{ form_widget(form.address) }}
+                </div>
+                <div class="input-field col s6">
+                    <label for="cp" class="">Code postal*</label>
+                    {{ form_widget(form.cp) }}
+                </div>
+                <div class="col s8">
+                    <p>
+                        {{ form_widget(form.is_active, {'id': 'filled-in-box', 'attr': {'class': 'filled-in'}}) }}
+                        <label for="filled-in-box">Active ?</label>
+                    </p>
+                </div>
+                <div id="next_step" data-href="{{ path('fos_user_registration_register') }}"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+            <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+        </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+<script>
+
+    $(document).ready(function() {
+
+//        $("#form_modal").on("click",'#save_center',function(){
+//            form = $(this).closest('form');
+//            link = $('#next_step').data('href');
+//            $.ajax({
+//                data: new FormData(form[0]),
+//                url: form.attr('action'),
+//                type: 'POST',
+//                cache: false,
+//                contentType: false,
+//                processData: false,
+//                beforeSend: function(){
+//                    $('#form_modal').closeModal();
+//                },
+//                success: function(data_json){
+//                    data = $.parseJSON(data_json);
+//                    if (data.status=="ok") {
+//
+//                        if (data.page=="refresh") {
+//                            $('#form_modal').closeModal();
+//                            location.replace(link);
+//
+//                        }
+//                        else {
+//                            $('#form_modal').html(data.html);
+//                            $('#form_modal').openModal();
+//                        }
+//                    }
+//                },
+//                error: function() {
+//                    alert('Une erreur est survenue');
+//                    $('#form_modal').closeModal();
+//
+//                }
+//
+//            });
+//        });
+
+        // Upload avatar
+        $('.dropify').dropify({
+            messages: {
+                default: 'Glissez-déposez un logo ici ou cliquez',
+                replace: 'Glissez-déposez un logo ou cliquez pour remplacer',
+                remove:  'Supprimer',
+                error:   'Désolé, le fichier trop volumineux'
+            }
+        });
+
+    });
+
+</script>

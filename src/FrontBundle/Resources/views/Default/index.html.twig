@@ -1,0 +1,257 @@
+{% extends "FrontBundle::base.html.twig" %}
+
+{% block body %}
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+    <section id="booking" class="block">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <h2 class="white-text text-header">Réservez un terrain</h2>
+                    <p class="flow-text white-text hide-on-small-only">Réservez votre terrain en ligne en choisissant votre jour et votre créneau horaire.<br>
+                        Pour être sûr d'avoir un terrain réservé chaque semaine, même jour, même heure contactez votre centre.</p>
+                </div>
+            </div>
+            <div class="col s12 m12 btn-booking">
+                <div class="col s12 center-align">
+                    <button class="btn-floating btn-large waves-effect waves-light yellow z-depth-1 black-text" onclick="window.location.href='{{ path('booking_page') }}'">Réservez</button>
+                </div>
+            </div>
+            {#<form action="{{ path('booking_search_first') }}" method="POST">#}
+                {#{{ form_row(form._token) }}#}
+                {#<div class="row">#}
+                    {#<!-- region & ville -->#}
+                    {#<div class="col s12 m3 offset-m1">#}
+                        {#<div class="col s12 card-panel">#}
+                            {#<div class="input-field col s12">#}
+                                {#<i class="material-icons prefix">location_on</i>#}
+                                {#{{ form_widget(form.ville) }}#}
+                                {#{{ form_label(form.ville, 'Ville') }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<!-- centre -->#}
+                    {#<div class="col s12 m3 card-panel" id="autocompelet-center">#}
+                        {#<div class="input-field col s12">#}
+                            {#<i class="material-icons prefix">business</i>#}
+                            {#{{ form_widget(form.center) }}#}
+                            {#{{ form_label(form.center, 'Center') }}#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<!-- date -->#}
+                    {#<div class="col s12 m3">#}
+                        {#<div class="col s12 card-panel">#}
+                            {#<div class="input-field col s12">#}
+                                {#<i class="material-icons prefix">event</i>#}
+                                {#{{ form_widget(form.date) }}#}
+                                {#{{ form_label(form.date, 'Date') }}#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#<!-- btn form -->#}
+                    {#<div class="col s12 m1">#}
+                        {#<button class="btn-floating btn-large waves-effect waves-light yellow left z-depth-1 black-text" type="submit" name="action">Rechercher</button>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</form>#}
+        </div>
+    </section>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+    <section id="plateforme" class="block white lighten-1">
+
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3 class="text-header">Plateforme</h3>
+                <p class="flow-text">Espace personnel pour la gestion de vos centre de football</p>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <img src="{{ asset('public/images/plateforme-photo.png') }}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m6 l5 offset-l1">
+                    <div class="card blueprint sticky-action">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">Gérer les Terrains</span>
+                            <p>Automate your customer service tasks to deliver the best support. React and track customer requests more efficiently.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#modal1" class="modal-trigger">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m6 l5">
+                    <div class="card blueprint sticky-action">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">Gérer les réservations </span>
+                            <p>Automate the consolidation, triage and prioritization of leads, and easily track your customer touch points to gain customer intelligence and make smarter sales .</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#modal1" class="modal-trigger">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m6 l5 offset-l1">
+                    <div class="card blueprint sticky-action">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">Gérer les planification</span>
+                            <p>Break down the silos between your apps and streamline your business operations. Allow your team to collaborate across departments seamlessly.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#modal1" class="modal-trigger">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m6 l5">
+                    <div class="card blueprint sticky-action">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">Service client</span>
+                            <p>Avoid lead fragmentation across multiple sources, prioritize leads and launch different targeted engagement campaigns.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#modal1" class="modal-trigger">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m6 l5 offset-l1">
+                    <div class="card blueprint sticky-action">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">Dêpot des vidéos</span>
+                            <p>Automate the billing and payment process across multiple systems, and create alerts for preempted churn risk and variance in financial data.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#modal1" class="modal-trigger">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m6 l5">
+                    <div class="card blueprint sticky-action">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">Dashboard</span>
+                            <p>Completely automate your HR processes such as employee onboarding, offboarding, performance management, compensation management and more.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#modal1" class="modal-trigger">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+    <section id="exagon-interlude" class="">
+
+        {#<div class="row">#}
+        {#<div class="col s12 center-align" style="margin-top: 1rem">#}
+        {#<h2 class="white-text text-header">Key concepts</h2>#}
+        {#</div>#}
+        {#</div>#}
+        <div class="container">
+            <div class="row center-align">
+                <div class="col s4 m2 offset-m1 exagon">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/centers.png') }}">
+                        <p class="white-text">Centres</p>
+                    </a>
+                </div>
+                <div class="col s4 m2 exagon">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/terrains.png') }}">
+                        <p class="white-text">Terrains</p>
+                    </a>
+                </div>
+                <div class="col s4 m2 exagon">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/regions.png') }}">
+                        <p class="white-text">Régions</p>
+                    </a>
+                </div>
+                <div class="col s5 offset-s1 m2 exagon">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/clients.png') }}">
+                        <p class="white-text">Clients</p>
+                    </a>
+                </div>
+                <div class="col s5 m2 exagon">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/stadiers.png') }}">
+                        <p class="white-text">Stadiers</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+    <section id="video" class="block grey lighten-3">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3 class="text-header">Revoir votre match en vidéo</h3>
+                <p class="flow-text">Si vous avez joué un match sur terrain équipé par caméra, vous avez l'occasion de regarder votre match en vidéo.</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row center-align">
+                <div class="col s6 m2 offset-m3 circle hide-on-small-only">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/youtube.png') }}">
+                    </a>
+                </div>
+                <div class="col s12 m2 circle">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/camera.png') }}">
+                    </a>
+                </div>
+                <div class="col s6 m2 circle hide-on-small-only">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/arena.png') }}">
+                    </a>
+                </div>
+                <div class="col s12 m12 btn-video">
+                    <div class="col s12 center-align">
+                        <a class="btn btn-large waves-effect waves-light yellow accent-4 black-text" href="{{ path('video_login') }}">Match en vidéo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+    {#<section id="contact" class="block white lighten-1">#}
+    {#</section>#}
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    {# === CSS STYLE === #}
+    <style>
+        /*html, body, .block {*/
+            /*height: 100%;*/
+        /*}*/
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(0,0,0,.1);
+        }
+        footer {
+            padding-left: 0;
+        }
+
+    </style>
+
+{% endblock body %}

@@ -1,0 +1,52 @@
+{% form_theme form 'materialize_layout.html.twig' %}
+
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form) }}
+        <div class="modal-content">
+            <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau tarif</h5><br>
+            {#<div class="divider"></div><br>#}
+            {{ form_row(form._token) }}
+            <div class="row">
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <div class="input-field col s12">
+                        <label for="center" class="active">Centre*</label>
+                        {{ form_widget(form.center) }}
+                    </div>
+                {% else %}
+                    <div class="input-field col s12 hide">
+                        <input type="hidden" id="price_center" name="price[center]" required="required" value="{{ app.user.center.id }}"/>
+                    </div>
+                {% endif %}
+                <div class="input-field col s6">
+                    <label for="type" class="active">Type*</label>
+                    {{ form_widget(form.bookingType) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s6">
+                    <label for="montant" class="">Montant*</label>
+                    {{ form_widget(form.amount) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s12">
+                    <label for="jour" class="active">Jour*</label>
+                    {{ form_widget(form.day) }}
+                    <div class="errorTxt1"></div>
+                </div>
+                <div class="input-field col s12">
+                    <label for="séances" class="active">Séances</label>
+                    {{ form_widget(form.session) }}
+                    <div class="errorTxt1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+            <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+        </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+
