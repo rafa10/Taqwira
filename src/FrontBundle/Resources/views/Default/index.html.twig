@@ -16,43 +16,6 @@
                     <button class="btn-floating btn-large waves-effect waves-light yellow z-depth-1 black-text" onclick="window.location.href='{{ path('booking_page') }}'">Réservez</button>
                 </div>
             </div>
-            {#<form action="{{ path('booking_search_first') }}" method="POST">#}
-                {#{{ form_row(form._token) }}#}
-                {#<div class="row">#}
-                    {#<!-- region & ville -->#}
-                    {#<div class="col s12 m3 offset-m1">#}
-                        {#<div class="col s12 card-panel">#}
-                            {#<div class="input-field col s12">#}
-                                {#<i class="material-icons prefix">location_on</i>#}
-                                {#{{ form_widget(form.ville) }}#}
-                                {#{{ form_label(form.ville, 'Ville') }}#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<!-- centre -->#}
-                    {#<div class="col s12 m3 card-panel" id="autocompelet-center">#}
-                        {#<div class="input-field col s12">#}
-                            {#<i class="material-icons prefix">business</i>#}
-                            {#{{ form_widget(form.center) }}#}
-                            {#{{ form_label(form.center, 'Center') }}#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<!-- date -->#}
-                    {#<div class="col s12 m3">#}
-                        {#<div class="col s12 card-panel">#}
-                            {#<div class="input-field col s12">#}
-                                {#<i class="material-icons prefix">event</i>#}
-                                {#{{ form_widget(form.date) }}#}
-                                {#{{ form_label(form.date, 'Date') }}#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#<!-- btn form -->#}
-                    {#<div class="col s12 m1">#}
-                        {#<button class="btn-floating btn-large waves-effect waves-light yellow left z-depth-1 black-text" type="submit" name="action">Rechercher</button>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</form>#}
         </div>
     </section>
 <!-- //////////////////////////////////////////////////////////////////////////// -->
@@ -78,24 +41,24 @@
                 <div class="col s12 m6 l5 offset-l1">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4">Gérer les Terrains</span>
-                            <p>Automate your customer service tasks to deliver the best support. React and track customer requests more efficiently.</p>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">view_array</i>Gérer les Terrains</span><br>
+                            <p>Vous avez la possibilité d'ajouter un ou plusieurs terrain, pour chaque terrain vous pouvez mettre leurs informations description, scénace, capacité.</p>
                         </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="modal-trigger">Learn more</a>
-                        </div>
+                        {#<div class="card-action">#}
+                            {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
+                        {#</div>#}
                     </div>
                 </div>
 
                 <div class="col s12 m6 l5">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4">Gérer les réservations </span>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">receipt</i>Gérer les réservations </span><br>
                             <p>Automate the consolidation, triage and prioritization of leads, and easily track your customer touch points to gain customer intelligence and make smarter sales .</p>
                         </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="modal-trigger">Learn more</a>
-                        </div>
+                        {#<div class="card-action">#}
+                            {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
+                        {#</div>#}
                     </div>
                 </div>
             </div>
@@ -104,24 +67,24 @@
                 <div class="col s12 m6 l5 offset-l1">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4">Gérer les planification</span>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">event_note</i>Gérer les planification</span><br>
                             <p>Break down the silos between your apps and streamline your business operations. Allow your team to collaborate across departments seamlessly.</p>
                         </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="modal-trigger">Learn more</a>
-                        </div>
+                        {#<div class="card-action">#}
+                            {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
+                        {#</div>#}
                     </div>
                 </div>
 
                 <div class="col s12 m6 l5">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4">Service client</span>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">people</i>Service client</span><br>
                             <p>Avoid lead fragmentation across multiple sources, prioritize leads and launch different targeted engagement campaigns.</p>
                         </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="modal-trigger">Learn more</a>
-                        </div>
+                        {#<div class="card-action">#}
+                            {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
+                        {#</div>#}
                     </div>
                 </div>
             </div>
@@ -130,24 +93,24 @@
                 <div class="col s12 m6 l5 offset-l1">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4">Dêpot des vidéos</span>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">videocam</i>Dêpot des vidéos</span><br>
                             <p>Automate the billing and payment process across multiple systems, and create alerts for preempted churn risk and variance in financial data.</p>
                         </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="modal-trigger">Learn more</a>
-                        </div>
+                        {#<div class="card-action">#}
+                            {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
+                        {#</div>#}
                     </div>
                 </div>
 
                 <div class="col s12 m6 l5">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4">Dashboard</span>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">dashboard</i>Dashboard</span><br>
                             <p>Completely automate your HR processes such as employee onboarding, offboarding, performance management, compensation management and more.</p>
                         </div>
-                        <div class="card-action">
-                            <a href="#modal1" class="modal-trigger">Learn more</a>
-                        </div>
+                        {#<div class="card-action">#}
+                            {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
+                        {#</div>#}
                     </div>
                 </div>
             </div>
@@ -156,6 +119,41 @@
     </section>
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <section id="video" class="block grey lighten-3">
+        <div class="row">
+            <div class="col s12 center-align">
+                <h3 class="text-header">Revoir votre match en vidéo</h3>
+                <p class="flow-text">Si vous avez joué un match sur terrain équipé par caméra, vous avez l'occasion de regarder votre match en vidéo.</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row center-align">
+                <div class="col s6 m2 offset-m3 circle hide-on-small-only">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/youtube.png') }}">
+                    </a>
+                </div>
+                <div class="col s12 m2 circle">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/camera.png') }}">
+                    </a>
+                </div>
+                <div class="col s6 m2 circle hide-on-small-only">
+                    <a href="#">
+                        <img src="{{ asset('public/images/soccer_icon/arena.png') }}">
+                    </a>
+                </div>
+                <div class="col s12 m12 btn-video">
+                    <div class="col s12 center-align">
+                        <a class="btn btn-large waves-effect waves-light yellow accent-4 black-text" href="{{ path('video_login') }}">Match en vidéo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
     <section id="exagon-interlude" class="">
 
         {#<div class="row">#}
@@ -201,50 +199,72 @@
     </section>
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 <!-- //////////////////////////////////////////////////////////////////////////// -->
-    <section id="video" class="block grey lighten-3">
+    <section id="contact" class="block white lighten-1">
         <div class="row">
             <div class="col s12 center-align">
-                <h3 class="text-header">Revoir votre match en vidéo</h3>
-                <p class="flow-text">Si vous avez joué un match sur terrain équipé par caméra, vous avez l'occasion de regarder votre match en vidéo.</p>
+                <h3 class="text-header">Contactez-nous</h3>
+            </div>
+            <div class="col s12 m10 offset-m1">
+                <p class="flow-text center-align">Taqwira permettant aux joueurs de trouver facilement leurs terrains préférés ,suivre les offres et la disponibilité de chaque terrain.
+                D'autre part pour les propriétaires des centres de football, taqwira offre un plateforme de gestion pour chaque centre qu'il pourra la gérer facilement.
+                        si vous ne trouvez pas votre centre proposez au propriétaire l'insription sur taqwira.com</p>
             </div>
         </div>
         <div class="container">
-            <div class="row center-align">
-                <div class="col s6 m2 offset-m3 circle hide-on-small-only">
-                    <a href="#">
-                        <img src="{{ asset('public/images/soccer_icon/youtube.png') }}">
-                    </a>
-                </div>
-                <div class="col s12 m2 circle">
-                    <a href="#">
-                        <img src="{{ asset('public/images/soccer_icon/camera.png') }}">
-                    </a>
-                </div>
-                <div class="col s6 m2 circle hide-on-small-only">
-                    <a href="#">
-                        <img src="{{ asset('public/images/soccer_icon/arena.png') }}">
-                    </a>
-                </div>
-                <div class="col s12 m12 btn-video">
-                    <div class="col s12 center-align">
-                        <a class="btn btn-large waves-effect waves-light yellow accent-4 black-text" href="{{ path('video_login') }}">Match en vidéo</a>
+            <div class="col s12 m12 btn-contact">
+                <div class="col s12 center-align">
+                    <b href="#modal1" class="btn btn-large full-width waves-effect waves-light grey darken-2 modal-trigger">
+                        <span class="white-text">Contactez-nous</span>
+                    </b>
+                    <!-- Modal form contact -->
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">account_circle</i>
+                                            <input id="name" type="text" class="validate">
+                                            <label for="name" class="">Nom & Prénom</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">email</i>
+                                            <input id="to_email" type="email" class="validate">
+                                            <label for="to_email" class="">Email</label>
+                                        </div>
+                                    </div>
+                                    {#<div class="row">#}
+                                        {#<div class="input-field col s12">#}
+                                            {#<input id="subject" type="text" class="validate">#}
+                                            {#<label for="subject" class="">Sujet</label>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">message</i>
+                                            <textarea id="compose" class="materialize-textarea" length="500" style="height: 23px;"></textarea>
+                                            <label for="compose" class="">Message</label>
+                                            <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+                            <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+                        </div>
                     </div>
+                    <!-- / End modal form contact -->
                 </div>
             </div>
         </div>
-
     </section>
-<!-- //////////////////////////////////////////////////////////////////////////// -->
-<!-- //////////////////////////////////////////////////////////////////////////// -->
-    {#<section id="contact" class="block white lighten-1">#}
-    {#</section>#}
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
     {# === CSS STYLE === #}
     <style>
-        /*html, body, .block {*/
-            /*height: 100%;*/
-        /*}*/
         nav ul li a:hover, nav ul li a.active {
             background-color: rgba(0,0,0,.1);
         }
@@ -253,5 +273,4 @@
         }
 
     </style>
-
 {% endblock body %}

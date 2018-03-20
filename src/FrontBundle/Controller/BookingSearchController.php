@@ -139,12 +139,15 @@ class BookingSearchController extends Controller
             $em->persist($booking);
             $em->flush();
 
+            // Send mail confirmation booking to customer
+            $this->container->get('app.mailer')->sendBookingMessage($booking);
+
             $request->getSession()
                 ->getFlashBag()
                 ->add('SUCCÈS', 'La réservation a été enregistré avec succès!');
 
 
-            return $this->redirectToRoute('booking_search_first');
+            return $this->redirectToRoute('booking_page');
 
         }
 

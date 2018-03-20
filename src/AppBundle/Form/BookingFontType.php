@@ -36,7 +36,6 @@ class BookingFontType extends AbstractType
                 )
             ))
             ->add('price')
-            ->add('status')
             ->add('field')
             ->add('customer', CustomerType::class, array(
                 'attr'=>array(

@@ -2,6 +2,8 @@
 
 namespace  AppBundle\Services;
 
+use AppBundle\Entity\Booking;
+use AppBundle\Entity\Customer;
 use AppBundle\Entity\User;
 use Symfony\Component\Templating\EngineInterface;
 
@@ -9,9 +11,9 @@ class Mailer
 {
     protected $mailer;
     protected $templating;
-    private   $from ="no-replay@takwira.com";
-    private   $reply ="contact@takwira.com";
-    private   $name ="Takwira.com";
+    private   $from ="no-replay@taqwira.com";
+    private   $reply ="contact@taqwira.com";
+    private   $name ="taqwira.com";
 
     /**
      * Mailer constructor.
@@ -32,9 +34,7 @@ class Mailer
      */
     public function sendMessage($to, $subject, $body)
     {
-        $mail = \Swift_Mailer::newInstance();
-
-        $mail
+        $message = \Swift_Message::newInstance()
             ->setFrom($this->from)
             ->setTo($to)
             ->setSubject($subject)
@@ -42,19 +42,32 @@ class Mailer
             ->setReplyTo($this->reply)
             ->setContentType('text/html');
 
-        $this->mailer->send($mail);
+        $this->mailer->send($message);
     }
 
     /**
-     * function send mail refuse message
+     * function send mail confirmation message
      * @param User $user
      */
-    public function sendRefusMessage(User $user)
+    public function sendConfirmationAccountMessage(User $user)
     {
-        $subject = "Votre réservation a été refuséé";
-        $template = "Appbundle:mail:refus.html.twig";
+        $subject = "Votre compte stadier a été crée";
+        $template = "mail/confirmation.html.twig";
         $to = $user->getEmail();
         $body = $this->templating->render($template, array('user' => $user));
+        $this->sendMessage($to, $subject, $body);
+    }
+
+    /**
+     * function send mail success message
+     * @param Booking $booking
+     */
+    public function sendBookingMessage(Booking $booking)
+    {
+        $subject = "Confirmation de votre réservation terrain";
+        $template = "mail/booking_mail.html.twig";
+        $to = $booking->getCustomer()->getEmail();
+        $body = $this->templating->render($template, array('booking' => $booking));
         $this->sendMessage($to, $subject, $body);
     }
 

@@ -41,7 +41,9 @@ body {
 }
 
 #booking .container{
-    padding: 60px 0;
+    position: relative;
+    /*padding: 60px 0;*/
+    top: 10rem;
 }
 
 #booking .btn-floating.btn-large {
@@ -89,7 +91,11 @@ body {
 }
 
 #contact{
-    height: 300px;
+    padding: 70px 0;
+}
+
+#contact p{
+    font-size: 18px;
 }
 
 #exagon-interlude {
