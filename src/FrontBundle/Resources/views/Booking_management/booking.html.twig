@@ -10,15 +10,15 @@
                 <div class="row">
                     <div class="flow-text grey lighten-3 z-depth-0">GÉRER MA RÉSERVATIONS: <span class="red-text text-accent-3"><b>{{ booking.reference }}</b></span></div><hr class="style10">
                     <div class="col s12 card-panel z-depth-1">
-                        <h5 class="flow-text"><i class="small material-icons left">receipt</i> Ma réservation</h5>
+                        <h5 class="flow-text"><i class="fas fa-ticket-alt left"></i> Ma réservation</h5>
                     </div>
                     {# == Coordonnées du client ======================================================================#}
                     <div class="col s12 m4 card-panel z-depth-1 info-row hide-on-small-only">
                         <h2 class="flow-text">Coordonnées du client</h2><hr class="style10">
                         <div class="row">
-                            <div class="col s3">Nom:</div><div class="col s9"><b>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</b></div>
-                            <div class="col s3">E-mail:</div><div class="col s9"><b>{{ booking.customer.email }}</b></div>
-                            <div class="col s3">Téléphone:</div><div class="col s9"><b>{{ booking.customer.phone }}</b></div>
+                            <div class="col s2"><i class="fas fa-user"></i></div><div class="col s10"><b>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</b></div>
+                            <div class="col s2"><i class="fas fa-envelope"></i> </div><div class="col s10"><b>{{ booking.customer.email }}</b></div>
+                            <div class="col s2"><i class="fas fa-phone-volume"></i> </div><div class="col s10"><b>{{ booking.customer.phone }}</b></div>
                         </div>
                     </div>
                     {#=== Détails de ma réservation ==================================================================#}
@@ -47,10 +47,10 @@
                         </div>
                         <div class="row">
                             <div class="col s12 right-align">
-                                <a role="button" href="{{ path('receipt_match_pdf', {'id': booking.id}) }}" class="waves-effect waves-light yellow accent-4 black-text btn">Télécharger la réservation</a>
+                                <a role="button" href="{{ path('receipt_match_pdf', {'id': booking.id}) }}" class="waves-effect waves-light yellow accent-4 black-text btn"><i class="fas fa-file-pdf left"></i>Télécharger la réservation</a>
                                 <span class="hide-on-med-only" style="padding: 23px"></span>
                                 {% if booking.bill != null %}
-                                    <a role="button" href="{{ path('bill_match_pdf', { 'id': booking.id }) }}" class="waves-effect waves-light yellow accent-4 black-text btn">Télécharger la facture</a>
+                                    <a role="button" href="{{ path('bill_match_pdf', { 'id': booking.id }) }}" class="waves-effect waves-light yellow accent-4 black-text btn"><i class="fas fa-file-pdf left"></i> Télécharger la facture</a>
                                 {% endif %}
                             </div>
                         </div>

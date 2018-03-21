@@ -13,7 +13,7 @@
             </div>
             <div class="col s12 m12 btn-booking">
                 <div class="col s12 center-align">
-                    <button class="btn-floating btn-large waves-effect waves-light yellow z-depth-1 black-text" onclick="window.location.href='{{ path('booking_page') }}'">Réservez</button>
+                    <button class="btn-floating btn-large waves-effect waves-light yellow z-depth-1 black-text tooltipped" data-position="bottom" data-delay="50" data-tooltip="Réservez" onclick="window.location.href='{{ path('booking_page') }}'"><i class="far fa-futbol black-text"></i></button>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col s12 center-align">
                 <h3 class="text-header">Plateforme</h3>
-                <p class="flow-text">Espace personnel pour la gestion de vos centre de football</p>
+                <p class="flow-text">Plateforme d'automatisation de gestion de vos centre de football et de réservation client.</p>
             </div>
         </div>
 
@@ -53,8 +53,8 @@
                 <div class="col s12 m6 l5">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">receipt</i>Gérer les réservations </span><br>
-                            <p>Automate the consolidation, triage and prioritization of leads, and easily track your customer touch points to gain customer intelligence and make smarter sales .</p>
+                            <span class="card-title grey-text text-darken-4"><i class="fas fa-ticket-alt left fa-2x"></i> </i>Gérer les réservations </span><br>
+                            <p>Vous pouvez suivre les réservations en ligne des clients, avec la possiblité de gérer les abonnements client fidèles et de plus réservez des matchs depuis la plateforme.</p>
                         </div>
                         {#<div class="card-action">#}
                             {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
@@ -68,7 +68,7 @@
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
                             <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">event_note</i>Gérer les planification</span><br>
-                            <p>Break down the silos between your apps and streamline your business operations. Allow your team to collaborate across departments seamlessly.</p>
+                            <p>Vous pouvez effectuer un planning pour chaque terrain crée dans votre centre. le planning se divise entre trois element séance, periode, prix. </p>
                         </div>
                         {#<div class="card-action">#}
                             {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
@@ -79,8 +79,8 @@
                 <div class="col s12 m6 l5">
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
-                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">people</i>Service client</span><br>
-                            <p>Avoid lead fragmentation across multiple sources, prioritize leads and launch different targeted engagement campaigns.</p>
+                            <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">people</i>Espace Académie</span><br>
+                            <p>Vous pouvez gérer votre académie depuis la rubrique académie, dans cette vous avez la possibilité d'insérer l'effectif et le program annuelle de l'académie. </p>
                         </div>
                         {#<div class="card-action">#}
                             {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
@@ -94,7 +94,7 @@
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
                             <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">videocam</i>Dêpot des vidéos</span><br>
-                            <p>Automate the billing and payment process across multiple systems, and create alerts for preempted churn risk and variance in financial data.</p>
+                            <p>Si vous avez un ou plusieurs terrains équipé par caméra? vous avez la possibilité de mettre la vidéo en ligne d'autre part le client peut voir le match en vidéo.</p>
                         </div>
                         {#<div class="card-action">#}
                             {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
@@ -106,7 +106,7 @@
                     <div class="card blueprint sticky-action">
                         <div class="card-content">
                             <span class="card-title grey-text text-darken-4"><i class="medium material-icons left">dashboard</i>Dashboard</span><br>
-                            <p>Completely automate your HR processes such as employee onboarding, offboarding, performance management, compensation management and more.</p>
+                            <p>Tableau de bord pour visualiser la performance de votre centre et les dernières réservations en cours accompagnée des statistiques précise .</p>
                         </div>
                         {#<div class="card-action">#}
                             {#<a href="#modal1" class="modal-trigger">Learn more</a>#}
@@ -252,7 +252,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+                            <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Envoyer</button>
                             <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
                         </div>
                     </div>

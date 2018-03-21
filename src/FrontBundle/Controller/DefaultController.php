@@ -2,13 +2,15 @@
 
 namespace FrontBundle\Controller;
 
+use AppBundle\Entity\Contact;
+use AppBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -23,88 +25,46 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $form = $this->formBuilderSearch();
-
         return $this->render('FrontBundle:Default:index.html.twig', array(
-            'form' => $form->createView(),
         ));
     }
 
     /**
-     * Auto-complete form field region & ville & center
-     * @Route("form/search", name="form_search")
+     * contact for create new center
+     * @Route("contact_us", name="contact_us")
+     * @Method({"GET", "POST"})
      */
-    public function getFormSearchAction()
+    public function contactAction(Request $request)
     {
-
-        $regions = [];
-        $citys = [];
-        $centers = [];
         $em = $this->getDoctrine()->getManager();
+        $contact = new Contact();
 
-        $regionAll = $em->getRepository('AppBundle:Region')->findAll();
-        foreach ($regionAll as $region){
-            $regions[$region->getName()] = null;
+        $form = $this->createForm(ContactType::class, $contact, array(
+            'action' => $this->generateUrl('contact_us')
+        ));
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($contact);
+            $em->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Le message a bien été envoyé!');
+
+            return $this->redirect('contact_us');
+
         }
-        $cityAll = $em->getRepository('AppBundle:City')->findAll();
-        foreach ($cityAll as $city){
-            $citys[$city->getName()] = null;
-        }
 
-        $centerAll = $em->getRepository('AppBundle:Center')->findAll();
-        foreach ($centerAll as $center){
-            $centers[$center->getName()] = null;
-        }
-
-        $regionCity = array_merge($regions, $citys);
-
-        $payload=array();
-        $payload['status']='ok';
-        $payload['page']='show';
-        $payload['region_city'] = $regionCity;
-        $payload['center'] = $centers;
-
-        return new Response(json_encode($payload));
+        return $this->render('FrontBundle:Default:contact_us.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
-
-
 
     /** ============================================================================================================== */
     /** === Form Builder search ====================================================================================== */
     /** ============================================================================================================== */
 
-    /**
-     * form builder search
-     * @return mixed
-     */
-    public function formBuilderSearch()
-    {
-        $form = $this->createFormBuilder()
-            ->add('ville', SearchType::class, array(
-                'attr' => array(
-                    'class' => 'autocomplete-region',
-                )
-            ))
-            ->add('center', SearchType::class, array(
-                'attr' => array(
-                    'class' => 'autocomplete-center',
-                )
-            ))
-            ->add('date', DateType::class, array(
-                'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
-                'required' => true,
-                'model_timezone' => 'Europe/Paris',
-                'attr' => array(
-                    'class' => 'datepicker',
-                    'data-provide' => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy'
-                )
-            ))
-            ->getForm();
-
-        return $form;
-
-    }
 
 }

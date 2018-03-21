@@ -1,15 +1,12 @@
-﻿/*================================================================================
-NOTE:
-------
-PLACE HERE YOUR OWN JS CODES AND IF NEEDED.
-WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR CUSTOM SCRIPT IT'S BETTER LIKE THIS.
-================================================================================= */
-
-$(document).ready(function(){
+﻿$(document).ready(function(){
 
     // =================================================================================================================
-    // Compound framework materialize (FrontOffice) ====================================================================
+    // Compound framework materialize ==================================================================================
     // =================================================================================================================
+    $(".button-collapse").sideNav();
+    $('.tooltipped').tooltip({delay: 50});
+    $('.stepper').activateStepper();
+    $('.modal').modal();
     $('select').material_select();
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
@@ -19,14 +16,6 @@ $(document).ready(function(){
         close: 'Ok',
         closeOnSelect: false // Close upon selecting a date,
     });
-
-    // =================================================================================================================
-    // Compound framework materialize ==================================================================================
-    // =================================================================================================================
-    $(".button-collapse").sideNav();
-    $('.tooltipped').tooltip({delay: 50});
-    $('.stepper').activateStepper();
-    $('.modal').modal();
     // =================================================================================================================
     // Smooth target ===================================================================================================
     // =================================================================================================================
@@ -143,7 +132,7 @@ $(document).ready(function(){
     jQuery(window).load(function () {
 
         // On lance un ajax pour charger le booking match to day =================================================
-        $.getJSON('/form/search', function(data) {})
+        $.getJSON('/booking/form/search', function(data) {})
             .done(function(data) {
                 if (data.status == "ok"){
                     if (data.page == "show") {
@@ -151,7 +140,6 @@ $(document).ready(function(){
                         getCenter(data.center);
                     } else {
                         swal("", "Une erreur est survenue");
-
                     }
                 }
             });
@@ -190,7 +178,6 @@ $(document).ready(function(){
             minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
         });
     }
-
     // =================================================================================================================
     function getCenter($center){
         $('input.autocomplete-center').autocomplete({
@@ -245,32 +232,6 @@ $(document).ready(function(){
         $('.modal').modal();
 
     }
-
-    //==================================================================================================================
-    // Form Customer auto-complete =====================================================================================
-    //==================================================================================================================
-    // $('.stepper').on('step2', function(){
-    //     $.getJSON($('#form_customer_exist').attr("data-href"), function(data) {})
-    //         .done(function(data) {
-    //             if (data.status == "ok"){
-    //                 if (data.page == "show") {
-    //                     getCustomer(data.customers);
-    //                 } else {
-    //                     swal("", "Une erreur est survenue");
-    //
-    //                 }
-    //             }
-    //         });
-    // });
-
-    // function getCustomer($customers){
-    //     $('input.autocomplete-customer').autocomplete({
-    //         data: $customers,
-    //         limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-    //         onAutocomplete: function(val) { /* Callback function when value is autcompleted.*/ },
-    //         minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    //     });
-    // }
 
 
 

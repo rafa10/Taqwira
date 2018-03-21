@@ -47,13 +47,14 @@ body {
 }
 
 #booking .btn-floating.btn-large {
-    width: 100px;
-    height: 100px;
+    width: 60px;
+    height: 60px;
     border: 1px solid #ccc;
 }
 
 #booking .btn-large i {
-    /*font-size: 2rem;*/
+    margin:0.1rem -1rem;
+    font-size: 3.6rem;
 }
 
 #booking button .btn, .btn-large, .btn-flat {
@@ -66,8 +67,16 @@ body {
     text-shadow: 1px 1px 1px #191919;
 }
 
+#booking p{
+    font-size: 18px;
+}
+
 #plateforme{
     padding: 60px 0;
+}
+
+#plateforme p{
+    font-size: 18px;
 }
 
 #plateforme img {
@@ -88,6 +97,10 @@ body {
 
 #video .btn-video {
     padding: 2.5rem;
+}
+
+#video p{
+    font-size: 18px;
 }
 
 #contact{

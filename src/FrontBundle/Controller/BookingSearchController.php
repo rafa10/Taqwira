@@ -166,6 +166,42 @@ class BookingSearchController extends Controller
     /** ============================================================================================================== */
 
     /**
+     * @Route("/form/search", name="booking_form_search")
+     */
+    public function getFormSearchAction()
+    {
+
+        $regions = [];
+        $citys = [];
+        $centers = [];
+        $em = $this->getDoctrine()->getManager();
+
+        $regionAll = $em->getRepository('AppBundle:Region')->findAll();
+        foreach ($regionAll as $region){
+            $regions[$region->getName()] = null;
+        }
+        $cityAll = $em->getRepository('AppBundle:City')->findAll();
+        foreach ($cityAll as $city){
+            $citys[$city->getName()] = null;
+        }
+
+        $centerAll = $em->getRepository('AppBundle:Center')->findAll();
+        foreach ($centerAll as $center){
+            $centers[$center->getName()] = null;
+        }
+
+        $regionCity = array_merge($regions, $citys);
+
+        $payload=array();
+        $payload['status']='ok';
+        $payload['page']='show';
+        $payload['region_city'] = $regionCity;
+        $payload['center'] = $centers;
+
+        return new Response(json_encode($payload));
+    }
+
+    /**
      * form builder search
      * @return mixed
      */
@@ -277,6 +313,5 @@ class BookingSearchController extends Controller
 
         return new Response(json_encode($payload));
     }
-
 
 }
