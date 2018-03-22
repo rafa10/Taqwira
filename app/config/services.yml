@@ -21,6 +21,13 @@ services:
             class : AppBundle\Services\Mailer
             arguments: [ "@mailer" , "@templating"]
 
+    # authentication success event listener
+    app.authentication_listener:
+            class: AppBundle\EventListener\AuthenticationListener
+            arguments: ["@doctrine.orm.entity_manager"]
+            tags:
+                - { name: kernel.event_subscriber }
+
     # Redirect to back_office after login
     app.redirect_after_login:
             class: AppBundle\EventListener\AfterLoginRedirection

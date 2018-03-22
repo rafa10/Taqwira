@@ -27,8 +27,8 @@ class AuthenticationListener implements EventSubscriberInterface
     }
 
     /**
-     * onInteractiveLogin
      * @param InteractiveLoginEvent $event
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
 
     public function onInteractiveLogin(InteractiveLoginEvent $event)
@@ -43,41 +43,14 @@ class AuthenticationListener implements EventSubscriberInterface
         $this->em->flush();
 
         // Get config of current users and set in session ('config')
-        $request = $event->getRequest();
-        if (!$request->hasPreviousSession()) {
-            return;
-        }
-        $company = $user->getCompany();
-        $configSections = $this->em->getRepository('AppBundle:ConfigSection')->findBy(array('company' => $company));
-        $configs = $this->em->getRepository('AppBundle:Config')->findBy(array( 'configSection' => $configSections ));
-        $request->getSession()->set('config', $configs);
-
-        // Purge du job dans l'historique lorsque la date de création + xxx jours est atteinte
-        $scenarios = $this->em->getRepository('AppBundle:Scenario')->findBy(array( 'company' => $company ));
-        $jobs = $this->em->getRepository('AppBundle:Job')->findBy(array( 'scenario' => $scenarios ));
-
-        $configSections = $this->em->getRepository('AppBundle:ConfigSection')->findBy(array('company' => $company, 'section' => 3));
-        $config = $this->em->getRepository('AppBundle:Config')->findOneBy(array( 'configSection' => $configSections ));
-
-        $default = 365;
-        $date_now = new \DateTime();
-        foreach ( $jobs as $job ){
-            $created_at = $job->getCreatedAt();
-            $leftDays = date_diff($created_at, $date_now);
-            if (!empty($config)){
-                if ($config->getValeur() < intval($leftDays->format('%a'))){
-                    $this->em->remove($job);
-                    $this->em->flush();
-                }
-
-            } else {
-                if ($default < intval($leftDays->format('%a'))){
-                    $this->em->remove($job);
-                    $this->em->flush();
-                }
-            }
-
-        }
+//        $request = $event->getRequest();
+//        if (!$request->hasPreviousSession()) {
+//            return;
+//        }
+//        $company = $user->getCompany();
+//        $configSections = $this->em->getRepository('AppBundle:ConfigSection')->findBy(array('company' => $company));
+//        $configs = $this->em->getRepository('AppBundle:Config')->findBy(array( 'configSection' => $configSections ));
+//        $request->getSession()->set('config', $configs);
 
     }
 

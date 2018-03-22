@@ -568,6 +568,110 @@ $(document).ready(function(){
         });
     }
 
+    // =================================================================================================================
+    // Dashboard =======================================================================================================
+    // =================================================================================================================
+    window.onload = function() {
+        // Booking Bar Chart ===========================================================================================
+        var BarChartSampleData = {
+            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
+            datasets: [
+                {
+                    label: "Match",
+                    fillColor: "#f48fb1",
+                    strokeColor: "#f06292",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56]
+                },
+                {
+                    label: "Abonnement",
+                    fillColor: "#b0bec5",
+                    strokeColor: "#90a4ae",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    data: [28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86]
+                }
+            ]
+        };
+        window.BarChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(BarChartSampleData,{
+            responsive:true
+        });
+        //Sessions Line Chart ===========================================================================================
+        $.getJSON('/plateforme/session/chart', function(data) {})
+            .done(function(data) {
+                if (data.status == "ok") {
+                    if (data.page == "show") {
+                        var LineChartSampleData = {
+                            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
+                            datasets: [{
+                                label: "Année la précédant",
+                                fillColor: "rgba(220,220,220,0.2)",
+                                strokeColor: "rgba(220,220,220,1)",
+                                pointColor: "rgba(220,220,220,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(220,220,220,1)",
+                                data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56]
+                            }, {
+                                label: "Année en cours",
+                                fillColor: "rgba(151,187,205,0.2)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(151,187,205,1)",
+                                data: data.session
+                            }]
+                        };
+                        window.LineChartSample = new Chart(document.getElementById("line-chart-sample").getContext("2d")).Line(LineChartSampleData,{
+                            responsive:true
+                        });
+
+                    } else {
+                        swal("", "Une erreur est survenue");
+
+                    }
+                }
+            });
+        //total booking type Pie Doughnut Chart ========================================================================
+        $.getJSON('/plateforme/booking_type/chart', function(data) {})
+            .done(function(data) {
+                if (data.status == "ok") {
+                    if (data.page == "show") {
+                        var PieDoughnutChartSampleData = [
+                            {
+                                value: data.match,
+                                color:"#f06292",
+                                highlight: "#f48fb1",
+                                label: "Match"
+                            },
+                            {
+                                value: data.abonnement,
+                                color: "#90a4ae",
+                                highlight: "#b0bec5",
+                                label: "Abonnement"
+                            }
+                            // {
+                            //     value: 100,
+                            //     color: "#FDB45C",
+                            //     highlight: "#FFC870",
+                            //     label: "Académie"
+                            // }
+                        ];
+                        window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+                            responsive:true
+                        });
+
+                    } else {
+                        swal("", "Une erreur est survenue");
+
+                    }
+                }
+            });
+
+    };
+
 // === End =============================================================================================================
 });
 
