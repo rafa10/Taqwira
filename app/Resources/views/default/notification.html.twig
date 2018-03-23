@@ -1,0 +1,12 @@
+<li style="width: 18rem">
+    <h5>NOTIFICATIONS <span class="new badge">{{ notifications|length }}</span></h5>
+</li>
+<li class="divider"></li>
+{% for notification in notifications %}
+    <li>
+        <a href="{#{ path('contact_show') }#}" class="blue-text"><i class="mdi-communication-email"></i> Message </a>
+        <time class="media-meta" datetime="">{{ notification.created|date('Y-m-d')~' à '~notification.created|date('H:i:s') }}</time>
+    </li>
+    <!-- exemple: datatime="2015-06-12T20:50:48+08:00"-->
+    <li class="divider"></li>
+{% endfor %}

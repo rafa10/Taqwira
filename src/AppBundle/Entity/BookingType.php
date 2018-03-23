@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class BookingType
 {
+    const MATCH = 1;
+    const ABONNEMENT = 2;
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

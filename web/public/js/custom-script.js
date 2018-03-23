@@ -36,15 +36,12 @@ $(document).ready(function(){
         //On lance un ajax pour charger le formulaire
         $.getJSON($(this).attr("data-href"), function(data) {})
             .done(function(data) {
-                if (data.status=="ok")
-                {
-                    if (data.page=="refresh")
-                    {
+                if (data.status=="ok") {
+                    if (data.page=="refresh") {
                         $('#form_modal').closeModal();
                         location.reload();
-                    }
-                    else
-                    {
+
+                    } else {
                         $('#form_modal').html(data.html);
                         $('#form_modal').attr('data-href', url);
                         refresh_Materialize_compound();
@@ -338,17 +335,130 @@ $(document).ready(function(){
     // Content display if on load page =================================================================================
     // =================================================================================================================
     jQuery(window).load(function () {
-
+        // =============================================================================================================
+        // Dashboard load element ======================================================================================
+        // =============================================================================================================
         //On lance un ajax pour refresh le baskets =====================================================================
-        $.getJSON($('#baskets-dropdown').attr("data-route"), function(data) {})
+        $.getJSON('/plateforme/basket/show', function(data) {})
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {
-                        $('#baskets-dropdown').html(data.html)
+                        $('#baskets-dropdown').html(data.html);
                     }
                 }
-            })
+            });
+        //On lance un ajax pour refresh les notification ===============================================================
+        $.getJSON('/plateforme/notification/show', function(data) {})
+            .done(function(data) {
+                if (data.status=="ok") {
+                    if (data.page=="show") {
+                        $('#notification').removeClass('hide').append(data.length);
+                        $('#notifications-dropdown').html(data.html);
+                    }
+                }
+            });
+        // Booking Bar Chart ===========================================================================================
+        $.getJSON('/plateforme/booking/chart', function(data) {})
+            .done(function(data) {
+                if (data.status == "ok") {
+                    if (data.page == "show") {
+                        var BarChartSampleData = {
+                            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
+                            datasets: [
+                                {
+                                    label: "Match",
+                                    fillColor: "#f48fb1",
+                                    strokeColor: "#f06292",
+                                    highlightFill: "rgba(220,220,220,0.75)",
+                                    highlightStroke: "rgba(220,220,220,1)",
+                                    data: data.match
+                                },
+                                {
+                                    label: "Abonnement",
+                                    fillColor: "#b0bec5",
+                                    strokeColor: "#90a4ae",
+                                    highlightFill: "rgba(151,187,205,0.75)",
+                                    highlightStroke: "rgba(151,187,205,1)",
+                                    data: data.abonnement
+                                }
+                            ]
+                        };
+                        window.BarChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(BarChartSampleData,{
+                            responsive:true
+                        });
+                    } else {
+                        swal("", "Une erreur est survenue");
 
+                    }
+                }
+            });
+        //Sessions Line Chart ===========================================================================================
+        $.getJSON('/plateforme/session/chart', function(data) {})
+            .done(function(data) {
+                if (data.status == "ok") {
+                    if (data.page == "show") {
+                        var LineChartSampleData = {
+                            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
+                            datasets: [{
+                                label: "Année la précédant",
+                                fillColor: "rgba(220,220,220,0.2)",
+                                strokeColor: "rgba(220,220,220,1)",
+                                pointColor: "rgba(220,220,220,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(220,220,220,1)",
+                                data: data.session_later
+                            }, {
+                                label: "Année en cours",
+                                fillColor: "rgba(151,187,205,0.2)",
+                                strokeColor: "rgba(151,187,205,1)",
+                                pointColor: "rgba(151,187,205,1)",
+                                pointStrokeColor: "#fff",
+                                pointHighlightFill: "#fff",
+                                pointHighlightStroke: "rgba(151,187,205,1)",
+                                data: data.session
+                            }]
+                        };
+                        window.LineChartSample = new Chart(document.getElementById("line-chart-sample").getContext("2d")).Line(LineChartSampleData,{
+                            responsive:true
+                        });
+
+                    } else {
+                        swal("", "Une erreur est survenue");
+
+                    }
+                }
+            });
+        //total booking type Pie Doughnut Chart ========================================================================
+        $.getJSON('/plateforme/booking_type/chart', function(data) {})
+            .done(function(data) {
+                if (data.status == "ok") {
+                    if (data.page == "show") {
+                        var PieDoughnutChartSampleData = [
+                            {
+                                value: data.match,
+                                color:"#f06292",
+                                highlight: "#f48fb1",
+                                label: "Match"
+                            },
+                            {
+                                value: data.abonnement,
+                                color: "#90a4ae",
+                                highlight: "#b0bec5",
+                                label: "Abonnement"
+                            }
+                        ];
+                        window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+                            responsive:true
+                        });
+
+                    } else {
+                        swal("", "Une erreur est survenue");
+
+                    }
+                }
+            });
+        // END Dashobard ///////////////////////////////////////////////////////////////////////////////////////////////
         // On lance un ajax pour charger le formulaire modifier centre =================================================
         $.getJSON($('#form_modal').attr("data-href"), function(data) {})
             .done(function(data) {
@@ -569,108 +679,22 @@ $(document).ready(function(){
     }
 
     // =================================================================================================================
-    // Dashboard =======================================================================================================
+    // Open content mail details =======================================================================================
     // =================================================================================================================
-    window.onload = function() {
-        // Booking Bar Chart ===========================================================================================
-        var BarChartSampleData = {
-            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
-            datasets: [
-                {
-                    label: "Match",
-                    fillColor: "#f48fb1",
-                    strokeColor: "#f06292",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56]
-                },
-                {
-                    label: "Abonnement",
-                    fillColor: "#b0bec5",
-                    strokeColor: "#90a4ae",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: [28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86]
-                }
-            ]
-        };
-        window.BarChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(BarChartSampleData,{
-            responsive:true
-        });
-        //Sessions Line Chart ===========================================================================================
-        $.getJSON('/plateforme/session/chart', function(data) {})
+    $('.message-trigger').click(function() {
+        $.getJSON($(this).attr("data-href"), function(data) {})
             .done(function(data) {
-                if (data.status == "ok") {
-                    if (data.page == "show") {
-                        var LineChartSampleData = {
-                            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
-                            datasets: [{
-                                label: "Année la précédant",
-                                fillColor: "rgba(220,220,220,0.2)",
-                                strokeColor: "rgba(220,220,220,1)",
-                                pointColor: "rgba(220,220,220,1)",
-                                pointStrokeColor: "#fff",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(220,220,220,1)",
-                                data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56]
-                            }, {
-                                label: "Année en cours",
-                                fillColor: "rgba(151,187,205,0.2)",
-                                strokeColor: "rgba(151,187,205,1)",
-                                pointColor: "rgba(151,187,205,1)",
-                                pointStrokeColor: "#fff",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(151,187,205,1)",
-                                data: data.session
-                            }]
-                        };
-                        window.LineChartSample = new Chart(document.getElementById("line-chart-sample").getContext("2d")).Line(LineChartSampleData,{
-                            responsive:true
-                        });
-
+                if (data.status=="ok"){
+                    if (data.page=="show"){
+                        // $('.email-unread').addClass('selected');
+                        $('#email-details').empty().html(data.html);
                     } else {
                         swal("", "Une erreur est survenue");
 
                     }
                 }
-            });
-        //total booking type Pie Doughnut Chart ========================================================================
-        $.getJSON('/plateforme/booking_type/chart', function(data) {})
-            .done(function(data) {
-                if (data.status == "ok") {
-                    if (data.page == "show") {
-                        var PieDoughnutChartSampleData = [
-                            {
-                                value: data.match,
-                                color:"#f06292",
-                                highlight: "#f48fb1",
-                                label: "Match"
-                            },
-                            {
-                                value: data.abonnement,
-                                color: "#90a4ae",
-                                highlight: "#b0bec5",
-                                label: "Abonnement"
-                            }
-                            // {
-                            //     value: 100,
-                            //     color: "#FDB45C",
-                            //     highlight: "#FFC870",
-                            //     label: "Académie"
-                            // }
-                        ];
-                        window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
-                            responsive:true
-                        });
-
-                    } else {
-                        swal("", "Une erreur est survenue");
-
-                    }
-                }
-            });
-
-    };
+            })
+    });
 
 // === End =============================================================================================================
 });

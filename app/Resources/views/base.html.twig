@@ -114,7 +114,7 @@
                 {#</div>#}
                 <ul class="right hide-on-med-and-down">
                     <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen"><i class="mdi-action-settings-overscan"></i></a></li>
-                    <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"><i class="mdi-social-notifications">{#<small class="notification-badge">1</small>#}</i></a> </li>
+                    <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"><i class="mdi-social-notifications"><small id="notification" class="notification-badge hide"></small></i></a> </li>
                     <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="baskets-dropdown"><i class="mdi-action-shopping-cart">{% if app.session.get('basket') is empty %}<small class="notification-badge basket-badget hide"></small>{% else %}<small class="notification-badge basket-badget">{{ app.session.get('basket')|length }}</small>{% endif %}</i></a></li>
                     <li><a class="waves-effect waves-light dropdown-button btn yellow accent-4 black-text" style="margin-right: 0.5rem" data-activates="dropdown1">Réservez</a></li>
                 </ul>
@@ -124,18 +124,9 @@
                     <li><a href="{{ path('booking_subscription_new') }}" class="black-text"> Abonnement</a></li>
                 </ul>
                 <!-- notifications-dropdown -->
-                <ul id="notifications-dropdown" class="dropdown-content">
-                    <li>
-                        <h5>NOTIFICATIONS <span class="new badge">5</span></h5>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#!"><i class="mdi-action-add-shopping-cart"></i> A new order has been placed!</a>
-                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
-                    </li>
-                </ul>
+                <ul id="notifications-dropdown" class="dropdown-content"></ul>
                 <!-- baskets-dropdown -->
-                <ul id="baskets-dropdown" class="dropdown-content" data-route="{{ path('basket_show') }}"></ul>
+                <ul id="baskets-dropdown" class="dropdown-content"></ul>
             </div>
         </nav>
     </div>
@@ -203,6 +194,10 @@
                             </li>
                         </ul>
                     </li>
+                {% endif %}
+                {#=== Mailbox==== =====================================================================================#}
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li class="bold {% if app.request.attributes.get('_route') == 'contact_index' %}active{% endif %}"><a href="{{ path('contact_index') }}" class="waves-effect waves-cyan"><i class="mdi-communication-email"></i>Mailbox</a>
                 {% endif %}
                 {#=== Calender =======================================================================================#}
                 <li class='bold {% if app.request.attributes.get('_route') == 'calendar_index' %}active{% endif %}'><a href="{{ path('calendar_index') }}" class="waves-effect waves-cyan calendar_app"><i class="mdi-editor-insert-invitation"></i> Calendrier</a></li>

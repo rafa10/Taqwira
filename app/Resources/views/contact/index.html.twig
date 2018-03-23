@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--start container-->
+        <div class="container">
+
+            <div id="mail-app" class="section">
+                <div class="row">
+                    <div class="col s12">
+                        <nav class="red">
+                            <div class="nav-wrapper">
+                                <div class="left col s12 m5 l5">
+                                    <ul>
+                                        <li><a role="menuitem" class="email-menu"><i class="mdi-content-inbox"></i></a></li>
+                                        <li><a role="menuitem" class="email-type">Boîte réception</a></li>
+                                        {#<li class="right"><a href="#!"><i class="mdi-action-search"></i></a></li>#}
+                                    </ul>
+                                </div>
+                                <div class="col s12 m7 l7 hide-on-med-and-down">
+                                    <ul class="right">
+                                        {#<li><a href="#!"><i class="mdi-content-archive"></i></a></li>#}
+                                        <li><a href="#!"><i class="mdi-action-delete"></i></a></li>
+                                        {#<li><a href="#!"><i class="mdi-content-mail"></i></a></li>#}
+                                        {#<li><a href="#!"><i class="mdi-navigation-more-vert"></i></a></li>#}
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="col s12">
+                        <div id="email-list" class="col s10 m4 l4 card-panel z-depth-1">
+                            <ul class="collection">
+                                {% for contact in contacts %}
+                                    <li class="collection-item avatar email-unread message-trigger" data-href="{{ path('message_details_show', {'id': contact.id}) }}">
+                                        <span class="circle blue-grey">{{ contact.name|slice(0, 1) }}</span>
+                                        <span class="email-title">{{ contact.name }}</span>
+                                        <p class="truncate grey-text ultra-small">{{ contact.message|slice(0, 40) }}.</p>
+                                        <a role="button" class="secondary-content email-time"><span class="blue-text ultra-small">{{ contact.created|date('d-m-Y') ~' à '~ contact.created|date('H:i') }}</span></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div id="email-details" class="col s12 m8 l8 card-panel">
+                            <div class="email-content-wrap">
+                                <div class="row center " style="padding: 10rem">
+                                    <i class="medium mdi-content-drafts"></i>
+                                    <p class="flow-text">Séleconne un élément pour le lire</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compose Email Trigger -->
+                <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
+                    <a class="btn-floating btn-large red modal-trigger" href="#modal1">
+                        <i class="mdi-editor-border-color"></i>
+                    </a>
+                </div>
+
+                <!-- Compose Email Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <nav class="red">
+                            <div class="nav-wrapper">
+                                <div class="left col s12 m5 l5">
+                                    <ul>
+                                        <li><a href="#!" class="email-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
+                                        </li>
+                                        <li><a href="#!" class="email-type">Compose</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col s12 m7 l7 hide-on-med-and-down">
+                                    <ul class="right">
+                                        <li><a href="#!"><i class="mdi-editor-attach-file"></i></a>
+                                        </li>
+                                        <li><a href="#!"><i class="modal-action modal-close  mdi-content-send"></i></a>
+                                        </li>
+                                        <li><a href="#!"><i class="mdi-navigation-more-vert"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="model-email-content">
+                        <div class="row">
+                            <form class="col s12">
+                                <!--<div class="row">
+                                  <div class="input-field col s12">
+                                    <input id="from_email" type="email" class="validate">
+                                    <label for="from_email">From</label>
+                                  </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="to_email" type="email" class="validate">
+                                        <label for="to_email">To</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input id="subject" type="text" class="validate">
+                                        <label for="subject">Subject</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="compose" class="materialize-textarea" length="500"></textarea>
+                                        <label for="compose">Compose email</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--end container-->
+
+    </section>
+    <!-- END CONTENT -->
+
+{% endblock body %}

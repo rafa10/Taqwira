@@ -21,12 +21,8 @@ class Contact
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=true)
      * @Assert\NotBlank(message="Please provide a name")
-     * @Assert\Regex(
-     *     pattern     = "/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i",
-     *     htmlPattern = "^[a-zA-Z]+$"
-     * )
      */
     private $name;
 
@@ -48,6 +44,11 @@ class Contact
      * @Assert\NotBlank(message="Please provide a message")
      */
     private $message;
+
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $is_locked;
 
     // ..........
 
@@ -208,5 +209,31 @@ class Contact
     public function getCreated()
     {
         return $this->created;
+    }
+
+    
+
+    /**
+     * Set isLocked
+     *
+     * @param boolean $isLocked
+     *
+     * @return Contact
+     */
+    public function setIsLocked($isLocked)
+    {
+        $this->is_locked = $isLocked;
+
+        return $this;
+    }
+
+    /**
+     * Get isLocked
+     *
+     * @return boolean
+     */
+    public function getIsLocked()
+    {
+        return $this->is_locked;
     }
 }
