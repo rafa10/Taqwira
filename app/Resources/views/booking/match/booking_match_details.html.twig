@@ -39,7 +39,11 @@
                 <div class="row form_customer hide">
                     {# *** customer exist in database *** #}
                     <div id="form_customer_exist">
-                        <div class="input-field col s12"><label for="time_end" class="active">Client*</label>{{ form_widget(form.customer) }}<div class="errorTxt1"></div></div>
+                        <div class="input-field col s12">
+                            <label for="time_end" class="active">Client*</label>
+                            {{ form_widget(form.customer) }}
+                            <div class="errorTxt1"></div>
+                        </div>
                     </div>
                     {# *** check customer form *** #}
                     <div class="col s12">

@@ -57,7 +57,7 @@
                                     <tr>
                                         <td>{{ price.id }}</td>
                                         <td>{{ price.bookingType }}</td>
-                                        <td> {% for item in price.day %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %} </td>
+                                        <td> {% for item in price.day %}<div class="chip">{{ item|trans }}</div>&nbsp;{% endfor %} </td>
                                         <td> <div class="chip">De <b>{{ price.Session|first }}</b> à <b>{{ price.Session|last }}</b></div> </td>
                                         <td>{{ price.amount }} €</td>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ price.center.name }}</div></td>{% endif %}

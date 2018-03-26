@@ -11,8 +11,8 @@ class Mailer
 {
     protected $mailer;
     protected $templating;
-    private   $from ="no-replay@taqwira.com";
-    private   $reply ="contact@taqwira.com";
+    private   $from ="support@taqwira.com";
+    private   $reply ="noreplay@taqwira.com";
     private   $name ="taqwira.com";
 
     /**
@@ -64,10 +64,25 @@ class Mailer
      */
     public function sendBookingMessage(Booking $booking)
     {
-        $subject = "Confirmation de votre réservation terrain";
+        $subject = "Confirmation de votre réservation match";
         $template = "mail/booking_mail.html.twig";
         $to = $booking->getCustomer()->getEmail();
         $body = $this->templating->render($template, array('booking' => $booking));
+        $this->sendMessage($to, $subject, $body);
+    }
+
+    /**
+     * function send mail success booking subscription message
+     * @param $basket
+     * @param Customer $customer
+     */
+    public function sendBookingSubscriptionMessage($basket, Customer $customer)
+    {
+
+        $subject = "Confirmation de votre réservation abonnement";
+        $template = "mail/booking_subscription_mail.html.twig";
+        $to = $customer->getEmail();
+        $body = $this->templating->render($template, array('basket' => $basket, 'customer' => $customer));
         $this->sendMessage($to, $subject, $body);
     }
 

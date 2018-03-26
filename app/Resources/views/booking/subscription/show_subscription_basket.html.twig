@@ -101,7 +101,7 @@
                                         <td>{{ basket.field.name }}</td>
                                         <td><b>{{ basket.date|date('d/m/Y') }}</b></td>
                                         <td>De <b>{{ basket.timeStart|date('H:i') }}</b> à <b>{{ basket.timeEnd|date('H:i') }}</b></td>
-                                        <td><a role="button" data-href="{{ path('subscription_basket_delete', { 'id': basket.reference }) }}" class="btn-warning-confirm task-cat red lighten-1 " >Supprimer</a></td>
+                                        <td><a role="button" data-href="{{ path('subscription_basket_delete', { 'id': basket.reference }) }}" class="btn-warning-confirm "><i class="tiny mdi-action-delete red lighten-4 red-text text-lighten-1 circle" style="padding: 0px 4px"></i></a></td>
                                         <td class="right-align"><b>{{ basket.price }} €</b> </td>
                                     </tr>
                                     {% set total = total + basket.price %}

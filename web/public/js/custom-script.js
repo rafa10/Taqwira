@@ -188,7 +188,7 @@ $(document).ready(function(){
     });
 
     // =================================================================================================================
-    $("#form_checkbox_paid").on("click",'#paid',function(){
+    $("#form_bill_subscription").on("click",'#paid',function(){
         form = $(this).closest('form');
         $.ajax({
             data: new FormData(form[0]),
@@ -225,22 +225,6 @@ $(document).ready(function(){
 
         });
     });
-
-    // =================================================================================================================
-    // =================================================================================================================
-    // =================================================================================================================
-    // $('input.autocomplete').autocomplete({
-    //     data: {
-    //         "Apple": null,
-    //         "Microsoft": null,
-    //         "Google": 'https://placehold.it/250x250'
-    //     },
-    //     limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-    //     onAutocomplete: function(val) {
-    //         // Callback function when value is autcompleted.
-    //     },
-    //     minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-    // });
 
     // =================================================================================================================
     // Btn active center ===============================================================================================
@@ -326,6 +310,12 @@ $(document).ready(function(){
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year
             format: 'dd/mm/yyyy',
+            monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+            today: 'aujourd\'hui',
+            clear: 'effacer',
+            formatSubmit: 'dd/mm/yyyy',
+            closeOnSelect: false // Close upon selecting a date,
         });
 
     }
@@ -459,6 +449,7 @@ $(document).ready(function(){
                 }
             });
         // END Dashobard ///////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // On lance un ajax pour charger le formulaire modifier centre =================================================
         $.getJSON($('#form_modal').attr("data-href"), function(data) {})
             .done(function(data) {
@@ -656,7 +647,7 @@ $(document).ready(function(){
                             swal("", "Réservation bien ajouté dans le pannier!");
                         });
                         //On lance un ajax pour refresh le baskets
-                        $.getJSON($('#baskets-dropdown').attr("data-route"), function(data) {})
+                        $.getJSON('/plateforme/basket/show', function(data) {})
                             .done(function(data) {
                                 if ( isNaN( parseInt($('.basket-badget').text()) )){
                                     $('.basket-badget').removeClass('hide');

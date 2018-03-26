@@ -33,15 +33,16 @@
                 {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
                 <div class="divider"></div>
                 <!--DataTables example-->
-                <form id="form_checkbox_paid" method="POST" action="{{ path('booking_subscription_paid') }}">
+                <form id="form_bill_subscription" method="POST" action="{{ path('bill_subscription_paid') }}">
                 <div id="table-datatables" class="card-panel">
-                    <p class= "header right-align"><button type="button" class="btn-floating waves-effect waves-light blue lighten-4" id="paid"><i class="mdi-action-credit-card blue-text"></i></button></p>
+                    <p class= "tools"><button type="button" class="btn-floating waves-effect waves-light blue lighten-4" id="paid"><i class="mdi-action-credit-card blue-text"></i></button></p>
                     <div class="row">
                         <div class="col s12">
                             <table id="data-table-simple" class="responsive-table display" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>&nbsp;</th>
                                     <th>Référence</th>
                                     <th>Client</th>
                                     <th>Date</th>
@@ -58,6 +59,12 @@
                                 {% for booking in bookings %}
                                     <tr>
                                         <td>{{ booking.id }}</td>
+                                        <td>
+                                            <span>
+                                                <input type="checkbox" class="filled-in" name="id[]" id="filled-in-box-{{ booking.id }}" value="{{ booking.id }}"/>
+                                                <label for="filled-in-box-{{ booking.id }}">&nbsp;</label>
+                                            </span>
+                                        </td>
                                         <td>{{ booking.reference }}</td>
                                         <td>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</td>
                                         <td><b>{{ booking.date|date('d/m/Y') }}</b></td>
@@ -68,15 +75,14 @@
                                             {% if booking.bill == true %}
                                                 <span class="task-cat green">Payée</span>
                                             {% else %}
-                                                <span class="task-cat grey">Non payée</span>&nbsp;
-                                                <span>
-                                                    <input type="checkbox" class="filled-in" name="id[]" id="filled-in-box-{{ booking.id }}" value="{{ booking.id }}"/>
-                                                    <label for="filled-in-box-{{ booking.id }}">&nbsp;</label>
-                                                </span>
+                                                <span class="task-cat grey">Non payée</span>
                                             {% endif %}
                                         </td>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ booking.field.center.name }}</div></td>{% endif %}
                                         <td class="center-align">
+                                            {% if booking.bill == true %}
+                                                <a role="button" href="{{ path('bill_match_pdf', { 'id': booking.id }) }}" class="btn-floating waves-effect waves-light grey lighten-4"><i class="mdi-action-description  blue-grey-text"></i></a>
+                                            {% endif %}
                                             <button type="button" data-href="{{ path('booking_subscription_delete', { 'id': booking.id }) }}" class="btn-floating btn-warning-confirm waves-effect waves-light grey lighten-3 "><i class="mdi-action-delete grey-text"></i></button>
                                         </td>
                                     </tr>

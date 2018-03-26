@@ -215,6 +215,9 @@ class BookingController extends Controller
             $em->persist($booking);
             $em->flush();
 
+            // Send mail confirmation booking to customer
+            $this->container->get('app.mailer')->sendBookingMessage($booking);
+
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', 'The booking successfully created!');
@@ -432,7 +435,6 @@ class BookingController extends Controller
             $booking->setTimeStart($timeStart);
             $booking->setTimeEnd($timeEnd);
             $booking->setPrice($price);
-            $booking->setStatus(false);
 
             array_push($basket, $booking);
 
@@ -499,13 +501,15 @@ class BookingController extends Controller
                 $booking->setTimeStart($data->getTimeStart());
                 $booking->setTimeEnd($data->getTimeEnd());
                 $booking->setPrice($data->getPrice());
-                $booking->setStatus($data->getStatus());
                 $booking->setCustomer($customer);
 
                 $em->persist($booking);
             }
 
             $em->flush();
+
+            // Send mail confirmation booking to customer
+            $this->container->get('app.mailer')->sendBookingSubscriptionMessage($basket, $customer);
 
             $session->remove('basket');
 
@@ -528,40 +532,6 @@ class BookingController extends Controller
         ));
 
         return new Response(json_encode($payload));
-    }
-
-    /**
-     * Paid booking subscription.
-     * @Route("/subscription/paid", name="booking_subscription_paid")
-     * @Method({"GET", "POST"})
-     * @return Response
-     */
-    public function bookingSubscriptionPaidAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $arrayID = $request->request->get('id');
-
-//        $bookingArrayId = isset($data['id']) ? $data['id'] : null;
-
-        foreach ( $arrayID as $id ){
-            $booking = $em->getRepository('AppBundle:Booking')->find($id);
-            $booking->setStatus(true);
-            $em->persist($booking);
-        }
-
-        $em->flush();
-
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking of subscription  successfully paid!');
-
-        $payload = [];
-        $payload['status'] = 'ok';
-        $payload['page'] = 'refresh';
-
-        return new Response(json_encode($payload));
-
     }
 
     /**
@@ -591,7 +561,6 @@ class BookingController extends Controller
 
     /**
      * Deletes a Center entity.
-     *
      * @Route("/subscription/basket/{id}/delete", name="subscription_basket_delete")
      * @Method("GET")
      * @param $id

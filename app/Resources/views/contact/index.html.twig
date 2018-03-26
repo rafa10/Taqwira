@@ -36,12 +36,21 @@
                         <div id="email-list" class="col s10 m4 l4 card-panel z-depth-1">
                             <ul class="collection">
                                 {% for contact in contacts %}
+                                    {% if contact.isLocked == false %}
+                                    <li class="collection-item avatar email-unread message-trigger" data-href="{{ path('message_details_show', {'id': contact.id}) }}">
+                                        <span class="circle blue-grey">{{ contact.name|slice(0, 1) }}</span>
+                                        <span class="email-title"><strong>{{ contact.name }}</strong></span>
+                                        <p class="truncate blue-text ultra-small">{{ contact.message|slice(0, 40) }}.</p>
+                                        <a role="button" class="secondary-content email-time"><span class="blue-text ultra-small">{{ contact.created|date('d-m-Y') ~' à '~ contact.created|date('H:i') }}</span></a>
+                                    </li>
+                                {% else %}
                                     <li class="collection-item avatar email-unread message-trigger" data-href="{{ path('message_details_show', {'id': contact.id}) }}">
                                         <span class="circle blue-grey">{{ contact.name|slice(0, 1) }}</span>
                                         <span class="email-title">{{ contact.name }}</span>
                                         <p class="truncate grey-text ultra-small">{{ contact.message|slice(0, 40) }}.</p>
-                                        <a role="button" class="secondary-content email-time"><span class="blue-text ultra-small">{{ contact.created|date('d-m-Y') ~' à '~ contact.created|date('H:i') }}</span></a>
+                                        <a role="button" class="secondary-content email-time"><span class="grey-text ultra-small">{{ contact.created|date('d-m-Y') ~' à '~ contact.created|date('H:i') }}</span></a>
                                     </li>
+                                {% endif %}
                                 {% endfor %}
                             </ul>
                         </div>

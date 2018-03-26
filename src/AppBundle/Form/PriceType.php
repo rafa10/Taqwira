@@ -20,7 +20,13 @@ class PriceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('day', null, array())
+            ->add('day', EntityType::class, array(
+                'class' => 'AppBundle:Day',
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez ...',
+                'multiple' => true,
+                'choice_translation_domain' => true
+            ))
             ->add('session', null, array())
             ->add('amount', NumberType::class)
             ->add('bookingType', EntityType::class, array(

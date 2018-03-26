@@ -35,7 +35,7 @@
                 <div class="errorTxt1"></div>
             </div>
             <div class="input-field col s12">
-                <div class="right-align">{% for item in price.day %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %}</div>
+                <div class="right-align">{% for item in price.day %}<div class="chip">{{ item|trans }}</div>&nbsp;{% endfor %}</div>
             </div>
             <div class="input-field col s12">
                 <label for="séances" class="active">Séances</label>
