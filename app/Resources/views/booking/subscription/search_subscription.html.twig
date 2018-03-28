@@ -66,14 +66,26 @@
                                                     {% for sessionF in field.session %}
                                                         {% if sessionF.id == sessionP.id %}
                                                             {% if sessionF.timeStart|date('H:i') >= 'now'|date('H:i') %}
+                                                                <!--==== Session button content =====================-->
                                                                 {% set bookSelected %} <a class="tooltipped btn-booking-subscription" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" data-href="{{ path('subscription_basket_new', {'field': field.id ,'date': date_search|date('Y/m/d'), 'timeS': sessionF.timeStart|date('H:i'), 'timeE': sessionF.timeEnd|date('H:i'), 'price': price.amount }) }}"><div class="chip waves-effect waves-light lime"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                <!--==== Session already booked =====================-->
                                                                 {% for booking in bookings if booking.field.id == field.id %}
-                                                                {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
-                                                                    {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
-                                                                {% endif %}
-                                                            {% endfor %}
+                                                                    {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
+                                                                        {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                                <!--==== Session academy ============================-->
+                                                                {% for program in day.Program %}
+                                                                    {% for sessionA in program.Session if sessionF.id == sessionA.id %}
+                                                                        {% if program.field.id == field.id %}
+                                                                            {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                {% endfor %}
+                                                                <!--==== Session available for booking ==============-->
                                                                 {{ bookSelected }}
                                                             {% else %}
+                                                                <!--==== Session passed =============================-->
                                                                 <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a>
                                                             {% endif %}
                                                         {% endif %}
@@ -89,12 +101,23 @@
                                                 {% for sessionP in price.Session %}
                                                     {% for sessionF in field.session %}
                                                         {% if sessionF.id == sessionP.id %}
+                                                            <!--==== Session button content =========================-->
                                                             {% set bookSelected %} <a class="tooltipped btn-booking-subscription" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" data-href="{{ path('subscription_basket_new', {'field': field.id ,'date': date_search|date('Y/m/d'), 'timeS': sessionF.timeStart|date('H:i'), 'timeE': sessionF.timeEnd|date('H:i'), 'price': price.amount }) }}"><div class="chip waves-effect waves-light lime"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
-                                                        {% for booking in bookings if booking.field.id == field.id %}
-                                                            {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
-                                                                {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                            <!--==== Session already booked =========================-->
+                                                            {% for booking in bookings if booking.field.id == field.id %}
+                                                                {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
+                                                                    {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <!--==== Session academy ================================-->
+                                                            {% for program in day.Program %}
+                                                                {% for sessionA in program.Session if sessionF.id == sessionA.id %}
+                                                                    {% if program.field.id == field.id %}
+                                                                        {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                            <!--==== Session available for booking ==================-->
                                                             {{ bookSelected }}
                                                         {% endif %}
                                                     {% endfor %}
@@ -182,14 +205,26 @@
                                                 {% for sessionF in fields.session %}
                                                     {% if sessionF.id == sessionP.id %}
                                                         {% if sessionF.timeStart|date('H:i') >= 'now'|date('H:i') %}
+                                                            <!--==== Session button content =========================-->
                                                             {% set bookSelected %} <a class="tooltipped btn-booking-subscription" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" data-href="{{ path('subscription_basket_new', {'field': fields.id ,'date': date_search|date('Y/m/d'), 'timeS': sessionF.timeStart|date('H:i'), 'timeE': sessionF.timeEnd|date('H:i'), 'price': price.amount }) }}"><div class="chip waves-effect waves-light lime"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                            <!--==== Session already booked =========================-->
                                                             {% for booking in bookings if booking.field.id == fields.id %}
-                                                            {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
-                                                                {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                                {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
+                                                                    {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <!--==== Session academy ================================-->
+                                                            {% for program in day.Program %}
+                                                                {% for sessionA in program.Session if sessionF.id == sessionA.id %}
+                                                                    {% if program.field.id == fields.id %}
+                                                                        {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            {% endfor %}
+                                                            <!--==== Session available for booking ==================-->
                                                             {{ bookSelected }}
                                                         {% else %}
+                                                            <!--==== Session passed =================================-->
                                                             <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a>
                                                         {% endif %}
                                                     {% endif %}
@@ -205,12 +240,23 @@
                                             {% for sessionP in price.Session %}
                                                 {% for sessionF in fields.session %}
                                                     {% if sessionF.id == sessionP.id %}
+                                                        <!--==== Session button content ==============================-->
                                                         {% set bookSelected %} <a class="tooltipped btn-booking-subscription" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" data-href="{{ path('subscription_basket_new', {'field': fields.id ,'date': date_search|date('Y/m/d'), 'timeS': sessionF.timeStart|date('H:i'), 'timeE': sessionF.timeEnd|date('H:i'), 'price': price.amount }) }}"><div class="chip waves-effect waves-light lime"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                        <!--==== Session already booked =============================-->
                                                         {% for booking in bookings if booking.field.id == fields.id %}
-                                                        {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
-                                                            {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
-                                                        {% endif %}
-                                                    {% endfor %}
+                                                            {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
+                                                                {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                        <!--==== Session academy ====================================-->
+                                                        {% for program in day.Program %}
+                                                            {% for sessionA in program.Session if sessionF.id == sessionA.id %}
+                                                                {% if program.field.id == fields.id %}
+                                                                    {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                        <!--==== Session available for booking ======================-->
                                                         {{ bookSelected }}
                                                     {% endif %}
                                                 {% endfor %}

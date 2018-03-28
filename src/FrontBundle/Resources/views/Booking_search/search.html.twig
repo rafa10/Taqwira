@@ -1,6 +1,6 @@
 {% extends "FrontBundle::base.html.twig" %}
 
-{% block title %} Réservation terrain | Taqwira {% endblock title %}
+{% block title %} Réservation de terrain | Taqwira {% endblock title %}
 
 {% block body %}
 
@@ -54,15 +54,15 @@
                     {% endfor %}
                 {% endif %}
 
-                <div id="map-page-content" class="col s12 m12 l10 offset-l1">
+                <div id="map-page-content" class="col s12 m12">
                     <div class="map-card">
                         <div class="card">
-                            <div class="card-image waves-effect waves-block waves-light">
-                                <div id="map" style="width: 100%; height: 450px;"></div>
-                            </div>
-                            <div class="card-content">
+                            <div class="card-content" style="border-bottom: 1px solid #CCC">
                                 <h4 class="card-title grey-text text-darken-4"><a href="#" class="grey-text text-darken-4">Le réseau taqwira</a></h4>
                                 <p class="blog-post-content">Taqwira, c'est plus de 100 centre de football en Tunisie, mais c'est surtout la solution pour la réservation des terrain. Vous n'avez plus qu'à rechercher votre terrain !.</p>
+                            </div>
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img src="{{ asset('public/images/arena.png') }}" alt="bg main">
                             </div>
                         </div>
                     </div>
@@ -108,60 +108,6 @@
         }
 
     </style>
-
-    <script>
-        function initMap() {
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 7,
-                center: {lat: 35.568326, lng: 9.372038},
-            });
-
-            // Create an array of alphabetical characters used to label the markers.
-            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-            var markers = locations.map(function(location, i) {
-                return new google.maps.Marker({
-                    position: location,
-                    label: labels[i % labels.length]
-                });
-            });
-
-            // Add a marker clusterer to manage the markers.
-            var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-        }
-        var locations = [
-            {lat: 35.960567, lng: 10.569547},
-            {lat: 36.915104, lng: 10.141080},
-            {lat: 35.675492, lng: 10.756315},
-            {lat: 35.559389, lng: 10.130094},
-            {lat: 34.940333, lng: 10.800260},
-            {lat: 37.372834, lng: 9.852668},
-            {lat: 37.372834, lng: 9.852668},
-            {lat: 35.429864, lng: 11.032938 },
-            {lat: 36.512308, lng: 10.720126 },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-            // {lat: , lng: },
-        ]
-    </script>
 
 {% endblock body %}
 

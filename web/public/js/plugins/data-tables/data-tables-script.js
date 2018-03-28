@@ -5,6 +5,7 @@ $(document).ready(function(){
         scrollY: '70vh',
         scrollCollapse: true,
         paging: false,
+        "order": [[ 0, "desc" ]],
         "language": {
             "decimal":        "",
             "emptyTable":     "Aucune donnée disponible",

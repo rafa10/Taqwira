@@ -59,22 +59,33 @@
                     {% else %}
                         {% set nowColor = 'grey lighten-4' %}
                         <div class="card-action center session-day-{{ field.id }} {{ nowColor }}">
-                            {#<span>#}
-                            {% for day in days %}
+                            {% for day in days %}<!-- day -->
                                 {% if day.name == "now"|date('l') %}
-                                    {% for price in day.Price %}
-                                        {% for sessionP in price.Session %}
-                                            {% for sessionF in field.session %}
+                                    {% for price in day.Price %} <!-- Price -->
+                                        {% for sessionP in price.Session %}<!-- Session price -->
+                                            {% for sessionF in field.session %}<!-- Session -->
                                                 {% if sessionF.id == sessionP.id %}
                                                     {% if sessionF.timeStart|date('H:i') >= 'now'|date('H:i') %}
+                                                        <!--==== Session content button =============================-->
                                                         {% set bookSelected %} <a class="tooltipped modal_trigger" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" data-href="{{ path('booking_match_details', {'field': field.id ,'date': 'now'|date('Y/m/d'), 'timeS': sessionF.timeStart|date('H:i'), 'timeE': sessionF.timeEnd|date('H:i'), 'price': price.amount }) }}"><div class="chip waves-effect waves-light lime"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a>{% endset %}
+                                                        <!--==== Session already booked =============================-->
                                                         {% for booking in bookings if booking.field.id == field.id %}
                                                             {% if booking.date|date('Y-m-d') == "now"|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
                                                                 {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                             {% endif %}
                                                         {% endfor %}
+                                                        <!--==== Session academy ====================================-->
+                                                        {% for program in day.Program %}
+                                                            {% for sessionA in program.Session if sessionF.id == sessionA.id %}
+                                                                {% if program.field.id == field.id %}
+                                                                    {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                        <!--==== Session available for booking ======================-->
                                                         {{ bookSelected }}
                                                     {% else %}
+                                                        <!--===== Session passed ====================================-->
                                                         <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a>
                                                     {% endif %}
                                                 {% endif %}
@@ -83,7 +94,6 @@
                                     {% endfor %}
                                 {% endif %}
                             {% endfor %}
-                            {#</span>#}
                         </div>
                     {% endif %}
                 {% endfor %}

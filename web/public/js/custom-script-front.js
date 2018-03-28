@@ -209,6 +209,7 @@
             beforeSend: function(){
                 $('#booking-search').empty();
                 $('#preloader-page-content').removeClass('hide');
+                $('#map-page-content').empty();
             },
             success: function(data_json){
                 data = $.parseJSON(data_json);
@@ -234,6 +235,21 @@
         $('.tooltipped').tooltip({delay: 50});
         $('.modal').modal();
 
+    }
+
+    function loading() {
+        var $preloader_wrapper = '<div class="preloader-wrapper small active">\n' +
+             '<div class="spinner-layer spinner-blue-only">\n' +
+             '<div class="circle-clipper left">\n' +
+             '<div class="circle"></div>\n' +
+             '</div><div class="gap-patch">\n' +
+             '<div class="circle"></div>\n' +
+             '</div><div class="circle-clipper right">\n' +
+             '<div class="circle"></div>\n' +
+             '</div>\n' +
+             '</div>\n' +
+             '</div><br>S\'il vous plaît, attendez...';
+        return $preloader_wrapper;
     }
 
 
