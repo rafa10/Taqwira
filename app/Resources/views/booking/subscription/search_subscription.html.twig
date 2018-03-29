@@ -20,7 +20,7 @@
                                 {% endfor %}
                             </p>
                         </div>
-                        <div class="col s3"><span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span></div>
+                        <div class="col s3"><span class="btn disabled">{% if 'now'|date('Y-m-d') == date_search|date('Y-m-d') %} Aujourd'hui {% else %} {{ date_search|date|localizeddate('full', 'none', app.request.locale ) }} {% endif %}</span></div>
                     </div>
                     {#<div class="card-action center">#}
                     {#<span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span>#}
@@ -159,7 +159,7 @@
                             {% endfor %}
                         </p>
                     </div>
-                    <div class="col s3"><span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span></div>
+                    <div class="col s3"><span class="btn disabled">{% if 'now'|date('Y-m-d') == date_search|date('Y-m-d') %} Aujourd'hui {% else %} {{ date_search|date|localizeddate('full', 'none', app.request.locale ) }} {% endif %}</span></div>
                 </div>
                 {#<div class="card-action center">#}
                 {#<span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span>#}

@@ -66,50 +66,17 @@ class BookingController extends Controller
      */
     public function newMatchAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $userLogin = $this->get('security.token_storage')->getToken()->getUser();
         $center = $userLogin->getCenter();
+        $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
 
         $form = $this->formBuilderSearch($center);
 
         return $this->render('booking/match/new_match.html.twig', array(
             'form' => $form->createView(),
+            'fields' => $fields
         ));
-    }
-
-    /**
-     * Lists all match to day .
-     * @Route("/match/to_day", name="booking_match_to_day")
-     * @Method("GET")
-     */
-    public function getMatchToDayAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $userLogin = $this->get('security.token_storage')->getToken()->getUser();
-        $center = $userLogin->getCenter();
-        $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
-        $days = $em->getRepository('AppBundle:Day')->findAll();
-
-        $bookingsTab = [];
-        $bookings = [];
-        foreach ( $fields as $field ){
-            $bookingsTab[] = $em->getRepository('AppBundle:Booking')->findBy(array('field' => $field));
-        }
-        foreach ( $bookingsTab as $index ){
-            foreach ($index as $item){
-                $bookings[] = $item;
-            }
-        }
-
-        $payload=array();
-        $payload['status']='ok';
-        $payload['page']='show';
-        $payload['html'] = $this->renderView('booking/match/to_day_match.html.twig', array(
-            'fields' => $fields,
-            'days' => $days,
-            'bookings' => $bookings
-        ));
-
-        return new Response(json_encode($payload));
     }
 
     /**
@@ -268,7 +235,6 @@ class BookingController extends Controller
     /** ============================================================================================================== */
     /** ===================================== Booking subscription =================================================== */
     /** ============================================================================================================== */
-
     /**
      * Lists all booking subscription entities.
      * @Route("/subscription", name="booking_subscription_index")
@@ -301,50 +267,17 @@ class BookingController extends Controller
      */
     public function newSubscriptionAction()
     {
+        $em = $this->getDoctrine()->getManager();
         $userLogin = $this->get('security.token_storage')->getToken()->getUser();
         $center = $userLogin->getCenter();
+        $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
 
         $form = $this->formBuilderSearch($center);
 
         return $this->render('booking/subscription/new_subscription.html.twig', array(
             'form' => $form->createView(),
+            'fields' => $fields
         ));
-    }
-
-    /**
-     * Lists all subscription to day .
-     * @Route("/subscription/to_day", name="booking_subscription_to_day")
-     * @Method("GET")
-     */
-    public function getSubscriptionToDayAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $userLogin = $this->get('security.token_storage')->getToken()->getUser();
-        $center = $userLogin->getCenter();
-        $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
-        $days = $em->getRepository('AppBundle:Day')->findAll();
-
-        $bookingsTab = [];
-        $bookings = [];
-        foreach ( $fields as $field ){
-            $bookingsTab[] = $em->getRepository('AppBundle:Booking')->findBy(array('field' => $field));
-        }
-        foreach ( $bookingsTab as $index ){
-            foreach ($index as $item){
-                $bookings[] = $item;
-            }
-        }
-
-        $payload=array();
-        $payload['status']='ok';
-        $payload['page']='show';
-        $payload['html'] = $this->renderView('booking/subscription/to_day_subscription.html.twig', array(
-            'fields' => $fields,
-            'days' => $days,
-            'bookings' => $bookings
-        ));
-
-        return new Response(json_encode($payload));
     }
 
     /**
@@ -617,7 +550,6 @@ class BookingController extends Controller
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
                 'required' => true,
-                'model_timezone' => 'Europe/Paris',
                 'attr' => array(
                     'class' => 'datepicker',
                     'data-provide' => 'datepicker',

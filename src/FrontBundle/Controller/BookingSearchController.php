@@ -58,7 +58,7 @@ class BookingSearchController extends Controller
 
         $data = $request->request->get('form');
         $centerName = isset($data['center']) ? $data['center'] : null;
-        $date = isset($data['date']) ? $data['date'] : date("F j, Y");
+        $date = isset($data['date']) ? $data['date'] : date("Y-m-d");
         $date_search = new \DateTime($date);
 
         $center = $em->getRepository('AppBundle:Center')->findOneBy(array('name' => $centerName));
@@ -78,7 +78,7 @@ class BookingSearchController extends Controller
         $payload=array();
         $payload['status']='ok';
         $payload['page']='search';
-        $payload['html'] = $this->renderView('FrontBundle:Booking_search:match.html.twig', array(
+        $payload['html'] = $this->renderView('FrontBundle:Booking_search:content_result.html.twig', array(
             'fields' => $fields,
             'date_search' => $date_search,
             'days' => $days,

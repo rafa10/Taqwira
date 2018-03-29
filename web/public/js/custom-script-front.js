@@ -10,14 +10,20 @@
     $('select').material_select();
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-        weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-        today: 'aujourd\'hui',
-        clear: 'effacer',
-        formatSubmit: 'dd/mm/yyyy',
-        close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
+        selectYears: 2, // Creates a dropdown of 15 years to control year
+        labelMonthNext: 'Mois suivant',
+        labelMonthPrev: 'Mois précédent',
+        labelMonthSelect: 'Selectionner le mois',
+        labelYearSelect: 'Selectionner une année',
+        monthsFull: [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre' ],
+        monthsShort: [ 'Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec' ],
+        weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
+        weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+        weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+        today: 'Aujourd\'hui',
+        clear: 'Effacer',
+        close: 'Fermer',
+        format: 'dd-mm-yyyy'
     });
     // =================================================================================================================
     // Smooth target ===================================================================================================
@@ -197,36 +203,43 @@
     // Form search booking match =======================================================================================
     //==================================================================================================================
     $("#form-booking-search").on("click",'#search',function(){
-        form = $(this).closest('form');
-        $('.alert-message').remove();
-        $.ajax({
-            data: new FormData(form[0]),
-            url: form.attr('action'),
-            type: 'POST',
-            cache: false,
-            contentType: false,
-            processData: false,
-            beforeSend: function(){
-                $('#booking-search').empty();
-                $('#preloader-page-content').removeClass('hide');
-                $('#map-page-content').empty();
-            },
-            success: function(data_json){
-                data = $.parseJSON(data_json);
-                if (data.status=="ok") {
-                    if (data.page=="search") {
-                        $('#preloader-page-content').addClass('hide');
-                        $('#map-page-content').addClass('hide');
-                        $('#booking-search').html(data.html);
-                        initialise();
+        if ($("input[name$='form[center]']").valid() && $("input[name$='form[date]']").valid())
+        {
+            form = $(this).closest('form');
+            $('.alert-message').remove();
+            $.ajax({
+                data: new FormData(form[0]),
+                url: form.attr('action'),
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function(){
+                    $('#booking-search').empty();
+                    $('#map-page-content').empty();
+                    $('#preloader-page-content').removeClass('hide');
+                },
+                success: function(data_json){
+                    data = $.parseJSON(data_json);
+                    if (data.status=="ok") {
+                        if (data.page=="search") {
+                            $('#preloader-page-content').addClass('hide');
+                            $('#booking-search').html(data.html);
+                            initialise();
+                        }
                     }
+                },
+                error: function() {
+                    alert("Une erreur est survenue");
                 }
-            },
-            error: function() {
-                alert("Une erreur est survenue");
-            }
 
-        });
+            });
+        }
+        else
+        {
+            return false;
+        }
+
     });
 
     // Initialise booking match & subscription modal ===================================================================
@@ -236,23 +249,6 @@
         $('.modal').modal();
 
     }
-
-    function loading() {
-        var $preloader_wrapper = '<div class="preloader-wrapper small active">\n' +
-             '<div class="spinner-layer spinner-blue-only">\n' +
-             '<div class="circle-clipper left">\n' +
-             '<div class="circle"></div>\n' +
-             '</div><div class="gap-patch">\n' +
-             '<div class="circle"></div>\n' +
-             '</div><div class="circle-clipper right">\n' +
-             '<div class="circle"></div>\n' +
-             '</div>\n' +
-             '</div>\n' +
-             '</div><br>S\'il vous plaît, attendez...';
-        return $preloader_wrapper;
-    }
-
-
 
 // === End =============================================================================================================
 });

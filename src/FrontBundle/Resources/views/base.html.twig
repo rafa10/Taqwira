@@ -17,6 +17,7 @@
     <meta name="msapplication-TileImage" content="{{ asset('public/images/favicon/mstile-144x144.png') }}">
     <!-- ICONS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
     <!-- ICONS FONT AWESOME -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
     <!-- CORE CSS-->
@@ -25,7 +26,7 @@
     <!-- Materialize Stepper -->
     <link href="{{ asset('public/css/materialize-stepper/materialize-stepper.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- Custome CSS file -->
-    <link href="{{ asset('public/css/custom/custom.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{{ asset('public/css/custom/custom_front.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 <body>
 
@@ -47,8 +48,8 @@
                 <a href="{{ path('home') }}" class="brand-logo darken-1" style="margin-top: 0.65rem"><img src="{{ asset('public/images/logo-takwira.png') }}" alt="Taqwira logo"></a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    {% set vidLink = null %}{% set contLink = null %}{% set bilLink = null %}{% set btnLink = null %}{% set homLink = null %}{% set plaLink = 'hide' %}
-                    {% if app.request.attributes.get('_route') == 'home' %}{% set homLink = 'hide' %}{% set plaLink = null %}{% endif %}
+                    {% set vidLink = null %}{% set contLink = 'hide' %}{% set bilLink = null %}{% set btnLink = null %}{% set homLink = null %}{% set plaLink = 'hide' %}
+                    {% if app.request.attributes.get('_route') == 'home' %}{% set homLink = 'hide' %}{% set plaLink = null %}{% set contLink = null %}{% endif %}
                     <li class="{{ homLink }}"><a href="{{ path('home') }}"></i>Accueil</a></li>
                     <li class="{{ plaLink }}"><a href="#plateforme"></i>Plateforme</a></li>
                     <li class="{{ contLink }}"><a href="#contact">Contact</a></li>

@@ -20,7 +20,9 @@
                                 {% endfor %}
                             </p>
                         </div>
-                        <div class="col s3"><span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span></div>
+                        <div class="col s3">
+                            <span class="btn disabled">{% if 'now'|date('Y-m-d') == date_search|date('Y-m-d') %} Aujourd'hui {% else %} {{ date_search|date|localizeddate('full', 'none', app.request.locale ) }} {% endif %}</span>
+                        </div>
                     </div>
                     {#<div class="card-action center">#}
                         {#<span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span>#}
@@ -77,8 +79,8 @@
                                                                 <!--==== Session academy ============================-->
                                                                 {% for program in day.Program %}
                                                                     {% for sessionA in program.Session if sessionF.id == sessionA.id %}
-                                                                        {% if program.field.id == fields.id %}
-                                                                            {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                        {% if program.field.id == field.id %}
+                                                                            {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                                         {% endif %}
                                                                     {% endfor %}
                                                                 {% endfor %}
@@ -108,11 +110,11 @@
                                                                     {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                                 {% endif %}
                                                             {% endfor %}
-                                                            <!--==== Session academy ============================--====>
+                                                            <!--==== Session academy ================================-->
                                                             {% for program in day.Program %}
                                                                 {% for sessionA in program.Session if sessionF.id == sessionA.id %}
-                                                                    {% if program.field.id == fields.id %}
-                                                                        {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                    {% if program.field.id == field.id %}
+                                                                        {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                                     {% endif %}
                                                                 {% endfor %}
                                                             {% endfor %}
@@ -158,7 +160,9 @@
                             {% endfor %}
                         </p>
                     </div>
-                    <div class="col s3"><span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span></div>
+                    <div class="col s3">
+                        <span class="btn disabled">{% if 'now'|date('Y-m-d') == date_search|date('Y-m-d') %} Aujourd'hui {% else %} {{ date_search|date|localizeddate('full', 'none', app.request.locale ) }} {% endif %}</span>
+                    </div>
                 </div>
                 {#<div class="card-action center">#}
                     {#<span class="btn disabled">{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}</span>#}
@@ -216,7 +220,7 @@
                                                             {% for program in day.Program %}
                                                                 {% for sessionA in program.Session if sessionF.id == sessionA.id %}
                                                                     {% if program.field.id == fields.id %}
-                                                                        {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                        {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                                     {% endif %}
                                                                 {% endfor %}
                                                             {% endfor %}
@@ -251,7 +255,7 @@
                                                         {% for program in day.Program %}
                                                             {% for sessionA in program.Session if sessionF.id == sessionA.id %}
                                                                 {% if program.field.id == fields.id %}
-                                                                    {% set bookSelected %} <a class="disabled"><div class="chip red lighten-1 red-text text-lighten-4"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                                    {% set bookSelected %} <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                                 {% endif %}
                                                             {% endfor %}
                                                         {% endfor %}

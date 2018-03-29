@@ -63,7 +63,7 @@
                 <!--end booking form-->
                 <div class="divider"></div>
 
-                <div id="preloader-page-content" class="card-panel center-align z-depth-0" style="position: absolute; top: 50%; left: 50%;">
+                <div id="preloader-page-content" class="card-panel center-align z-depth-0 hide" style="position: absolute; top: 50%; left: 50%;">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
                             <div class="circle-clipper left">
@@ -77,7 +77,35 @@
                     </div><br>S'il vous plaît, attendez...
                 </div>
                 {# == List all booking subscription to day == #}
-                <div id="booking-to_day" data-route="{{ path('booking_subscription_to_day') }}"></div>
+                <div id="booking-to_day">
+                    {% for field in fields %}
+
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card">
+                                    <div class="card-content row">
+                                        <div class="col s3">
+                                            <span class="card-title"><i class="medium mdi-action-view-array left"></i> {{ field.name }}</span>
+                                        </div>
+                                        <div class="col s6">
+                                            <p><i class="mdi-action-info-outline"></i> <b>Capacité</b>: {{ field.capacity }} joueurs</p>
+                                            <p>
+                                                {% set hideClass = null %}
+                                                {% for planning in field.planning if planning.field.id == field.id %}
+                                                    <i class="mdi-notification-event-available"></i> <b>Période</b>: De <b>{{ planning.dateStart|date('d/m/Y') }}</b> à <b>{{ planning.dateEnd|date('d/m/Y') }}</b>
+                                                {% else %}
+                                                    {% set hideClass = 'hide' %}
+                                                    <i class="mdi-notification-event-available"></i> <b>Période</b>: <span class="red-text"><i class="mdi-alert-warning"></i> Non disponible</span>
+                                                {% endfor %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
                 {# == List all booking subscription by date == #}
                 <div id="booking-search"></div>
 

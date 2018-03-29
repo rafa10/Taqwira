@@ -6,7 +6,8 @@
 
     <div id="form-booking-search" class="block grey lighten-3">
         <div class="row">
-            <form name="form" method="POST" action="{{ path('booking_search') }}" class="col s12 m10 offset-m1"><!--booking form-->
+            <!--=== Booking form ====================================================================================-->
+            <form name="form" method="POST" action="{{ path('booking_search') }}" class="col s12 m10 offset-m1 form-validation">
                 <!-- region & ville -->
                 <div class="col s12 m3 offset-m1 card-panel">
                     <div class="input-field col s12">
@@ -35,11 +36,11 @@
                 <div class="col s12 m1" style="margin-top: 1.2rem">
                     <button class="btn btn-large waves-effect waves-light yellow left z-depth-1 black-text" type="button" id="search">Rechercher</button>
                 </div>
-            </form><!--end booking form-->
-
-            <!-- block search result -->
+            </form>
+            <!--end booking form-->
+            <!--=== Content dynamic of message and booking result= ==================================================-->
             <div class="col s12 m10 offset-m1">
-
+                <!--=== Message session falsh back ==================================================================-->
                 {% if app.request.hasPreviousSession %}
                     {% for type, messages in app.session.flashbag.all() %}
                         {% for message in messages %}
@@ -53,8 +54,8 @@
                         {% endfor %}
                     {% endfor %}
                 {% endif %}
-
-                <div id="map-page-content" class="col s12 m12">
+                <!--=== bloc test image content =====================================================================-->
+                <div id="map-page-content" class="col s12 m10 offset-m1">
                     <div class="map-card">
                         <div class="card">
                             <div class="card-content" style="border-bottom: 1px solid #CCC">
@@ -67,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-
+                <!--=== Preloader content ===========================================================================-->
                 <div id="preloader-page-content" class="card-panel center-align z-depth-0 hide" style="position: absolute; top: 40%; left: 44%;">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
@@ -81,8 +82,8 @@
                         </div>
                     </div><br>S'il vous plaît, attendez...
                 </div>
-
-                <div id="booking-search"> {% include "FrontBundle::Booking_search/match.html.twig" %} </div>
+                <!--=== content result of search booking match ======================================================-->
+                <div id="booking-search" class="col s12 m12"></div>
 
             </div>
 

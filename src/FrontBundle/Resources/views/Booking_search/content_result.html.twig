@@ -2,27 +2,28 @@
 
     {% for field in fields %}
         <div class="card">{# class="card sticky-action"#}
-            <div class="card-content">
-                <div class="row">
-                    <div class="col s3">
-                        <span class="card-title"><i class="medium material-icons left">view_array</i> {{ field.name }}</span>
+            <div class="card-content row" style="margin-bottom: 0px">
+                <div class="col s12 m3 l3">
+                    <div class="card-title">
+                        <img class="left" src="{{ asset('public/images/soccer_icon/soccer34.png') }}" width="25%" alt="field icon">
+                        <span style="line-height: 70px; padding: 0 0.5rem">{{ field.name }}</span>
                     </div>
-                    <div class="col s6">
-                        <p><i class="tiny material-icons ">info_outline</i> <b>Capacité</b>: {{ field.capacity }} joueurs</p>
-                        <p>
-                            {% set hideClass = null %}
-                            {% for planning in field.planning if planning.field.id == field.id %}
-                                <i class="tiny material-icons">event_available</i> <b>Période</b>: De <b>{{ planning.dateStart|date('d/m/Y') }}</b> à <b>{{ planning.dateEnd|date('d/m/Y') }}</b>
-                            {% else %}
-                                {% set hideClass = 'hide' %}
-                                <i class="tiny material-icons">event_available</i> <b>Période</b>: <span class="red-text"><i class="material-icons">warning</i> Non disponible</span>
-                            {% endfor %}
-                        </p>
-                    </div>
-                    <div class="col s3">
-                        <i class="material-icons right activator">more_vert</i>
-                        {#<span class="btn disabled" style="color: #000 !important;">{% if 'now'|date('Y-m-d') == date_search|date('Y-m-d') %}Aujourd'hui{% else %}{{ date_search|date('l') }}, {{ date_search|date('d-m-Y') }}{% endif %}</span>#}
-                    </div>
+                </div>
+                <div class="col s12 m6 l6">
+                    <p><i class="tiny material-icons ">info_outline</i> <b>Capacité</b>: {{ field.capacity }} joueurs</p>
+                    <p>
+                        {% set hideClass = null %}
+                        {% for planning in field.planning if planning.field.id == field.id %}
+                            <i class="tiny material-icons">event_available</i> <b>Période</b>: De <b>{{ planning.dateStart|date('d/m/Y') }}</b> à <b>{{ planning.dateEnd|date('d/m/Y') }}</b>
+                        {% else %}
+                            {% set hideClass = 'hide' %}
+                            <i class="tiny material-icons">event_available</i> <b>Période</b>: <span class="red-text"><i class="tiny material-icons">warning</i> Non disponible</span>
+                        {% endfor %}
+                    </p>
+                    <p><i class="tiny material-icons ">event</i> <b>Date</b>:  <span class="grey-text">{% if 'now'|date('Y-m-d') == date_search|date('Y-m-d') %}Aujourd'hui{% else %}{{ date_search|date|localizeddate('full', 'none', app.request.locale ) }}{% endif %}</span></p>
+                </div>
+                <div class="col s12 m3 l3 right">
+                    <i class="material-icons right activator">more_vert</i>
                 </div>
             </div>
             {#==== calculer de nombre des jours dans le  planning =============================#}
@@ -30,14 +31,14 @@
                 {#===========================================================================================#}
                 {#=== Si la date est inferieur a la date de fin de planning =================================#}
                 {#===========================================================================================#}
-                {% if planning.dateStart|date('U') > date_search|date('U') %}
+                {% if planning.dateStart|date('Y-m-d') > date_search|date('Y-m-d') %}
                     <div class="card-action center grey lighten-4">
                         <span class="red-text">~~{#<i class="mdi-alert-warning"></i>#} Aucun résultat trouvé ! ~~</span>
                     </div>
                     {#===========================================================================================#}
                     {#=== Si la date d'aujourd'hui est superieur ================================================#}
                     {#===========================================================================================#}
-                {% elseif 'now'|date('U') > date_search|date('U') %}
+                {% elseif 'now'|date('Y-m-d') > date_search|date('Y-m-d') %}
                     <div class="card-action center grey lighten-4">
                         <span class="red-text">~~{#<i class="mdi-alert-warning"></i>#} Aucun résultat trouvé ! ~~</span>
                     </div>
@@ -133,26 +134,14 @@
                 {% endif %}
             {% endfor %}
             <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">{#<i class="medium material-icons left">view_array</i> {{ field.name }}#}<i class="material-icons right">close</i></span>
+                <span class="card-title grey-text text-darken-4">{{ field.name }}<i class="material-icons right">close</i></span>
                 <p>{{ field.description }}.</p>
             </div>
         </div>
     {% endfor %}
 
-{% else %}
+{#{% else %}#}
 
-    <div id="map-page-content" class="col s12 m12">
-        <div class="map-card">
-            <div class="card">
-                <div class="card-content" style="border-bottom: 1px solid #CCC">
-                    <h4 class="card-title grey-text text-darken-4"><a href="#" class="grey-text text-darken-4">Le réseau taqwira</a></h4>
-                    <p class="blog-post-content">Taqwira, c'est plus de 100 centre de football en Tunisie, mais c'est surtout la solution pour la réservation des terrain. Vous n'avez plus qu'à rechercher votre terrain !.</p>
-                </div>
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img src="{{ asset('public/images/arena.png') }}" alt="bg main">
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 {% endif %}
