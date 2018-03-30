@@ -159,6 +159,11 @@ class Center
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bill", mappedBy="center")
      */
     private $bill;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Service", mappedBy="center")
+     */
+    private $service;
     
     /**
      * Constructor
@@ -175,6 +180,7 @@ class Center
         $this->effective = new \Doctrine\Common\Collections\ArrayCollection();
         $this->configSection = new \Doctrine\Common\Collections\ArrayCollection();
         $this->bill = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->service = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -766,5 +772,39 @@ class Center
     public function getShareProgram()
     {
         return $this->share_program;
+    }
+
+    /**
+     * Add bill
+     *
+     * @param \AppBundle\Entity\Bill $bill
+     *
+     * @return Center
+     */
+    public function addBill(\AppBundle\Entity\Bill $bill)
+    {
+        $this->bill[] = $bill;
+
+        return $this;
+    }
+
+    /**
+     * Remove bill
+     *
+     * @param \AppBundle\Entity\Bill $bill
+     */
+    public function removeBill(\AppBundle\Entity\Bill $bill)
+    {
+        $this->bill->removeElement($bill);
+    }
+
+    /**
+     * Get bill
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBill()
+    {
+        return $this->bill;
     }
 }

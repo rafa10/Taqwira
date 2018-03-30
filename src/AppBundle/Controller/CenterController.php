@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -50,7 +49,6 @@ class CenterController extends Controller
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_SUPER_ADMIN')")
      * @param Request $request
-     *
      * @return Response
      */
     public function newAction(Request $request)

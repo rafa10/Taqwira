@@ -1,0 +1,53 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
+    <div class="modal-content">
+        <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajoutez un nouveau photo</h5><br>
+        {#<div class="divider"></div><br>#}
+        {{ form_row(form._token) }}
+        <div class="row">
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <div class="input-field col s12">
+                    <label class="active">Centre*</label>
+                    {{ form_widget(form.center) }}
+                </div>
+            {% else %}
+                <div class="input-field col s12 hide">
+                    <input type="hidden" id="image_center" name="image[center]" required="required" value="{{ app.user.center.id }}"/>
+                </div>
+            {% endif %}
+            <div class="input-field col s12">
+                <label for="url" class="active">Photo*</label>
+                {{ form_widget(form.url) }}
+                <div class="url"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action waves-effect waves-light yellow accent-4 black-text btn" id="save">Enregistrer</button>
+        <button type="button" class="modal-action modal-close waves-effect btn-flat" id="cancel">Annuler</button>
+    </div>
+    {{ form_end(form, { 'render_rest': false } ) }}
+
+{% endblock %}
+
+<script>
+
+    $(document).ready(function() {
+
+        // Upload avatar
+        $('.dropify').dropify({
+            messages: {
+                default: 'Glissez-déposez un logo ici ou cliquez',
+                replace: 'Glissez-déposez un logo ou cliquez pour remplacer',
+                remove:  'Supprimer',
+                error:   'Désolé, le fichier trop volumineux'
+            }
+        });
+
+    });
+
+</script>
+
+

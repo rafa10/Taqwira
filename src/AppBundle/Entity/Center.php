@@ -159,6 +159,11 @@ class Center
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Bill", mappedBy="center")
      */
     private $bill;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Service", mappedBy="center")
+     */
+    private $service;
     
     /**
      * Constructor
@@ -175,6 +180,7 @@ class Center
         $this->effective = new \Doctrine\Common\Collections\ArrayCollection();
         $this->configSection = new \Doctrine\Common\Collections\ArrayCollection();
         $this->bill = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->service = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -800,5 +806,39 @@ class Center
     public function getBill()
     {
         return $this->bill;
+    }
+
+    /**
+     * Add service
+     *
+     * @param \AppBundle\Entity\Service $service
+     *
+     * @return Center
+     */
+    public function addService(\AppBundle\Entity\Service $service)
+    {
+        $this->service[] = $service;
+
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param \AppBundle\Entity\Service $service
+     */
+    public function removeService(\AppBundle\Entity\Service $service)
+    {
+        $this->service->removeElement($service);
+    }
+
+    /**
+     * Get service
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getService()
+    {
+        return $this->service;
     }
 }

@@ -185,7 +185,7 @@ class BookingSearchController extends Controller
             $citys[$city->getName()] = null;
         }
 
-        $centerAll = $em->getRepository('AppBundle:Center')->findAll();
+        $centerAll = $em->getRepository('AppBundle:Center')->findBy(array('share_program' => true));
         foreach ($centerAll as $center){
             $centers[$center->getName()] = null;
         }

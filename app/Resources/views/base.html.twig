@@ -17,8 +17,6 @@
     <!-- For iPhone -->
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" content="{{ asset('public/images/favicon/mstile-144x144.png') }}">
-    <!-- For Windows Phone -->
-
     <!-- CORE CSS-->
     <link href="{{ asset('public/css/materialize.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{{ asset('public/css/style.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
@@ -28,6 +26,8 @@
     <link href="{{ asset('public/css/materialize.clockpicker.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
     <!--Flaticon-->
     <link href="{{ asset('public/font/flaticon/flaticon.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Materialize Stepper -->
+    <link href="{{ asset('public/css/materialize-stepper/materialize-stepper.min.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="{{ asset('public/js/plugins/prism/prism.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{{ asset('public/js/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" type="text/css" rel="stylesheet" media="screen,projection">
@@ -202,6 +202,8 @@
                 </li>
                 {#=== Configurations =====================================================================================#}
                 <li class='bold {% if app.request.attributes.get('_route') == 'configuration_index' %}active{% endif %}'><a href="{{ path('configuration_index') }}" class="waves-effect waves-cyan"><i class="mdi-action-perm-data-setting"></i>Configurations</a></li>
+                {#=== Photos =====================================================================================#}
+                <li class='bold {% if app.request.attributes.get('_route') == 'image_index' %}active{% endif %}'><a href="{{ path('image_index') }}" class="waves-effect waves-cyan"><i class="mdi-editor-insert-photo"></i>Photos</a></li>
             </ul>
         </aside>
         <!-- END LEFT SIDEBAR NAV-->

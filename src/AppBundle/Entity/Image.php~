@@ -46,14 +46,6 @@ class Image
     protected $created;
 
     /**
-     * @var datetime $updated
-     *
-     * @ORM\Column(type="datetime", nullable = true)
-     */
-    protected $updated;
-
-
-    /**
      * Gets triggered only on insert
 
      * @ORM\PrePersist
@@ -63,16 +55,88 @@ class Image
         $this->created = new \DateTime("now");
     }
 
-    /**
-     * Gets triggered every time on update
-
-     * @ORM\PreUpdate
-     */
-    public function onPreUpdate()
-    {
-        $this->updated = new \DateTime("now");
-    }
-
     // ..........
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Image
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     *
+     * @return Image
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set center
+     *
+     * @param \AppBundle\Entity\Center $center
+     *
+     * @return Image
+     */
+    public function setCenter(\AppBundle\Entity\Center $center = null)
+    {
+        $this->center = $center;
+
+        return $this;
+    }
+
+    /**
+     * Get center
+     *
+     * @return \AppBundle\Entity\Center
+     */
+    public function getCenter()
+    {
+        return $this->center;
+    }
 }

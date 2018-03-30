@@ -5,11 +5,11 @@
 {% block body %}
 
     <div id="form-booking-search" class="block grey lighten-3">
-        <div class="row">
-            <!--=== Booking form ====================================================================================-->
+        <!--=== Booking form ====================================================================================-->
+        <div class="row white z-depth-1" style="padding: 10px">
             <form name="form" method="POST" action="{{ path('booking_search') }}" class="col s12 m10 offset-m1 form-validation">
                 <!-- region & ville -->
-                <div class="col s12 m3 offset-m1 card-panel">
+                <div class="col s12 m3">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">location_on</i>
                         {{ form_widget(form.ville) }}
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <!-- centre -->
-                <div class="col s12 m3 card-panel" id="autocompelet-center">
+                <div class="col s12 m3" id="autocompelet-center">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">business</i>
                         {{ form_widget(form.center) }}
@@ -25,20 +25,23 @@
                     </div>
                 </div>
                 <!-- date -->
-                <div class="col s12 m3 card-panel">
+                <div class="col s12 m3">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">event</i>
                         {{ form_widget(form.date) }}
                         {{ form_label(form.date, 'Date') }}
                     </div>
                 </div>
-                <!-- btn form -->
-                <div class="col s12 m1" style="margin-top: 1.2rem">
-                    <button class="btn btn-large waves-effect waves-light yellow left z-depth-1 black-text" type="button" id="search">Rechercher</button>
+                <!-- btn -->
+                <div class="col s12 m3" style="padding: 10px">
+                    <a role="button" class="btn btn-large waves-effect waves-light yellow left z-depth-1 black-text" type="button" id="search">Rechercher</a>
                 </div>
             </form>
             <!--end booking form-->
-            <!--=== Content dynamic of message and booking result= ==================================================-->
+        </div>
+
+        <!--=== Content dynamic of message and booking result= ==================================================-->
+        <div class="row">
             <div class="col s12 m10 offset-m1">
                 <!--=== Message session falsh back ==================================================================-->
                 {% if app.request.hasPreviousSession %}
@@ -55,7 +58,7 @@
                     {% endfor %}
                 {% endif %}
                 <!--=== bloc test image content =====================================================================-->
-                <div id="map-page-content" class="col s12 m10 offset-m1">
+                <div id="map-page-content" class="col s12 m10 offset-m1 hide-on-small-only">
                     <div class="map-card">
                         <div class="card">
                             <div class="card-content" style="border-bottom: 1px solid #CCC">
@@ -69,7 +72,7 @@
                     </div>
                 </div>
                 <!--=== Preloader content ===========================================================================-->
-                <div id="preloader-page-content" class="card-panel center-align z-depth-0 hide" style="position: absolute; top: 40%; left: 44%;">
+                <div id="preloader-page-content" class="card-panel center-align z-depth-0 hide hide-on-small-only" style="position: absolute; top: 40%; left: 42%;">
                     <div class="preloader-wrapper small active">
                         <div class="spinner-layer spinner-blue-only">
                             <div class="circle-clipper left">
@@ -86,8 +89,8 @@
                 <div id="booking-search" class="col s12 m12"></div>
 
             </div>
-
         </div>
+
     </div>
 
     {# === CSS STYLE === #}
