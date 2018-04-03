@@ -54,11 +54,12 @@ class VideoManagementController extends Controller
 
                 $payload=array();
                 $payload['status']='ok';
-                $payload['page']='new';
+                $payload['page']='show';
                 $payload['reference'] = $booking->getReference();
                 return new Response(json_encode($payload));
 
             } else {
+                // send error message
                 $payload=array();
                 $payload['status']='ok';
                 $payload['page']='refresh';

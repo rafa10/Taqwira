@@ -73,51 +73,53 @@ $(document).ready(function(){
     // Send modal form type for all entities (crud) ====================================================================
     // =================================================================================================================
     $("#form_modal").on("click",'#save',function(){
-        form = $(this).closest('form');
-        // console.log(form);
-        $.ajax({
-            data: new FormData(form[0]),
-            url: form.attr('action'),
-            type: 'POST',
-            cache: false,
-            contentType: false,
-            processData: false,
-            beforeSend: function(){
-                $('#form_modal').closeModal();
-                $('.loader_form').removeClass('hide');
-            },
-            success: function(data_json){
-                data = $.parseJSON(data_json);
-                // console.log(data);
-                if (data.status=="ok") {
-                    if ( data.page=="index") {
-                        $('#form_modal').closeModal();
+        if ($(".formValidate").valid()) {
+            form = $(this).closest('form');
+            // console.log(form);
+            $.ajax({
+                data: new FormData(form[0]),
+                url: form.attr('action'),
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                    $('#form_modal').closeModal();
+                    $('.loader_form').removeClass('hide');
+                },
+                success: function (data_json) {
+                    data = $.parseJSON(data_json);
+                    // console.log(data);
+                    if (data.status == "ok") {
+                        if (data.page == "index") {
+                            $('#form_modal').closeModal();
 
-                    } else if (data.page=="edit") {
-                        $('#modal_form').html(data.html);
-                        refresh_Materialize_compound();
-                        $('select').material_select('destroy');
+                        } else if (data.page == "edit") {
+                            $('#modal_form').html(data.html);
+                            refresh_Materialize_compound();
+                            $('select').material_select('destroy');
 
-                    } else if (data.page=="refresh") {
-                        $('#form_modal').closeModal();
-                        location.reload();
-                        $('#loader-wrapper').remove();
+                        } else if (data.page == "refresh") {
+                            $('#form_modal').closeModal();
+                            location.reload();
+                            $('#loader-wrapper').remove();
+                        }
+                        else {
+                            $('.loader_form').addClass('hide');
+                            $('#form_modal').html(data.html);
+                            refresh_Materialize_compound();
+                            $('#form_modal').openModal();
+                        }
                     }
-                    else {
-                        $('.loader_form').addClass('hide');
-                        $('#form_modal').html(data.html);
-                        refresh_Materialize_compound();
-                        $('#form_modal').openModal();
-                    }
+                },
+                error: function () {
+                    alert('Une erreur est survenue');
+                    $('#form_modal').closeModal();
+
                 }
-            },
-            error: function() {
-                alert('Une erreur est survenue');
-                $('#form_modal').closeModal();
 
-            }
-
-        });
+            });
+        } else { return false}
     });
 
 
@@ -299,7 +301,6 @@ $(document).ready(function(){
         Materialize.updateTextFields();
         $('#textarea1').val('New Text');
         $('#textarea1').trigger('autoresize');
-        $('.stepper').activateStepper();
         // Upload avatar
         $('.dropify').dropify({
             messages: {

@@ -14,7 +14,7 @@
                 </div>
             {% else %}
                 <div class="input-field col s12 hide">
-                    <input type="hidden" id="customer_center" name="appbundle_customer[center]" required="required" value="{{ app.user.center.id }}"/>
+                    <input type="hidden" id="customer_center" name="customer[center]" required="required" value="{{ app.user.center.id }}"/>
                 </div>
             {% endif %}
             <div class="input-field col s2">
@@ -55,7 +55,7 @@
 <script>
 
     $(document).ready(function(){
-
+    //
         $("#formValidate").validate({
             rules: {
                 'customer[sexe]' : {

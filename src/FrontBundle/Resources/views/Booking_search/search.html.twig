@@ -7,9 +7,9 @@
     <div id="form-booking-search" class="block grey lighten-3">
         <!--=== Booking form ====================================================================================-->
         <div class="row white z-depth-1" style="padding: 10px">
-            <form name="form" method="POST" action="{{ path('booking_search') }}" class="col s12 m10 offset-m1 form-validation">
+            <form name="form" method="POST" action="{{ path('booking_search') }}" class="form-validation">
                 <!-- region & ville -->
-                <div class="col s12 m3">
+                <div class="col s12 m3 offset-m1">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">location_on</i>
                         {{ form_widget(form.ville) }}
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <!-- btn -->
-                <div class="col s12 m3" style="padding: 10px">
+                <div class="col s12 m2" style="padding: 10px">
                     <a role="button" class="btn btn-large waves-effect waves-light yellow left z-depth-1 black-text" type="button" id="search">Rechercher</a>
                 </div>
             </form>

@@ -44,67 +44,107 @@
     //==================================================================================================================
     // Form check booking login ( front office ) =======================================================================
     //==================================================================================================================
-    $(".form-login-booking").on("click",'.btn-check-booking',function(){
-        form = $(this).closest('form');
-        $('.alert-message').remove();
-        $.ajax({
-            data: new FormData(form[0]),
-            url: form.attr('action'),
-            type: 'POST',
-            cache: false,
-            contentType: false,
-            processData: false,
-            beforeSend: function(){},
-            success: function(data_json){
-                data = $.parseJSON(data_json);
-                if (data.status=="ok") {
-                    if (data.page == "error_mail") {
-                        $('.mess-error-mail').append('<div class="card alert-message z-depth-0 red lighten-5"><div class="card-content red-text"><p><i class="material-icons left">error</i>Impossible de trouver la réservation associée</p></div></div>');
-                    }else if (data.page == "error_name") {
-                        $('.mess-error-name').append('<div class="card alert-message z-depth-0 red lighten-5"><div class="card-content red-text"><p><i class="material-icons left">error</i>Impossible de trouver la réservation associée</p></div></div>');
-                    } else if(data.page == "success_mail") {
-                        window.location.href = '/booking/management/'+data.reference;
-                    } else if(data.page == "success_name") {
-                        window.location.href = '/booking/management/'+data.reference;
-                    }
-                }
-            },
-            error: function() {
-                alert("Une erreur est survenue");
-            }
+    $(".form-login-booking").on("click",'.btn-check-booking-mail',function(){
+        if ($(".formMailValidate").valid()) {
+            form = $(this).closest('form');
+            $('.alert-message').remove();
+            $.ajax({
+                data: new FormData(form[0]),
+                url: form.attr('action'),
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                },
+                success: function (data_json) {
+                    data = $.parseJSON(data_json);
+                    if (data.status == "ok") {
+                        if (data.page == "error_mail") {
+                            $('.mess-error-mail').append('<div class="card alert-message z-depth-0 red lighten-5"><div class="card-content red-text"><p><i class="material-icons left">error</i>Impossible de trouver la réservation associée</p></div></div>');
 
-        });
+                        } else {
+                            window.location.href = '/booking/management/' + data.reference;
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Une erreur est survenue");
+                }
+
+            });
+
+        } else { return false}
+    });
+
+    // ==================================================================================================================
+
+    $(".form-login-booking").on("click",'.btn-check-booking-name',function(){
+        if ($(".formNameValidate").valid()) {
+            form = $(this).closest('form');
+            $('.alert-message').remove();
+            $.ajax({
+                data: new FormData(form[0]),
+                url: form.attr('action'),
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                },
+                success: function (data_json) {
+                    data = $.parseJSON(data_json);
+                    if (data.status == "ok") {
+                        if (data.page == "error_name") {
+                            $('.mess-error-name').append('<div class="card alert-message z-depth-0 red lighten-5"><div class="card-content red-text"><p><i class="material-icons left">error</i>Impossible de trouver la réservation associée</p></div></div>');
+
+                        } else {
+                            window.location.href = '/booking/management/' + data.reference;
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Une erreur est survenue");
+                }
+
+            });
+
+        } else { return false}
     });
 
     //==================================================================================================================
     // Form check video login ( front office ) =========================================================================
     //==================================================================================================================
     $(".form-login-video").on("click",'#check-video-mail',function(){
-        form = $(this).closest('form');
-        $('.alert-message').remove();
-        $.ajax({
-            data: new FormData(form[0]),
-            url: form.attr('action'),
-            type: 'POST',
-            cache: false,
-            contentType: false,
-            processData: false,
-            beforeSend: function(){},
-            success: function(data_json){
-                data = $.parseJSON(data_json);
-                if (data.status=="ok") {
-                    if (data.page=="refresh") {
-                        $('.mess-error-mail').append('<div class="card alert-message z-depth-0 red lighten-5"><div class="card-content red-text"><p><i class="material-icons left">error</i>Impossible de trouver la réservation associée</p></div></div>');
-                    } else {
-                        window.location.href = '/video/management/'+data.reference;
+        if ($(".formValidate").valid()) {
+            form = $(this).closest('form');
+            $('.alert-message').remove();
+            $.ajax({
+                data: new FormData(form[0]),
+                url: form.attr('action'),
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
+                },
+                success: function (data_json) {
+                    data = $.parseJSON(data_json);
+                    if (data.status == "ok") {
+                        if (data.page == "refresh") {
+                            $('.mess-error-mail').append('<div class="card alert-message z-depth-0 red lighten-5"><div class="card-content red-text"><p><i class="material-icons left">error</i>Impossible de trouver la réservation associée</p></div></div>');
+                        } else {
+                            window.location.href = '/video/management/' + data.reference;
+                        }
                     }
+                },
+                error: function () {
+                    alert("Une erreur est survenue");
                 }
-            },
-            error: function() {
-                alert("Une erreur est survenue");
-            }
 
-        });
+            });
+
+        } else { return false}
     });
 
 
@@ -203,8 +243,7 @@
     // Form search booking match =======================================================================================
     //==================================================================================================================
     $("#form-booking-search").on("click",'#search',function(){
-        if ($("input[name$='form[center]']").valid() && $("input[name$='form[date]']").valid())
-        {
+        if ($(".form-validation").valid()) {
             form = $(this).closest('form');
             $('.alert-message').remove();
             $.ajax({
@@ -234,10 +273,10 @@
                 }
 
             });
-        }
-        else
-        {
+
+        } else {
             return false;
+
         }
 
     });

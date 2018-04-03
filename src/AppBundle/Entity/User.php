@@ -33,7 +33,7 @@ class User extends BaseUser
     private $lastname;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="user")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="user", cascade={"persist"})
      * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
      *
      */

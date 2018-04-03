@@ -101,7 +101,12 @@
                 <li class="user-details blue-grey">
                     <div class="row">
                         <div class="col col s4 m4 l4">
-                            <img src="{{ asset('uploads/avatars/'~app.user.center.avatar) }}" alt="" class="circle responsive-img valign profile-image">
+                            {% if app.user.center.avatar is not null %}
+                                <img src="{{ asset('uploads/avatars/'~app.user.center.avatar) }}" alt="avatar" class="circle responsive-img valign profile-image">
+                            {% else %}
+                                <img src="{{ asset('public/images/avatar.png') }}" alt="avatar" class="circle responsive-img valign profile-image">
+                                <a href="{{ path('fos_user_profile_show') }}" class="red-text" style="position: absolute; top: 30px; left:35px;"><i class="mdi-alert-error"></i></a>
+                            {% endif %}
                         </div>
                         <div class="col col s8 m8 l8">
                             <ul id="profile-dropdown" class="dropdown-content">

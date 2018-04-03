@@ -18,7 +18,8 @@
                         </ul>
                         <!-- Reference-->
                         <div class="form-login-booking">
-                            {{ form_start(form_mail) }}
+                            {{ form_start(form_mail, {'attr':{'class': 'formMailValidate'}}) }}
+                                {{ form_row(form_mail._token) }}
                                 <div id="reference" class="tab-content col s12  grey lighten-4">
                                     <div class="row mess-error-mail"></div>
                                     <div class="row">
@@ -35,16 +36,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col s12 right-align">
-                                            <button type="button" class=" waves-effect waves-light yellow accent-4 black-text btn btn-check-booking">Connexion</button>
+                                            <button type="button" class=" waves-effect waves-light yellow accent-4 black-text btn btn-check-booking-mail">Connexion</button>
                                         </div>
                                     </div>
                                 </div>
-                            {{ form_row(form_mail._token) }}
                             {{ form_end(form_mail, { 'render_rest': false } ) }}
                         </div>
-                        <!-- Reference&Name -->
+                        <!-- Reference & Name -->
                         <div class="form-login-booking">
-                            {{ form_start(form_name) }}
+                            {{ form_start(form_name, {'attr':{'class': 'formNameValidate'}}) }}
+                                {{ form_row(form_name._token) }}
                                 <div id="reference_name" class="tab-content col s12  grey lighten-4" style="display: none;">
                                     <div class="row mess-error-name"></div>
                                     <div class="row">
@@ -66,11 +67,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col s12 right-align">
-                                            <button type="button" class=" waves-effect waves-light yellow accent-4 black-text btn btn-check-booking">Connexion</button>
+                                            <button type="button" class=" waves-effect waves-light yellow accent-4 black-text btn btn-check-booking-name">Connexion</button>
                                         </div>
                                     </div>
                                 </div>
-                            {{ form_row(form_name._token) }}
                             {{ form_end(form_name, { 'render_rest': false } ) }}
                         </div>
                         <!-- Forget_reference -->
