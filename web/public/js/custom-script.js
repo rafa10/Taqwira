@@ -24,11 +24,21 @@ $(document).ready(function(){
         weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
         weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
         weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-        today: 'Aujourd\'hui',
+        today: 'Aujour',
         clear: 'Effacer',
         close: 'Fermer',
         format: 'dd-mm-yyyy'
     });
+
+    // $('#modal_form').on('hidden.bs.modal', function () {
+    //         tinyMCE.remove();
+    // });
+    $("#form_modal").leanModal({
+            // dismissible: false, // Modal can be dismissed by clicking outside of the modal
+            ready: function() { alert('Ready'); }, // Callback for Modal open
+            complete: function() { tinyMCE.remove(); } // Callback for Modal close
+        }
+    );
     // =================================================================================================================
     // Smooth target ===================================================================================================
     // =================================================================================================================
@@ -75,7 +85,9 @@ $(document).ready(function(){
     $("#form_modal").on("click",'#save',function(){
         if ($(".formValidate").valid()) {
             form = $(this).closest('form');
-            // console.log(form);
+            if (typeof(tinyMCE) != "undefined") {
+                tinyMCE.triggerSave();
+            }
             $.ajax({
                 data: new FormData(form[0]),
                 url: form.attr('action'),
@@ -251,14 +263,33 @@ $(document).ready(function(){
     $(".center_stat").click(function() {
         that = $(this);
         // this function will get executed every time the #home element is clicked (or tab-spacebar changed)
-        if(that.is(":checked") == true) // "this" refers to the element that fired the event
-        {
+        if(that.is(":checked") == true) {// "this" refers to the element that fired the event
             $.get(that.attr("data-href"), function() {
                 swal("Activé!", "Votre centre a été activé!", "success");
             });
-        } else{
+
+        } else {
             $.get(that.attr("data-href"), function() {
-                swal("désactivé!", "Votre centre a été désactivé!", "success");
+                swal("Désactivé!", "Votre centre a été désactivé!", "success");
+            });
+
+        }
+    });
+
+    // =================================================================================================================
+    // Btn published event ===============================================================================================
+    // =================================================================================================================
+    $(".event_is_published").click(function() {
+        that = $(this);
+        // this function will get executed every time the #home element is clicked (or tab-spacebar changed)
+        if(that.is(":checked") == true) {// "this" refers to the element that fired the event
+            $.get(that.attr("data-href"), function() {
+                swal("Publié!", "Votre événement a été publié!", "success");
+            });
+
+        } else {
+            $.get(that.attr("data-href"), function() {
+                swal("Désactivé!", "Votre événement a été désactivé!", "success");
             });
 
         }
@@ -283,7 +314,7 @@ $(document).ready(function(){
                 .done(function(data) {
                     if (data.status=="ok") {
                         if (data.page=="disable") {
-                            swal("désactivé!", "Le partager programme a été désactivé!", "success");
+                            swal("Désactivé!", "Le partager programme a été désactivé!", "success");
                         }
                     }
                 })
@@ -336,7 +367,7 @@ $(document).ready(function(){
             weekdaysFull: [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi' ],
             weekdaysShort: [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
             weekdaysLetter: [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
-            today: 'Aujourd\'hui',
+            today: 'Aujour',
             clear: 'Effacer',
             close: 'Fermer',
             format: 'dd-mm-yyyy'

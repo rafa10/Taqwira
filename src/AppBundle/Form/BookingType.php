@@ -14,7 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BookingType extends AbstractType
 {
     /**
-     * {@inheritdoc}
+     * @param FormBuilderInterface $builder
+     * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,13 +38,17 @@ class BookingType extends AbstractType
             ))
             ->add('price')
             ->add('field')
-            ->add('customer', null, array())
+            ->add('customer', CustomerType::class, array(
+                'attr'=>array(
+                    'readonly' => false
+                )
+            ))
 
         ;
     }
 
     /**
-     * {@inheritdoc}
+     * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -51,14 +56,6 @@ class BookingType extends AbstractType
             'data_class' => 'AppBundle\Entity\Booking',
             'attr' => array('readonly' => true)
         ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'appbundle_booking';
     }
 
 

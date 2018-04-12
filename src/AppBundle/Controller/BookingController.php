@@ -6,9 +6,8 @@ use AppBundle\Entity\Bill;
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\Customer;
 use AppBundle\Entity\Session;
-use AppBundle\Form\BookingSubscriptionType;
-use AppBundle\Form\BookingType;
 use AppBundle\Form\CustomerType;
+use AppBundle\Form\BookingType;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -172,12 +171,17 @@ class BookingController extends Controller
         if (empty($this->isGranted('ROLE_SUPER_ADMIN'))){
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
-            $form = $this->formBuilderCustomer($form, $center);
         }
-
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $request->request->all();
+            $email = isset($data['booking']['customer']['email']) ? $data['booking']['customer']['email'] : null;
+            $customer = $em->getRepository('AppBundle:Customer')->findOneBy(array('email' => $email, 'center' => $center));
+            if(!empty($customer)){
+                $booking->setCustomer($customer);
+            }
 
             $em->persist($booking);
             $em->flush();
@@ -400,46 +404,53 @@ class BookingController extends Controller
      */
     public function bookingSubscriptionAction(Request $request )
     {
-        $em = $this->getDoctrine()->getManager();
-        $booking = new Booking();
 
-        $form = $this->createForm(BookingSubscriptionType::class, $booking, array(
+        $em = $this->getDoctrine()->getManager();
+        $customer = new Customer();
+
+        $form = $this->createForm(CustomerType::class, $customer, array(
             'action' => $this->generateUrl('booking_subscription_details')
         ));
 
         if (empty($this->isGranted('ROLE_SUPER_ADMIN'))){
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
-            $form = $this->formBuilderCustomer($form, $center);
         }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $data = $request->request->all();
-            $customerID = isset($data['booking_subscription']['customer']) ? $data['booking_subscription']['customer'] : null;
-            $customer = $em->getRepository('AppBundle:Customer')->find($customerID);
+            $email = isset($data['customer']['email']) ? $data['customer']['email'] : null;
+            $customerExist = $em->getRepository('AppBundle:Customer')->findOneBy(array('email' => $email, 'center' => $center));
+
+            if(!empty($customerExist)){
+                $customer = $customerExist;
+
+            } else {
+                $em->persist($customer);
+                $em->flush();
+            }
 
             $session = $request->getSession();
             $basket = $session->get('basket');
 
             foreach ($basket as $data){
+                $type = $em->getRepository('AppBundle:BookingType')->find($data->getBookingType()->getId());
+                $field = $em->getRepository('AppBundle:Field')->find($data->getField()->getId());
+
                 $booking = new Booking();
                 $booking->setReference($data->getReference());
-                $type = $em->getRepository('AppBundle:BookingType')->find($data->getBookingType()->getId());
                 $booking->setBookingType($type);
-                $field = $em->getRepository('AppBundle:Field')->find($data->getField()->getId());
                 $booking->setField($field);
                 $booking->setDate($data->getDate());
                 $booking->setTimeStart($data->getTimeStart());
                 $booking->setTimeEnd($data->getTimeEnd());
                 $booking->setPrice($data->getPrice());
                 $booking->setCustomer($customer);
-
                 $em->persist($booking);
+                $em->flush();
             }
-
-            $em->flush();
 
             // Send mail confirmation booking to customer
             $this->container->get('app.mailer')->sendBookingSubscriptionMessage($basket, $customer);
@@ -580,50 +591,6 @@ class BookingController extends Controller
         }
         return $hash;
 
-    }
-
-    /**
-     * form new customer .
-     * @Route("/customer/new", name="booking_match_new_customer")
-     * @Method({"GET", "POST"})
-     * @param Request $request
-     * @return Response
-     */
-    public function newCustomerInBookingMatchAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $customer = new Customer();
-
-        $form = $this->createForm(CustomerType::class, $customer, array(
-            'action' => $this->generateUrl('booking_match_new_customer')
-        ));
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $em->persist($customer);
-            $em->flush();
-
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The session successfully created!');
-
-            $payload=array();
-            $payload['status']='ok';
-            $payload['page']='refresh';
-            return new Response(json_encode($payload));
-
-        }
-
-        $payload=array();
-        $payload['status']='ok';
-        $payload['page']='new';
-        $payload['html'] = $this->renderView('customer/new_customer.html.twig', array(
-            'form' => $form->createView(),
-        ));
-
-        return new Response(json_encode($payload));
     }
 
     /**

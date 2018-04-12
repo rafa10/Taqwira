@@ -44,6 +44,7 @@
                                     <th>#</th>
                                     <th>Nom</th>
                                     <th>Adresse</th>
+                                    <th>Téléphone</th>
                                     <th>Date de création</th>
                                     <th>Statut</th>
                                     {#<th>Date de mis à jour</th>#}
@@ -70,6 +71,7 @@
                                             </div>
                                         </td>
                                         <td>{{ center.region.name}}, {{ center.city.name }}</td>
+                                        <td>{{ center.phone}}</td>
                                         <td>{{ center.created|date('d/m/Y') }}</td>
                                         <td><!-- Switch -->
                                             <div class="switch">

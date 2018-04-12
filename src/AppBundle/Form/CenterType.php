@@ -26,7 +26,7 @@ class CenterType extends AbstractType
                 ),
             ))
 //            ->add('color')
-            ->add('is_active')
+//            ->add('is_active')
             ->add('region', EntityType::class, array(
                 'class' => 'AppBundle:Region',
                 'choice_label' => 'name',
@@ -41,6 +41,8 @@ class CenterType extends AbstractType
             ))
             ->add('address')
             ->add('cp')
+            ->add('phone')
+            ->add('service', null, array())
         ;
     }
 

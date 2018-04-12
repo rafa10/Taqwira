@@ -75,6 +75,16 @@ class CenterController extends Controller
             // $file->setName($dataName);
             $center->setAvatar($imgName);
 
+            $data = $request->request->all();
+            // Insertion selection sessions
+            $servicesSelected = isset($data['center']['service']) ? $data['center']['service'] : [];
+            // add all selected session
+            foreach ($servicesSelected as $value) {
+                $service = $em->getRepository('AppBundle:Service')->find($value);
+                $service->addCenter($center);
+                $em->persist($service);
+            }
+
             $em->persist($center);
             $em->flush();
 
@@ -133,6 +143,26 @@ class CenterController extends Controller
                     $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
                     $dataImg->move( $this->container->getParameter('avatar'), $imgName );
                     $center->setAvatar($imgName);
+                }
+
+                $data = $request->request->all();
+                //=== Update service of center ===//
+                if (isset($data['center']['service'])){
+                    $servicesSelected = $data['center']['service'];
+
+                    // Remove the old selected services
+                    $services = $center->getService();
+                    foreach ($services as $service) {
+                        $service->removeCenter($center);
+                        $em->persist($service);
+                    }
+                    // Add the new selected services
+                    foreach ($servicesSelected as $value) {
+                        $service = $em->getRepository('AppBundle:Service')->find($value);
+                        $service->addCenter($center);
+                        $em->persist($service);
+                    }
+
                 }
 
                 $em->persist($center);

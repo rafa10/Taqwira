@@ -5,7 +5,7 @@ namespace FrontBundle\Controller;
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\Center;
 use AppBundle\Entity\Field;
-use AppBundle\Form\BookingFontType;
+use AppBundle\Form\BookingType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Form;
@@ -63,6 +63,7 @@ class BookingSearchController extends Controller
 
         $center = $em->getRepository('AppBundle:Center')->findOneBy(array('name' => $centerName));
         $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
+        $user = $em->getRepository('AppBundle:User')->findOneBy(array('center' => $center));
 
         $bookingsTab = [];
         $bookings = [];
@@ -83,6 +84,8 @@ class BookingSearchController extends Controller
             'date_search' => $date_search,
             'days' => $days,
             'bookings' => $bookings,
+            'user' => $user,
+            'center' => $center
         ));
 
         return new Response(json_encode($payload));
@@ -102,19 +105,21 @@ class BookingSearchController extends Controller
         $em = $this->getDoctrine()->getManager();
         $type = $em->getRepository('AppBundle:BookingType')->findOneBy(array('description' => 'Match'));
         $reference  = $this->refHash(6);
-        $booking = new Booking();
         $fiel = $em->getRepository('AppBundle:Field')->find($field);
         $dateMatch = new \DateTime($date);
         $timeStart = new \DateTime($timeS);
         $timeEnd = new \DateTime($timeE);
-        // insert all booking details in form
+        $check_booking_match = $em->getRepository('AppBundle:Booking')->findBy(array('bookingType' => $type, 'date' => $dateMatch, 'timeStart' => $timeStart));
+        $center = $fiel->getCenter();
+
+        $booking = new Booking();
         $booking->setField($fiel);
         $booking->setDate($dateMatch);
         $booking->setTimeStart($timeStart);
         $booking->setTimeEnd($timeEnd);
         $booking->setPrice($price);
 
-        $form = $this->createForm(BookingFontType::class, $booking, array(
+        $form = $this->createForm(BookingType::class, $booking, array(
             'action' => $this->generateUrl('booking_details', array(
                 'field'=>$this->get('nzo_url_encryptor')->encrypt($field),
                 'date'=>$this->get('nzo_url_encryptor')->encrypt($date),
@@ -124,34 +129,45 @@ class BookingSearchController extends Controller
             ))
         ));
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        // vérification si la réservation est toujour disponible au non
+        if (empty($check_booking_match) ){
 
-            $data = $request->request->all();
-            $customerEmail = isset($data['appbundle_booking']['customer']['email']) ? $data['appbundle_booking']['customer']['email'] : null;
-            $customer = $em->getRepository('AppBundle:Customer')->findOneBy(array('email' => $customerEmail));
-            if(!empty($customer)){
-                $booking->setCustomer($customer);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $data = $request->request->all();
+                $email = isset($data['booking']['customer']['email']) ? $data['booking']['customer']['email'] : null;
+                $customer = $em->getRepository('AppBundle:Customer')->findOneBy(array('email' => $email, 'center' => $center));
+
+                if(!empty($customer)){
+                    $booking->setCustomer($customer);
+                }
+
+                $booking->setReference($reference);
+                $booking->setBookingType($type);
+
+                $em->persist($booking);
+                $em->flush();
+
+                // Send mail confirmation booking to customer
+                $this->container->get('app.mailer')->sendBookingMessage($booking);
+
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('SUCCÈS', 'La réservation a été enregistré avec succès!');
+
+
+                return $this->redirectToRoute('booking_page');
+
             }
-            $booking->setReference($reference);
-            $booking->setBookingType($type);
 
-            $em->persist($booking);
-            $em->flush();
-
-            // Send mail confirmation booking to customer
-            $this->container->get('app.mailer')->sendBookingMessage($booking);
-
+        } else {
             $request->getSession()
                 ->getFlashBag()
-                ->add('SUCCÈS', 'La réservation a été enregistré avec succès!');
-
+                ->add('ERREUR', 'La réservation non disponible!');
 
             return $this->redirectToRoute('booking_page');
-
         }
-
-        $center = $fiel->getCenter();
 
         return $this->render('FrontBundle:Booking_search:booking_details.html.twig', array(
             'form' => $form->createView(),
@@ -264,7 +280,7 @@ class BookingSearchController extends Controller
         $payload=array();
         $payload['status']='ok';
         $payload['page']='search';
-        $payload['html'] = $this->renderView('FrontBundle:Booking_search:form.html.twig', array(
+        $payload['html'] = $this->renderView('FrontBundle:Booking_search:center_form.html.twig', array(
             'centers' => $data_center
         ));
         return new Response(json_encode($payload));

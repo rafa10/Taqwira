@@ -3,9 +3,9 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
         <div class="modal-content">
-            <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau tarif</h5><br>
+            <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau programme</h5><br>
             {#<div class="divider"></div><br>#}
             {{ form_row(form._token) }}
             <div class="row">

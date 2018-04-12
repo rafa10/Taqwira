@@ -1,0 +1,44 @@
+{% block body %}
+
+    <!-- Modal Structure -->
+    <div class="modal-content grey lighten-4">
+
+        <div id="profile-page-wall-post" class="">
+            <div class="card-profile-title">
+                <div class="row">
+                    <div class="col s1">
+                        <img src="{{ asset('uploads/avatars/'~ event.center.avatar) }}" alt="" class="circle responsive-img valign profile-post-uer-image">
+                    </div>
+                    <div class="col s10">
+                        <p class="grey-text text-darken-4 margin">{{ event.center.name }}</p>
+                        <span class="grey-text text-darken-1 ultra-small">{{ event.title }}  -  {{ event.created|date('d/m/Y') }}</span>
+                    </div>
+                    <div class="col s1 right-align">
+                        {% if event.isPublished == true %}
+                            <i class="small mdi-editor-publish green-text"></i>
+                        {% else %}
+                            <i class="small mdi-notification-do-not-disturb red-text"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            {#<div class="card-image profile-small">#}
+                {#<img src="images/gallary/1.jpg" alt="sample" class="responsive-img profile-post-image">#}
+                {#<span class="card-title">Card Title</span>#}
+            {#</div>#}
+            <div class="card-content">
+                <p>{{ event.content|raw }}</p>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="modal-action modal-close waves-effect waves-green btn-flat">Fermer</button>
+    </div>
+
+{% endblock %}

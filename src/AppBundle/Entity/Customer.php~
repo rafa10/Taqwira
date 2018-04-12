@@ -41,7 +41,6 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Assert\NotBlank(message="Please provide a sexe")
      */
     private $sexe;
 
@@ -53,8 +52,9 @@ class Customer
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=8, nullable=true)
      * @Assert\NotBlank(message="Please provide a phone")
+     * @Assert\Regex(pattern="/^[0-9]*$/")
      */
     private $phone;
 
@@ -66,7 +66,6 @@ class Customer
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="customer")
      * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
-     *
      */
     private $center;
 
@@ -250,5 +249,29 @@ class Customer
     public function getBooking()
     {
         return $this->booking;
+    }
+
+    /**
+     * Set center
+     *
+     * @param \AppBundle\Entity\Center $center
+     *
+     * @return Customer
+     */
+    public function setCenter(\AppBundle\Entity\Center $center = null)
+    {
+        $this->center = $center;
+
+        return $this;
+    }
+
+    /**
+     * Get center
+     *
+     * @return \AppBundle\Entity\Center
+     */
+    public function getCenter()
+    {
+        return $this->center;
     }
 }

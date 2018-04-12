@@ -67,7 +67,7 @@
                                                 {% if sessionF.id == sessionP.id %}
                                                     {% if sessionF.timeStart|date('H:i') >= 'now'|date('H:i') %}
                                                         <!--==== Session button content =============================-->
-                                                        {% set bookSelected %} <a class="tooltipped modal_trigger" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" href="{{ path('booking_details', {'field': field.id | urlencrypt ,'date': date_search|date('Y-m-d') | urlencrypt , 'timeS': sessionF.timeStart|date('H:i') | urlencrypt, 'timeE': sessionF.timeEnd|date('H:i') | urlencrypt, 'price': price.amount | urlencrypt }) }}"><div class="chip waves-effect waves-light lime"><i class="tiny material-icons">timer</i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                        {% set bookSelected %} <a class="tooltipped modal_trigger" data-position="top" data-delay="50" data-tooltip="{{ price.amount }} TND" href="{{ path('booking_details', {'field': field.id | urlencrypt ,'date': date_search|date('Y-m-d') | urlencrypt , 'timeS': sessionF.timeStart|date('H:i') | urlencrypt, 'timeE': sessionF.timeEnd|date('H:i') | urlencrypt, 'price': price.amount | urlencrypt }) }}"><div class="chip waves-effect waves-light lime"><i class="tiny material-icons">timer</i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                         <!--==== Session already booked =============================-->
                                                         {% for booking in bookings if booking.field.id == field.id %}
                                                             {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
@@ -102,7 +102,7 @@
                                             {% for sessionF in field.session %}
                                                 {% if sessionF.id == sessionP.id %}
                                                     <!--==== Session button content =================================-->
-                                                    {% set bookSelected %} <a class="tooltipped modal_trigger" data-position="top" data-delay="50" data-tooltip="{{ price.amount }}€" href="{{ path('booking_details', {'field': field.id | urlencrypt ,'date': date_search|date('Y-m-d') | urlencrypt , 'timeS': sessionF.timeStart|date('H:i') | urlencrypt, 'timeE': sessionF.timeEnd|date('H:i') | urlencrypt, 'price': price.amount | urlencrypt }) }}"><div class="chip waves-effect waves-light lime"><i class="tiny material-icons">timer</i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
+                                                    {% set bookSelected %} <a class="tooltipped modal_trigger" data-position="top" data-delay="50" data-tooltip="{{ price.amount }} TND" href="{{ path('booking_details', {'field': field.id | urlencrypt ,'date': date_search|date('Y-m-d') | urlencrypt , 'timeS': sessionF.timeStart|date('H:i') | urlencrypt, 'timeE': sessionF.timeEnd|date('H:i') | urlencrypt, 'price': price.amount | urlencrypt }) }}"><div class="chip waves-effect waves-light lime"><i class="tiny material-icons">timer</i>  {{ sessionF.timeStart|date('H:i') }}</div></a> {% endset %}
                                                     <!--==== Session already booked =================================-->
                                                     {% for booking in bookings if booking.field.id == field.id %}
                                                         {% if booking.date|date('Y-m-d') == date_search|date('Y-m-d') and booking.timeStart|date('H:i') == sessionF.timeStart|date('H:i') %}
@@ -140,8 +140,93 @@
         </div>
     {% endfor %}
 
-{#{% else %}#}
-
-
+    <div class="row">
+        <h1 class="flow-text grey lighten-3 z-depth-0 card-panel">INFORMATIONS DU CENTRE</h1>
+        <!-- Carousel image du centre -->
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="carousel carousel-slider">
+                    {% for image in center.image %}
+                        <a class="carousel-item"><img src="{{ asset('uploads/photos/'~ image.url) }}"></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <p style="font-size:0.8rem;font-weight: 300">Note: Ceci est également compatible avec le tactile! Essayez de glisser avec votre doigt ou souris pour faire défiler le carrousel.</p>
+        </div>
+        <!-- informations centre -->
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <div class="row valign-wrapper">
+                            <div class="col s2">
+                                <img class="circle responsive-img" src="{{ asset('uploads/avatars/'~center.avatar) }}" alt="avatar"> <!-- notice the "circle" class -->
+                            </div>
+                            <div class="col s10">
+                                <span class="black-text">
+                                    {{ center.name }}
+                                </span>
+                            </div>
+                        </div>
+                    </span>
+                    <div class="divider"></div><br>
+                    <p><i class="material-icons left">view_array</i>{{ center.field|length }} Terrains</p><br>
+                    <p><i class="material-icons left">location_on</i>{{ center.address }}<br>{{ center.cp }} {{ center.city }}, {{ center.region }} </p><br>
+                    <p><i class="material-icons left">mail</i>{{ user.email }}</p><br>
+                    <p><i class="material-icons left">local_phone</i>{{ center.phone }}</p>
+                </div>
+            </div>
+        </div>
+        <!--Infromations equipements -->
+        <div class="col s12 m6">
+            <div class="card">
+                <ul class="collection with-header">
+                    <li class="collection-header"><h5>Équipements</h5></li>
+                    {% for service in center.service %}
+                        <li class="collection-item"><i class="material-icons left">{{ service.icon }}</i> {{ service.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!-- map  geolocalisation-->
+        <div class="col s12 m6 hide">
+            <div class="card">
+                <div id="map" style="height: 400px"></div>
+            </div>
+        </div>
+    </div>
 
 {% endif %}
+
+<script >
+
+    var geocoder;
+    var map;
+    var query = '{{ center.address }} {{ center.cp }} {{ center.city }}, {{ center.region }}';
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'),{
+            zoom: 12
+        });
+        geocoder = new google.maps.Geocoder();
+        console.log(query);
+        codeAddress();
+    }
+
+    function codeAddress() {
+        var address = query;
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == 'OK') {
+                resultsMap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initMap);
+
+</script>

@@ -286,6 +286,8 @@
 
         $('.tooltipped').tooltip({delay: 50});
         $('.modal').modal();
+        $('.carousel.carousel-slider').carousel({fullWidth: true});
+        // initMap();
 
     }
 

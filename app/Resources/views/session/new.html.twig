@@ -1,7 +1,7 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
     <div class="modal-content">
         <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau séance</h5><br>
         {#<div class="divider"></div><br>#}
@@ -36,3 +36,40 @@
     {{ form_end(form, { 'render_rest': false } ) }}
 
 {% endblock %}
+
+<script>
+
+    $(document).ready(function(){
+        //
+        $("#formValidate").validate({
+            rules: {
+                'session[time_start]' : {
+                    required: true
+                },
+                'session[time_end]': {
+                    required: true
+                },
+            },
+            //For custom messages
+            messages: {
+                'session[time_start]' : {
+                    required: "Champs requis 00:00"
+                },
+                'session[time_end]': {
+                    required: "Champs requis 00:00"
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
+    });
+
+</script>

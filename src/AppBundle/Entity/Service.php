@@ -21,9 +21,13 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
-     * @Assert\NotBlank(message="Please provide an center name")
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $icon;
 
     // ..........
 
@@ -120,5 +124,29 @@ class Service
     public function getCenter()
     {
         return $this->center;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     *
+     * @return Service
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 }

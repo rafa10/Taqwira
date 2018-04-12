@@ -3,7 +3,7 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
     <div class="modal-content">
         <h5 class="flow-text"><i class="small left mdi-editor-border-color"></i> Modifiez tarif</h5><br>
         {#<div class="divider"></div><br>#}

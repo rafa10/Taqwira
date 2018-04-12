@@ -5,12 +5,12 @@ namespace AppBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PlanningType extends AbstractType
+class EventType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -19,7 +19,7 @@ class PlanningType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('description', TextType::class)
+            ->add('title')
             ->add('date_start', DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',
@@ -38,9 +38,13 @@ class PlanningType extends AbstractType
                     'data-date-format' => 'dd-mm-yyyy'
                 )
             ))
-//            ->add('nb_session', NumberType::class)
-            ->add('field', EntityType::class, array(
-                'class' => 'AppBundle:Field',
+            ->add('content', TextareaType::class, array(
+                'attr' => array(
+                    'class' => 'tinymce ',
+                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
+                )))
+            ->add('center', EntityType::class, array(
+                'class' => 'AppBundle:Center',
                 'choice_label' => 'name',
                 'placeholder' => 'Choisissez ...',
                 'empty_data' => null
@@ -54,7 +58,7 @@ class PlanningType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Planning'
+            'data_class' => 'AppBundle\Entity\Event'
         ));
     }
 

@@ -190,7 +190,9 @@
                     </ul>
                 </li>
                 {#=== Video ==========================================================================================#}
-                <li class='bold {% if app.request.attributes.get('_route') == 'video_index' %}active{% endif %}'><a href="{{ path('video_index') }}" class="waves-effect waves-cyan"><i class="mdi-av-videocam"></i> vidéos</a></li>
+                <li class='bold {% if app.request.attributes.get('_route') == 'video_index' %}active{% endif %}'><a href="{{ path('video_index') }}" class="waves-effect waves-cyan"><i class="mdi-av-videocam"></i> Vidéos</a></li>
+                {#=== Event ==========================================================================================#}
+                <li class='bold {% if app.request.attributes.get('_route') == 'event_index' %}active{% endif %}'><a href="{{ path('event_index') }}" class="waves-effect waves-cyan"><i class="mdi-notification-event-note"></i> Événements</a></li>
                 {#=== Réglages =======================================================================================#}
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">

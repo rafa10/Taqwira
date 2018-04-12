@@ -33,50 +33,6 @@
                 <div class="divider"></div>
             <div id="invoice">
 
-                {#<div class="invoice-header">#}
-                    {#<div class="row section">#}
-                        {#<div class="col s12 m6 l6">#}
-                            {#<img src="{{ asset('public/images/generic-logo.png') }}" alt="company logo">#}
-                            {#<p>To,#}
-                                {#<br/>#}
-                                {#<span class="strong">Jonathan Doe</span>#}
-                                {#<br/>#}
-                                {#<span>125, ABC Street,</span>#}
-                                {#<br/>#}
-                                {#<span>New Yourk, USA</span>#}
-                                {#<br/>#}
-                                {#<span>+91-(444)-(333)-(221)</span>#}
-                            {#</p>#}
-                        {#</div>#}
-
-                        {#<div class="col s12 m6 l6">#}
-                            {#<div class="invoce-company-address right-align">#}
-                                {#<span class="invoice-icon"><i class="mdi-social-location-city cyan-text"></i></span>#}
-
-                                {#<p><span class="strong">Company Name LLC</span>#}
-                                    {#<br/>#}
-                                    {#<span>125, ABC Street,</span>#}
-                                    {#<br/>#}
-                                    {#<span>New Yourk, USA</span>#}
-                                    {#<br/>#}
-                                    {#<span>+91-(444)-(333)-(221)</span>#}
-                                {#</p>#}
-                            {#</div>#}
-
-                            {#<div class="invoce-company-contact right-align">#}
-                                {#<span class="invoice-icon"><i class="mdi-communication-quick-contacts-mail cyan-text"></i></span>#}
-                                {#<p><span class="strong">www.exampledomain.com</span>#}
-                                    {#<br/>#}
-                                    {#<span>info@exampledomain.com</span>#}
-                                    {#<br/>#}
-                                    {#<span>admin@exampledomain.com</span>#}
-                                {#</p>#}
-                            {#</div>#}
-
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-
                 <div class="invoice-table card-panel">
                     <div class="row">
                         <div class="col s12 m12 l12">
@@ -102,7 +58,7 @@
                                         <td><b>{{ basket.date|date('d/m/Y') }}</b></td>
                                         <td>De <b>{{ basket.timeStart|date('H:i') }}</b> à <b>{{ basket.timeEnd|date('H:i') }}</b></td>
                                         <td><a role="button" data-href="{{ path('subscription_basket_delete', { 'id': basket.reference }) }}" class="btn-warning-confirm "><i class="tiny mdi-action-delete red lighten-4 red-text text-lighten-1 circle" style="padding: 0px 4px"></i></a></td>
-                                        <td class="right-align"><b>{{ basket.price }} €</b> </td>
+                                        <td class="right-align"><b>{{ basket.price }} TND</b> </td>
                                     </tr>
                                     {% set total = total + basket.price %}
                                 {% endfor %}
@@ -110,7 +66,7 @@
                                     <td colspan="4"></td>
                                     <td class="grey darken-1 white-text">&nbsp;Total</td>
                                     <td class="grey darken-1 white-text">&nbsp;</td>
-                                    <td class="grey darken-1 white-text right-align"><strong>{{ total }} €</strong></td>
+                                    <td class="grey darken-1 white-text right-align"><strong>{{ total }} TND</strong></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -121,25 +77,6 @@
                 <div class="btn-validation right">
                     <button type="button" data-href="{{ path('booking_subscription_details') }}" class="waves-effect waves-light btn yellow accent-4 black-text modal_trigger">Valider le pannier</button>
                 </div>
-                {#<div class="invoice-footer">#}
-                    {#<div class="row">#}
-                        {#<div class="col s12 m6 l6">#}
-                            {#<p class="strong">Payment Method</p>#}
-                            {#<p>Please make the cheque to: AMANDA ORTON</p>#}
-                            {#<p class="strong">Terms & Condition</p>#}
-                            {#<ul>#}
-                                {#<li>You know, being a test pilot isn't always the healthiest business in the world.</li>#}
-                                {#<li>We predict too much for the next year and yet far too little for the next 10.</li>#}
-                            {#</ul>#}
-                        {#</div>#}
-                        {#<div class="col s12 m6 l6 center-align">#}
-                            {#<p>Approved By</p>#}
-                            {#<img src="images/signature-scan.png" alt="signature">#}
-                            {#<p class="header">AMANDA ORTON</p>#}
-                            {#<p>Managing Director</p>#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
 
             </div>
             </div>
@@ -147,5 +84,9 @@
 
     </section>
     <!-- END CONTENT -->
+
+    <!-- Loader -->
+    {% include 'AppBundle:loader:loader_form.html.twig' %}
+    <!-- end Loader -->
 
 {% endblock %}

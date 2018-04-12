@@ -18,30 +18,30 @@
                                     <div class="row">
                                         {{ form_row(form._token) }}
                                         <div class="input-field col s6">
-                                            <label for=name" class="active">Terrain*</label>
+                                            <label for="field" class="active">Terrain*</label>
                                             {{ form_widget(form.field, {'attr': {'class': 'hide'}}) }}
                                             <input disabled value="{{ name }}" id="disabled" type="text">
-                                            <div class="errorTxt1"></div>
+                                            <div class="field"></div>
                                         </div>
                                         <div class="input-field col s6">
-                                            <label for="timepicker" class="active">Date de départ*</label>
+                                            <label for="date" class="active">Date de départ*</label>
                                             {{ form_widget(form.date) }}
-                                            <div class="errorTxt1"></div>
+                                            <div class="date"></div>
                                         </div>
                                         <div class="input-field col s6">
-                                            <label for="time_end" class="active">Début*</label>
+                                            <label for="timeStart" class="active">Début*</label>
                                             {{ form_widget(form.timeStart) }}
-                                            <div class="errorTxt1"></div>
+                                            <div class="timeStart"></div>
                                         </div>
                                         <div class="input-field col s6">
-                                            <label for="time_end" class="active">Fin*</label>
+                                            <label for="timeEnd" class="active">Fin*</label>
                                             {{ form_widget(form.timeEnd) }}
-                                            <div class="errorTxt1"></div>
+                                            <div class="timeEnd"></div>
                                         </div>
                                         <div class="input-field col s12">
-                                            <label for="time_end" class="active">Prix*</label>
+                                            <label for="price" class="active">Prix TND*</label>
                                             {{ form_widget(form.price) }}
-                                            <div class="errorTxt1"></div>
+                                            <div class="price"></div>
                                         </div>
                                     </div>
                                     <div class="step-actions">
@@ -53,38 +53,35 @@
                                 <div data-step-label="Coordonnées" class="step-title waves-effect waves-dark">Étape 2</div>
                                 <div class="step-content">
                                     <div class="row">
-                                        {#<div class="row" id="form_customer_exist" data-href="{{ path('get_customer', {'center': center.id}) }}">#}
-                                            {#<div class="input-field col s12" id="autocompelet-customer">#}
-                                                {#<label for="time_end" class="active">Déjà client*</label>#}
-                                                {#<input type="search" id="search_customer" name="search[customer]" required="required" class="autocomplete-customer">#}
-                                            {#</div>#}
-                                        {#</div>#}
+                                        <div class="input-field col s12 hide">
+                                            <input type="hidden" id="booking_customer_center" name="booking[customer][center]" required="required" value="{{ center.id }}"/>
+                                        </div>
                                         <div class="input-field col s2">
-                                            <label for="time_end" class="active">Sexe*</label>
+                                            <label for="sexe" class="active">Sexe*</label>
                                             {{ form_widget(form.customer.sexe, {'attr': {'data-error': '.sexe'}}) }}
                                             {{ form_errors(form.customer.sexe) }}
                                             <div class="sexe"></div>
                                         </div>
                                         <div class="input-field col s5">
-                                            <label for="time_end" class="active">Nom*</label>
+                                            <label for="firstname" class="active">Nom*</label>
                                             {{ form_widget(form.customer.firstname, {'attr': {'data-error': '.firstname'}}) }}
                                             {{ form_errors(form.customer.firstname) }}
                                             <div class="firstname"></div>
                                         </div>
                                         <div class="input-field col s5">
-                                            <label for="time_end" class="active">Prénom*</label>
+                                            <label for="lastname" class="active">Prénom*</label>
                                             {{ form_widget(form.customer.lastname, {'attr': {'data-error': '.lastname'}}) }}
                                             {{ form_errors(form.customer.lastname) }}
                                             <div class="lastname"></div>
                                         </div>
                                         <div class="input-field col s12">
-                                            <label for="time_end" class="active">Email*</label>
+                                            <label for="email" class="active">Email*</label>
                                             {{ form_widget(form.customer.email, {'attr': {'data-error': '.email'}}) }}
                                             {{ form_errors(form.customer.email) }}
                                             <div class="email"></div>
                                         </div>
                                         <div class="input-field col s12">
-                                            <label for="time_end" class="active">Téléphone*</label>
+                                            <label for="phone" class="active">Téléphone*</label>
                                             {{ form_widget(form.customer.phone, {'attr': {'data-error': '.phone'}}) }}
                                             {{ form_errors(form.customer.phone) }}
                                             <div class="phone"></div>
@@ -130,64 +127,7 @@
 
     <script>
 
-        function validateCustomerDB(){
-
-            // $("#formValidate").validate({
-            //     rules: {
-            //         'appbundle_booking[customer][sexe]' : {
-            //             required: true
-            //         },
-            //         'appbundle_booking[customer][firstname]': {
-            //             required: true,
-            //             minlength: 2
-            //         },
-            //         'appbundle_booking[customer][lastname]': {
-            //             required: true,
-            //             minlength: 2
-            //         },
-            //         'appbundle_booking[customer][email]': {
-            //             required: true,
-            //             email: true
-            //         },
-            //         'appbundle_booking[customer][phone]': {
-            //             required: true,
-            //             number: true
-            //         }
-            //     },
-            //     //For custom messages
-            //     messages: {
-            //         'appbundle_booking[customer][sexe]' : {
-            //             required: "Selectionner une sexe"
-            //         },
-            //         'appbundle_booking[customer][firstname]': {
-            //             required: "Saisier le nom",
-            //             minlength: "minimum 2 characteres"
-            //         },
-            //         'appbundle_booking[customer][lastname]': {
-            //             required: "Saisier le prénom",
-            //             minlength: "minimum 2 characteres"
-            //         },
-            //         'appbundle_booking[customer][email]': {
-            //             required: "Saisier l'adresse mail",
-            //             email: "format non valide"
-            //         },
-            //         'appbundle_booking[customer][phone]': {
-            //             required: "Saisier le numéro de téléphone",
-            //             number: "format non valide"
-            //         }
-            //     },
-            //     errorElement : 'div',
-            //     errorPlacement: function(error, element) {
-            //         var placement = $(element).data('error');
-            //         if (placement) {
-            //             $(placement).append(error)
-            //         } else {
-            //             error.insertAfter(element);
-            //         }
-            //     }
-            // });
-
-        };
+        function validateCustomerDB(){};
 
     </script>
 

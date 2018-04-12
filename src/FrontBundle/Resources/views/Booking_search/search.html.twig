@@ -21,7 +21,7 @@
                     <div class="input-field col s12">
                         <i class="material-icons prefix">business</i>
                         {{ form_widget(form.center) }}
-                        {{ form_label(form.center, 'Center') }}
+                        {{ form_label(form.center, 'Centre*') }}
                     </div>
                 </div>
                 <!-- date -->
@@ -29,7 +29,7 @@
                     <div class="input-field col s12">
                         <i class="material-icons prefix">event</i>
                         {{ form_widget(form.date) }}
-                        {{ form_label(form.date, 'Date') }}
+                        {{ form_label(form.date, 'Date*') }}
                     </div>
                 </div>
                 <!-- btn -->
@@ -47,13 +47,23 @@
                 {% if app.request.hasPreviousSession %}
                     {% for type, messages in app.session.flashbag.all() %}
                         {% for message in messages %}
-                            <div class="row">
-                                <div id="card-alert" class="card green lighten-5 center-block col s12 m4 offset-m4">
-                                    <div class="card-content green-text">
-                                        <p class="center-align">{{ type }} : {{ message }}</p>
+                            {% if type == 'SUCCÈS' %}
+                                <div class="row">
+                                    <div id="card-alert" class="card green lighten-5 center-block col s12 m4 offset-m4">
+                                        <div class="card-content green-text">
+                                            <p class="center-align">{{ type }} : {{ message }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% else %}
+                                <div class="row">
+                                    <div id="card-alert" class="card red lighten-5 center-block col s12 m4 offset-m4">
+                                        <div class="card-content red-text">
+                                            <p class="center-align">{{ type }} : {{ message }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     {% endfor %}
                 {% endif %}
@@ -63,7 +73,7 @@
                         <div class="card">
                             <div class="card-content" style="border-bottom: 1px solid #CCC">
                                 <h4 class="card-title grey-text text-darken-4"><a href="#" class="grey-text text-darken-4">Le réseau taqwira</a></h4>
-                                <p class="blog-post-content">Taqwira, c'est plus de 100 centre de football en Tunisie, mais c'est surtout la solution pour la réservation des terrain. Vous n'avez plus qu'à rechercher votre terrain !.</p>
+                                <p class="blog-post-content" style="font-weight: 300">Taqwira, c'est plus de 100 centre de football en Tunisie, mais c'est surtout la solution pour la réservation des terrain. Vous n'avez plus qu'à rechercher votre terrain !.</p>
                             </div>
                             <div class="card-image waves-effect waves-block waves-light">
                                 <img src="{{ asset('public/images/arena.png') }}" alt="bg main">

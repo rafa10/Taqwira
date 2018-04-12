@@ -269,29 +269,36 @@ class PlanningController extends Controller
 
 
     /**
-     * All Fields
+     * Get all Fields if is not planning
      * @param $center
      * @return array
      */
     private function listAllFields($center)
     {
-        $allField = [];
+        $fieldNotPlanning = [];
         $fieldPlanning = [] ;
         $em = $this->getDoctrine()->getManager();
         $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
         $plannings = $em->getRepository('AppBundle:Planning')->findBy(array('field' => $fields));
-        foreach ($plannings as $planning) {
-            foreach ($fields as $field){
-                if ($field->getId() == $planning->getField()->getId()){
+        if ($fields != null) {
+            foreach ($fields as $field) {
+                if($plannings != null) {
+                    foreach ($plannings as $planning){
+                        if ($field->getId() == $planning->getField()->getId()){
+                            $fieldName = $field->getName();
+                            $fieldPlanning[$fieldName] = $field;
+                        }
+                        $fieldName = $field->getName();
+                        $fieldNotPlanning[$fieldName] = $field;
+                    }
+                } else {
                     $fieldName = $field->getName();
-                    $fieldPlanning[$fieldName] = $field;
+                    $fieldNotPlanning[$fieldName] = $field;
                 }
-                $fieldName = $field->getName();
-                $allField[$fieldName] = $field;
             }
         }
 
-        return $fieldAll = array_diff($allField, $fieldPlanning);
+        return $fieldAll = array_diff($fieldNotPlanning, $fieldPlanning);
     }
 
 

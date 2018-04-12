@@ -147,7 +147,7 @@ ul.stepper .step:before {
 }
 
 ul.stepper .step.active:before, ul.stepper .step.done:before {
-   background-color: #2196f3;
+   background-color: #afb42b;
 }
 
 ul.stepper .step.done:before {
@@ -172,7 +172,7 @@ ul.stepper .step-title {
 
 @media only screen and (min-width: 993px){
    ul.stepper.horizontal .step.active .step-title:before, ul.stepper.horizontal .step.done .step-title:before {
-      background-color: #2196f3;
+      background-color: #afb42b;
    }
 
    ul.stepper.horizontal .step.done .step-title:before {

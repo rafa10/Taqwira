@@ -38,6 +38,13 @@ class Center
     private $cp;
 
     /**
+     * @ORM\Column(type="string", length=8, nullable=true)
+     * @Assert\NotBlank(message="Please provide a phone")
+     *  @Assert\Regex(pattern="/^[0-9]*$/")
+     */
+    private $phone;
+
+    /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
      */
     private $is_active;
@@ -806,5 +813,39 @@ class Center
     public function getBill()
     {
         return $this->bill;
+    }
+
+    /**
+     * Add service
+     *
+     * @param \AppBundle\Entity\Service $service
+     *
+     * @return Center
+     */
+    public function addService(\AppBundle\Entity\Service $service)
+    {
+        $this->service[] = $service;
+
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param \AppBundle\Entity\Service $service
+     */
+    public function removeService(\AppBundle\Entity\Service $service)
+    {
+        $this->service->removeElement($service);
+    }
+
+    /**
+     * Get service
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getService()
+    {
+        return $this->service;
     }
 }

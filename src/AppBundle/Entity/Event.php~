@@ -39,10 +39,15 @@ class Event
     private $date_end;
 
     /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     * @Assert\NotBlank(message="Please provide an event description")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Please provide an event content")
      */
-    private $description;
+    private $content;
+
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $is_published;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="event")
@@ -91,8 +96,6 @@ class Event
     public function __construct()
     {
 //        $this->session = new ArrayCollection();
-//        $this->planning = new ArrayCollection();
-//        $this->booking = new ArrayCollection();
     }
 
     /**
@@ -104,4 +107,183 @@ class Event
     }
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     *
+     * @return Event
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set dateStart
+     *
+     * @param \DateTime $dateStart
+     *
+     * @return Event
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->date_start = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart
+     *
+     * @return \DateTime
+     */
+    public function getDateStart()
+    {
+        return $this->date_start;
+    }
+
+    /**
+     * Set dateEnd
+     *
+     * @param \DateTime $dateEnd
+     *
+     * @return Event
+     */
+    public function setDateEnd($dateEnd)
+    {
+        $this->date_end = $dateEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEnd
+     *
+     * @return \DateTime
+     */
+    public function getDateEnd()
+    {
+        return $this->date_end;
+    }
+
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return Event
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     *
+     * @return Event
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set center
+     *
+     * @param \AppBundle\Entity\Center $center
+     *
+     * @return Event
+     */
+    public function setCenter(\AppBundle\Entity\Center $center = null)
+    {
+        $this->center = $center;
+
+        return $this;
+    }
+
+    /**
+     * Get center
+     *
+     * @return \AppBundle\Entity\Center
+     */
+    public function getCenter()
+    {
+        return $this->center;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return Event
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

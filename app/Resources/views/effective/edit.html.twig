@@ -1,9 +1,9 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
     <div class="modal-content">
-        <h5 class="flow-text"><i class="small left mdi-editor-border-color"></i> Modifiez client</h5><br>
+        <h5 class="flow-text"><i class="small left mdi-editor-border-color"></i> Modifiez effectif</h5><br>
         {{ form_row(form._token) }}
         <div class="row">
             {% if is_granted('ROLE_SUPER_ADMIN') %}

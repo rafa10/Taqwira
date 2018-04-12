@@ -38,6 +38,13 @@ class Center
     private $cp;
 
     /**
+     * @ORM\Column(type="string", length=8, nullable=true)
+     * @Assert\NotBlank(message="Please provide a phone")
+     * @Assert\Regex(pattern="/^[0-9]*$/")
+     */
+    private $phone;
+
+    /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
      */
     private $is_active;
@@ -840,5 +847,29 @@ class Center
     public function getService()
     {
         return $this->service;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     *
+     * @return Center
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

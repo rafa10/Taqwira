@@ -1,31 +1,30 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
     <div class="modal-content">
         <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau période</h5><br>
-        {#<div class="divider"></div><br>#}
         {{ form_row(form._token) }}
         <div class="row">
             <div class="input-field col s12">
-                <label for=name" class="active">Terrain*</label>
-                {{ form_widget(form.field, {'attr':{'class': 'fieldClass'}}) }}
-                <div class="errorTxt1"></div>
+                <label for="field" class="active">Terrain*</label>
+                {{ form_widget(form.field, {'attr':{'class': 'fieldClass', 'data-error': '.field'}}) }}
+                <div class="field"></div>
             </div>
             <div class="input-field col s12">
-                <label for=name" class="">Description*</label>
-                {{ form_widget(form.description) }}
-                <div class="errorTxt1"></div>
+                <label for="description" class="">Description*</label>
+                {{ form_widget(form.description, {'attr':{'data-error': '.description'}}) }}
+                <div class="description"></div>
             </div>
             <div class="input-field col s12">
-                <label for="timepicker" class="active">Date de départ*</label>
-                {{ form_widget(form.date_start, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
-                <div class="errorTxt1"></div>
+                <label for="date_start" class="active">Date de départ*</label>
+                {{ form_widget(form.date_start, {'attr':{'data-error': '.date_start'}}) }}
+                <div class="date_start"></div>
             </div>
             <div class="input-field col s12">
-                <label for="time_end" class="active">Date de fin*</label>
-                {{ form_widget(form.date_end, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
-                <div class="errorTxt1"></div>
+                <label for="date_end" class="active">Date de fin*</label>
+                {{ form_widget(form.date_end, {'attr':{'data-error': '.date_end'}}) }}
+                <div class="date_end"></div>
             </div>
         </div>
     </div>
@@ -38,34 +37,51 @@
 {% endblock %}
 
 <script>
-    $(function () {
-//        jQuery(document).ready(function() {
-//            console.log("jQuery est prêt !");
-//
-//            $("#appbundle_planning_field").change(function() {
-//                mafonctionchange('timeStart','field');
-//            }).trigger('change');
-//
-//            function mafonctionchange(timeStart, field)
-//            {
-//                $.ajax({
-//                    url: '/edsa-Takwira/web/app_dev.php/planning/time_by_field',
-//                    type: 'POST',
-//                    data:
-//                        {
-//                            id : $("select."+field+"Class option:selected").val(),
-//                            select : timeStart
-//                        },
-//                    dataType: 'json',
-//                    success: function(reponse) {
-//                        $('.'+timeStart+'Class').empty();
-//                        $.each(reponse, function(index, element) {
-//                            $('.'+timeStart+'Class').append('<option value="'+ element.id +'"> '+ element.name +' </option>');
-//                        });
-//                    }
-//                });
-//            }
-//        });
+
+    $(document).ready(function(){
+        //
+        $("#formValidate").validate({
+            rules: {
+                'planning[description]' : {
+                    required: true
+                },
+                'planning[date_start]': {
+                    required: true
+                },
+                'planning[date_end]': {
+                    required: true
+                },
+                'planning[field]': {
+                    required: true
+                }
+            },
+            //For custom messages
+            messages: {
+                'planning[description]' : {
+                    required: "Champs requis"
+                },
+                'planning[date_start]': {
+                    required: "Champs requis"
+                },
+                'planning[date_end]': {
+                    required: "Champs requis"
+                },
+                'planning[field]': {
+                    required: "Champs requis"
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
     });
+
 </script>
 

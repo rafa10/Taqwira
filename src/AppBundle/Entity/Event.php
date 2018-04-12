@@ -39,10 +39,15 @@ class Event
     private $date_end;
 
     /**
-     * @ORM\Column(type="string", length=300, nullable=true)
-     * @Assert\NotBlank(message="Please provide an event description")
+     * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Please provide an event content")
      */
-    private $description;
+    private $content;
+
+    /**
+     * @ORM\Column(type="boolean", length=1, nullable=true)
+     */
+    private $is_published;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="event")
@@ -91,8 +96,6 @@ class Event
     public function __construct()
     {
 //        $this->session = new ArrayCollection();
-//        $this->planning = new ArrayCollection();
-//        $this->booking = new ArrayCollection();
     }
 
     /**
@@ -187,29 +190,6 @@ class Event
         return $this->date_end;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Event
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
     /**
      * Set created
@@ -281,5 +261,53 @@ class Event
     public function getCenter()
     {
         return $this->center;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return Event
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Set isPublished
+     *
+     * @param boolean $isPublished
+     *
+     * @return Event
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->is_published = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * Get isPublished
+     *
+     * @return boolean
+     */
+    public function getIsPublished()
+    {
+        return $this->is_published;
     }
 }

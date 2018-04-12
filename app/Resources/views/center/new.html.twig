@@ -1,7 +1,7 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
         <div class="modal-content">
             <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau centre</h5><br>
             {{ form_row(form._token) }}
@@ -36,12 +36,20 @@
                     <label for="cp" class="">Code postal*</label>
                     {{ form_widget(form.cp) }}
                 </div>
-                <div class="col s8">
-                    <p>
-                        {{ form_widget(form.is_active, {'id': 'filled-in-box', 'attr': {'class': 'filled-in'}}) }}
-                        <label for="filled-in-box">Active ?</label>
-                    </p>
+                <div class="input-field col s6">
+                    <label for="service" class="active">Service</label>
+                    {{ form_widget(form.service) }}
                 </div>
+                <div class="input-field col s6">
+                    <label for="service" class="active">Téléphone</label>
+                    {{ form_widget(form.phone) }}
+                </div>
+                {#<div class="input-field col s6">#}
+                    {#<p>#}
+                        {#{{ form_widget(form.is_active, {'id': 'filled-in-box', 'attr': {'class': 'filled-in'}}) }}#}
+                        {#<label for="filled-in-box">Active ?</label>#}
+                    {#</p>#}
+                {#</div>#}
                 <div id="next_step" data-href="{{ path('fos_user_registration_register') }}"></div>
             </div>
         </div>
@@ -56,44 +64,6 @@
 <script>
 
     $(document).ready(function() {
-
-//        $("#form_modal").on("click",'#save_center',function(){
-//            form = $(this).closest('form');
-//            link = $('#next_step').data('href');
-//            $.ajax({
-//                data: new FormData(form[0]),
-//                url: form.attr('action'),
-//                type: 'POST',
-//                cache: false,
-//                contentType: false,
-//                processData: false,
-//                beforeSend: function(){
-//                    $('#form_modal').closeModal();
-//                },
-//                success: function(data_json){
-//                    data = $.parseJSON(data_json);
-//                    if (data.status=="ok") {
-//
-//                        if (data.page=="refresh") {
-//                            $('#form_modal').closeModal();
-//                            location.replace(link);
-//
-//                        }
-//                        else {
-//                            $('#form_modal').html(data.html);
-//                            $('#form_modal').openModal();
-//                        }
-//                    }
-//                },
-//                error: function() {
-//                    alert('Une erreur est survenue');
-//                    $('#form_modal').closeModal();
-//
-//                }
-//
-//            });
-//        });
-
         // Upload avatar
         $('.dropify').dropify({
             messages: {

@@ -1,20 +1,20 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    <div id="booking_details"> {# ** form booking details ** #}
-        {{ form_start(form) }}
+    <div id="booking_details">
+        {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
             <div class="modal-content">
                 <h5 class="flow-text"><i class="small left mdi-editor-insert-invitation"></i> Réservez un match</h5><br>
-                {#<div class="divider"></div><br>#}
                 {{ form_row(form._token) }}
+                {# *** form booking details *** #}
                 <div class="row form_booking">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                         <label for=name" class="active">Terrain*</label>
                         {{ form_widget(form.field, {'attr': {'class': 'hide'}}) }}
                         <input disabled value="{{ field_name }}" id="disabled" type="text">
                         <div class="errorTxt1"></div>
                     </div>
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                         <label for="timepicker" class="active">Date de départ*</label>
                         {{ form_widget(form.date) }}
                         <div class="errorTxt1"></div>
@@ -30,30 +30,53 @@
                         <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s12">
-                        <label for="time_end" class="active">Prix*</label>
+                        <label for="time_end" class="active">Prix TND*</label>
                         {{ form_widget(form.price) }}
                         <div class="errorTxt1"></div>
                     </div>
                 </div>
-                {# =================== form customer ======================#}
+                {# *** form booking customer *** #}
                 <div class="row form_customer hide">
-                    {# *** customer exist in database *** #}
-                    <div id="form_customer_exist">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="input-field col s12">
-                            <label for="time_end" class="active">Client*</label>
-                            {{ form_widget(form.customer) }}
-                            <div class="errorTxt1"></div>
+                            <label class="active">Centre*</label>
+                            {{ form_widget(form.customer.center) }}
                         </div>
+                    {% else %}
+                        <div class="input-field col s12 hide">
+                            <input type="hidden" id="booking_customer_center" name="booking[customer][center]" required="required" value="{{ app.user.center.id }}"/>
+                        </div>
+                    {% endif %}
+                    <div class="input-field col s2">
+                        <label for="time_end" class="active">Sexe*</label>
+                        {{ form_widget(form.customer.sexe, {'attr': {'data-error': '.sexe'}}) }}
+                        {{ form_errors(form.customer.sexe) }}
+                        <div class="sexe"></div>
                     </div>
-                    {# *** check customer form *** #}
-                    <div class="col s12">
-                        <p class="checkbox">
-                            <input type="checkbox" name="new_customer" class="filled-in" data-href="{{ path('booking_match_new_customer') }}" id="filled-in-box" />
-                            <label for="filled-in-box">Nouveau client ?</label>
-                        </p>
+                    <div class="input-field col s5">
+                        <label for="time_end" class="active">Nom*</label>
+                        {{ form_widget(form.customer.firstname, {'attr': {'data-error': '.firstname'}}) }}
+                        {{ form_errors(form.customer.firstname) }}
+                        <div class="firstname"></div>
                     </div>
-                    <br><br><br>
-
+                    <div class="input-field col s5">
+                        <label for="time_end" class="active">Prénom*</label>
+                        {{ form_widget(form.customer.lastname, {'attr': {'data-error': '.lastname'}}) }}
+                        {{ form_errors(form.customer.lastname) }}
+                        <div class="lastname"></div>
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="time_end" class="active">Email*</label>
+                        {{ form_widget(form.customer.email, {'attr': {'data-error': '.email'}}) }}
+                        {{ form_errors(form.customer.email) }}
+                        <div class="email"></div>
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="time_end" class="active">Téléphone*</label>
+                        {{ form_widget(form.customer.phone, {'attr': {'data-error': '.phone'}}) }}
+                        {{ form_errors(form.customer.phone) }}
+                        <div class="phone"></div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -65,93 +88,85 @@
         {{ form_end(form, { 'render_rest': false } ) }}
     </div>
 
-    {# ** create a new customer ** #}
-    <div id="form_new_customer"> </div>
-
 {% endblock %}
 
 <script>
 
     $(document).ready(function() {
             //========================================================================
-            $("#form_modal").on("click",'#next',function(){
-                $('.form_booking').slideUp("slow");
-                $('.form_customer').removeClass('hide');
-                $('#next').addClass('hide');
-                $('#save').removeClass('hide');
-                $('#back').removeClass('hide');
-                $('#cancel').addClass('hide');
-            });
+        $("#form_modal").on("click",'#next',function(){
+            $('.form_booking').slideUp("slow");
+            $('.form_customer').removeClass('hide');
+            $('#next').addClass('hide');
+            $('#save').removeClass('hide');
+            $('#back').removeClass('hide');
+            $('#cancel').addClass('hide');
+        });
 
-            $("#form_modal").on("click",'#back',function(){
-                $('.form_booking').slideDown("slow");
-                $('.form_customer').addClass('hide');
-                $('#next').removeClass('hide');
-                $('#save').addClass('hide');
-                $('#back').addClass('hide');
-                $('#cancel').removeClass('hide');
-            });
+        $("#form_modal").on("click",'#back',function(){
+            $('.form_booking').slideDown("slow");
+            $('.form_customer').addClass('hide');
+            $('#next').removeClass('hide');
+            $('#save').addClass('hide');
+            $('#back').addClass('hide');
+            $('#cancel').removeClass('hide');
+        });
 
-            //========================================================================
-            $('.filled-in').click(function () {
-                url = $('#form_modal').data('href') ;
-                if ($('input[name=new_customer]').is(':checked')) {
-                    $('#form_customer_exist').slideUp('slow');
-                    //On lance un ajax pour charger le formulaire
-                    $.getJSON($(this).attr("data-href"), function(data) {})
-                        .done(function(data) {
-                            $('#booking_details').remove();
-                            $('#form_new_customer').html(data.html);
-                            $('select').material_select();
-                        });
-                    $('#form_new_customer').removeClass('hide');
-
-                    $("#form_new_customer").on("click",'#save_customer',function(){
-                        form = $(this).closest('form');
-                        $.ajax({
-                            data: new FormData(form[0]),
-                            url: form.attr('action'),
-                            type: 'POST',
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function(){},
-                            success: function(data_json){
-                                data = $.parseJSON(data_json);
-                                if (data.status=="ok") {
-                                    if (data.page=="refresh") {
-                                        $('#form_modal').closeModal();
-                                        //location.reload();
-
-                                        $.getJSON(url, function(data) {}).done(function(data) {
-                                            $('#form_modal').html(data.html);
-                                            $('select').material_select();
-                                            $('#form_modal').openModal();
-                                            $('.checkbox').remove();
-                                        });
-
-                                    } else {
-                                        $('#form_new_customer').html(data.html);
-                                        $('#form_new_customer').openModal();
-
-                                    }
-                                }
-                            },
-                            error: function() {
-                                alert('Une erreur est survenue');
-                                $('#form_new_customer').closeModal();
-
-                            }
-
-                        });
-                    });
-
-                } else {
-                    $('#form_customer_exist').slideDown('slow');
-                    $('#form_new_customer').addClass('hide');
-
+        $("#formValidate").validate({
+            rules: {
+                'customer[sexe]' : {
+                    required: true
+                },
+                'customer[firstname]': {
+                    required: true,
+                    minlength: 2
+                },
+                'customer[lastname]': {
+                    required: true,
+                    minlength: 2
+                },
+                'customer[email]': {
+                    required: true,
+                    email: true
+                },
+                'customer[phone]': {
+                    required: true,
+                    number: true
                 }
-            });
+            },
+            //For custom messages
+            messages: {
+                'customer[sexe]' : {
+                    required: "Selectionner une sexe"
+                },
+                'customer[firstname]': {
+                    required: "Saisier le nom",
+                    minlength: "minimum 2 characteres"
+                },
+                'customer[lastname]': {
+                    required: "Saisier le prénom",
+                    minlength: "minimum 2 characteres"
+                },
+                'customer[email]': {
+                    required: "Saisier l'adresse mail",
+                    email: "format non valide"
+                },
+                'customer[phone]': {
+                    required: "Saisier le numéro de téléphone",
+                    number: "format non valide"
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
     });
 
 </script>

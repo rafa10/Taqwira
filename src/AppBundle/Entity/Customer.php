@@ -52,8 +52,9 @@ class Customer
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=8, nullable=true)
      * @Assert\NotBlank(message="Please provide a phone")
+     * @Assert\Regex(pattern="/^[0-9]*$/")
      */
     private $phone;
 

@@ -21,9 +21,13 @@ class Service
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
-     * @Assert\NotBlank(message="Please provide an center name")
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $icon;
 
     // ..........
 
@@ -86,5 +90,39 @@ class Service
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add center
+     *
+     * @param \AppBundle\Entity\Center $center
+     *
+     * @return Service
+     */
+    public function addCenter(\AppBundle\Entity\Center $center)
+    {
+        $this->center[] = $center;
+
+        return $this;
+    }
+
+    /**
+     * Remove center
+     *
+     * @param \AppBundle\Entity\Center $center
+     */
+    public function removeCenter(\AppBundle\Entity\Center $center)
+    {
+        $this->center->removeElement($center);
+    }
+
+    /**
+     * Get center
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCenter()
+    {
+        return $this->center;
     }
 }

@@ -1,7 +1,7 @@
 {% block body %}
 
     <!-- Modal Structure -->
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
     <div class="modal-content">
         <h5 class="flow-text"><i class="small left mdi-editor-border-color"></i>Modifiez centre</h5><br>
         {#<div class="divider"></div><br>#}
@@ -34,11 +34,22 @@
                 <label for="cp">Code postal*</label>
                 {{ form_widget(form.cp) }}
             </div>
-            <div class="input-field col s12 m6">
-                <p>
-                    {{ form_widget(form.is_active, {'id': 'filled-in-box', 'attr': {'class': 'filled-in'}}) }}
-                    <label for="filled-in-box">Active ?</label>
-                </p>
+            <div class="input-field col s6">
+                <label for="phone" class="active">Téléphone</label>
+                {{ form_widget(form.phone) }}
+            </div>
+            {#<div class="input-field col s12 m6">#}
+                {#<p>#}
+                    {#{{ form_widget(form.is_active, {'id': 'filled-in-box', 'attr': {'class': 'filled-in'}}) }}#}
+                    {#<label for="filled-in-box">Active ?</label>#}
+                {#</p>#}
+            {#</div>#}
+            <div class="input-field col s12">
+                <label for="service" class="active">Service</label>
+                {{ form_widget(form.service) }}
+            </div>
+            <div class="input-field col s12">
+                <div class="right-align">{% for item in center.service %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %}</div>
             </div>
         </div>
     </div>
