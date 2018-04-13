@@ -194,6 +194,43 @@
                 <div id="map" style="height: 400px"></div>
             </div>
         </div>
+        <!--/end map-->
+        <h1 class="flow-text grey lighten-3 z-depth-0 card-panel">ÉVÉNEMENTS</h1>
+        <!-- Bloc event center -->
+        {% for event in events|sort %}
+            {% if event.isPublished == true and "now"|date('Y/m/d') <= event.date|date('Y/m/d') %}
+                <div class="col s12 m12">
+                    <div id="profile-page-wall-post" class="card">
+                        <div class="card-profile-title">
+                            <div class="row valign-wrapper">
+                                <div class="col s1">
+                                    <img src="{{ asset('uploads/avatars/'~ event.center.avatar) }}" alt="" class="circle responsive-img valign profile-post-uer-image">
+                                </div>
+                                <div class="col s10">
+                                    <p class="grey-text text-darken-4 margin">{{ event.center.name }}</p>
+                                    <span class="grey-text text-darken-1 ultra-small">{{ event.title }}  -  {{ event.created|date('d/m/Y') }}</span>
+                                </div>
+                                <div class="col s1 right-align">
+                                        <i class="material-icons">keyboard_arrow_down</i>
+                                </div>
+                            </div>
+                        </div>
+                        {#<div class="card-image profile-small">#}
+                            {#<img src="images/gallary/1.jpg" alt="sample" class="responsive-img profile-post-image">#}
+                            {#<span class="card-title">Card Title</span>#}
+                        {#</div>#}
+                        <div class="card-content">
+                            <p>{{ event.content|raw }}</p>
+                        </div>
+                        <div class="card-action">
+                            {#<a href="#">Like</a>&nbsp;#}
+                            <a href="#" class="grey-text"><i class="left material-icons">share</i> Partager</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
     </div>
 
 {% endif %}

@@ -30,15 +30,7 @@ $(document).ready(function(){
         format: 'dd-mm-yyyy'
     });
 
-    // $('#modal_form').on('hidden.bs.modal', function () {
-    //         tinyMCE.remove();
-    // });
-    $("#form_modal").leanModal({
-            // dismissible: false, // Modal can be dismissed by clicking outside of the modal
-            ready: function() { alert('Ready'); }, // Callback for Modal open
-            complete: function() { tinyMCE.remove(); } // Callback for Modal close
-        }
-    );
+
     // =================================================================================================================
     // Smooth target ===================================================================================================
     // =================================================================================================================
@@ -59,6 +51,7 @@ $(document).ready(function(){
     // Open modal form type for all entities (crud) ====================================================================
     // =================================================================================================================
     $('.modal_trigger').click(function() {
+        tinymce.remove();
         url = $(this).attr("data-href");
         //On lance un ajax pour charger le formulaire
         $.getJSON($(this).attr("data-href"), function(data) {})
@@ -372,6 +365,7 @@ $(document).ready(function(){
             close: 'Fermer',
             format: 'dd-mm-yyyy'
         });
+        tinymce.init({ selector:'textarea' });
 
     }
 
@@ -403,106 +397,112 @@ $(document).ready(function(){
                 }
             });
         // Booking Bar Chart ===========================================================================================
-        $.getJSON('/plateforme/booking/chart', function(data) {})
-            .done(function(data) {
-                if (data.status == "ok") {
-                    if (data.page == "show") {
-                        var BarChartSampleData = {
-                            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
-                            datasets: [
+        if ($('#bar-chart-sample').length) {
+            $.getJSON('/plateforme/booking/chart', function(data) {})
+                .done(function(data) {
+                    if (data.status == "ok") {
+                        if (data.page == "show") {
+                            var BarChartSampleData = {
+                                labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
+                                datasets: [
+                                    {
+                                        label: "Match",
+                                        fillColor: "#f48fb1",
+                                        strokeColor: "#f06292",
+                                        highlightFill: "rgba(220,220,220,0.75)",
+                                        highlightStroke: "rgba(220,220,220,1)",
+                                        data: data.match
+                                    },
+                                    {
+                                        label: "Abonnement",
+                                        fillColor: "#b0bec5",
+                                        strokeColor: "#90a4ae",
+                                        highlightFill: "rgba(151,187,205,0.75)",
+                                        highlightStroke: "rgba(151,187,205,1)",
+                                        data: data.abonnement
+                                    }
+                                ]
+                            };
+                            window.BarChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(BarChartSampleData,{
+                                responsive:true
+                            });
+                        } else {
+                            swal("", "Une erreur est survenue");
+
+                        }
+                    }
+                });
+        }
+        //Sessions Line Chart ===========================================================================================
+        if ($('#line-chart-sample').length) {
+            $.getJSON('/plateforme/session/chart', function(data) {})
+                .done(function(data) {
+                    if (data.status == "ok") {
+                        if (data.page == "show") {
+                            var LineChartSampleData = {
+                                labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
+                                datasets: [{
+                                    label: "Année la précédant",
+                                    fillColor: "rgba(220,220,220,0.2)",
+                                    strokeColor: "rgba(220,220,220,1)",
+                                    pointColor: "rgba(220,220,220,1)",
+                                    pointStrokeColor: "#fff",
+                                    pointHighlightFill: "#fff",
+                                    pointHighlightStroke: "rgba(220,220,220,1)",
+                                    data: data.session_later
+                                }, {
+                                    label: "Année en cours",
+                                    fillColor: "rgba(151,187,205,0.2)",
+                                    strokeColor: "rgba(151,187,205,1)",
+                                    pointColor: "rgba(151,187,205,1)",
+                                    pointStrokeColor: "#fff",
+                                    pointHighlightFill: "#fff",
+                                    pointHighlightStroke: "rgba(151,187,205,1)",
+                                    data: data.session
+                                }]
+                            };
+                            window.LineChartSample = new Chart(document.getElementById("line-chart-sample").getContext("2d")).Line(LineChartSampleData,{
+                                responsive:true
+                            });
+
+                        } else {
+                            swal("", "Une erreur est survenue");
+
+                        }
+                    }
+                });
+        }
+        //total booking type Pie Doughnut Chart ========================================================================
+        if ($('#doughnut-chart-sample').length) {
+            $.getJSON('/plateforme/booking_type/chart', function(data) {})
+                .done(function(data) {
+                    if (data.status == "ok") {
+                        if (data.page == "show") {
+                            var PieDoughnutChartSampleData = [
                                 {
-                                    label: "Match",
-                                    fillColor: "#f48fb1",
-                                    strokeColor: "#f06292",
-                                    highlightFill: "rgba(220,220,220,0.75)",
-                                    highlightStroke: "rgba(220,220,220,1)",
-                                    data: data.match
+                                    value: data.match,
+                                    color:"#f06292",
+                                    highlight: "#f48fb1",
+                                    label: "Match"
                                 },
                                 {
-                                    label: "Abonnement",
-                                    fillColor: "#b0bec5",
-                                    strokeColor: "#90a4ae",
-                                    highlightFill: "rgba(151,187,205,0.75)",
-                                    highlightStroke: "rgba(151,187,205,1)",
-                                    data: data.abonnement
+                                    value: data.abonnement,
+                                    color: "#90a4ae",
+                                    highlight: "#b0bec5",
+                                    label: "Abonnement"
                                 }
-                            ]
-                        };
-                        window.BarChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(BarChartSampleData,{
-                            responsive:true
-                        });
-                    } else {
-                        swal("", "Une erreur est survenue");
+                            ];
+                            window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+                                responsive:true
+                            });
 
+                        } else {
+                            swal("", "Une erreur est survenue");
+
+                        }
                     }
-                }
-            });
-        //Sessions Line Chart ===========================================================================================
-        $.getJSON('/plateforme/session/chart', function(data) {})
-            .done(function(data) {
-                if (data.status == "ok") {
-                    if (data.page == "show") {
-                        var LineChartSampleData = {
-                            labels: ["janv", "févr", "mars", "avr", "mai", "juin", "juil", "août", "sept", "oct", "nov", "déc"],
-                            datasets: [{
-                                label: "Année la précédant",
-                                fillColor: "rgba(220,220,220,0.2)",
-                                strokeColor: "rgba(220,220,220,1)",
-                                pointColor: "rgba(220,220,220,1)",
-                                pointStrokeColor: "#fff",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(220,220,220,1)",
-                                data: data.session_later
-                            }, {
-                                label: "Année en cours",
-                                fillColor: "rgba(151,187,205,0.2)",
-                                strokeColor: "rgba(151,187,205,1)",
-                                pointColor: "rgba(151,187,205,1)",
-                                pointStrokeColor: "#fff",
-                                pointHighlightFill: "#fff",
-                                pointHighlightStroke: "rgba(151,187,205,1)",
-                                data: data.session
-                            }]
-                        };
-                        window.LineChartSample = new Chart(document.getElementById("line-chart-sample").getContext("2d")).Line(LineChartSampleData,{
-                            responsive:true
-                        });
-
-                    } else {
-                        swal("", "Une erreur est survenue");
-
-                    }
-                }
-            });
-        //total booking type Pie Doughnut Chart ========================================================================
-        $.getJSON('/plateforme/booking_type/chart', function(data) {})
-            .done(function(data) {
-                if (data.status == "ok") {
-                    if (data.page == "show") {
-                        var PieDoughnutChartSampleData = [
-                            {
-                                value: data.match,
-                                color:"#f06292",
-                                highlight: "#f48fb1",
-                                label: "Match"
-                            },
-                            {
-                                value: data.abonnement,
-                                color: "#90a4ae",
-                                highlight: "#b0bec5",
-                                label: "Abonnement"
-                            }
-                        ];
-                        window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
-                            responsive:true
-                        });
-
-                    } else {
-                        swal("", "Une erreur est survenue");
-
-                    }
-                }
-            });
+                });
+        }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // END Dashobard ///////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

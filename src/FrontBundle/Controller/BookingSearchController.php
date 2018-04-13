@@ -64,6 +64,7 @@ class BookingSearchController extends Controller
         $center = $em->getRepository('AppBundle:Center')->findOneBy(array('name' => $centerName));
         $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
         $user = $em->getRepository('AppBundle:User')->findOneBy(array('center' => $center));
+        $events = $em->getRepository('AppBundle:Event')->findBy(array('center' => $center), array('created' => 'DESC'));
 
         $bookingsTab = [];
         $bookings = [];
@@ -85,7 +86,8 @@ class BookingSearchController extends Controller
             'days' => $days,
             'bookings' => $bookings,
             'user' => $user,
-            'center' => $center
+            'center' => $center,
+            'events' => $events
         ));
 
         return new Response(json_encode($payload));

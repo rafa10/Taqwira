@@ -38,11 +38,7 @@ class EventType extends AbstractType
                     'data-date-format' => 'dd-mm-yyyy'
                 )
             ))
-            ->add('content', TextareaType::class, array(
-                'attr' => array(
-                    'class' => 'tinymce ',
-                    'data-theme' => 'bbcode' // Skip it if you want to use default theme
-                )))
+            ->add('content', TextareaType::class)
             ->add('center', EntityType::class, array(
                 'class' => 'AppBundle:Center',
                 'choice_label' => 'name',

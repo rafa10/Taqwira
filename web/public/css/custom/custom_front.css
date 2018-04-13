@@ -153,6 +153,29 @@ body {
     width: 90%;
 }
 
+/* === profile center post ============================================================================================*/
+
+#profile-page-wall-post{
+    padding: 10px;
+}
+
+#profile-page-wall-post .card-profile-title {
+    line-height: 0;
+    padding: 10px;
+}
+
+#profile-page-wall-post .ultra-small {
+    font-size: 10px;
+    line-height: 1;
+}
+
+#profile-page-wall-post .card-content p{
+    font-family: 'Rubik', sans-serif !important;
+}
+
+#profile-page-wall-post .card-action a {
+    font-size: 12px;
+}
 /* == tabs style =====================================================================================================*/
 
 .tabs {
