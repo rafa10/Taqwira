@@ -20,13 +20,7 @@ class PriceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('day', EntityType::class, array(
-                'class' => 'AppBundle:Day',
-                'choice_label' => 'name',
-                'placeholder' => 'Choisissez ...',
-                'multiple' => true,
-                'choice_translation_domain' => true
-            ))
+            ->add('day', null, array())
             ->add('session', null, array())
             ->add('amount', NumberType::class)
             ->add('bookingType', EntityType::class, array(
@@ -35,8 +29,8 @@ class PriceType extends AbstractType
                 'placeholder' => 'Choisissez ...',
                 'empty_data' => null
             ))
-            ->add('center', EntityType::class, array(
-                'class' => 'AppBundle:Center',
+            ->add('field', EntityType::class, array(
+                'class' => 'AppBundle:Field',
                 'choice_label' => 'name',
                 'placeholder' => 'Choisissez ...',
                 'empty_data' => null

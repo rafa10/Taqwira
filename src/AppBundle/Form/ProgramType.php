@@ -16,13 +16,7 @@ class ProgramType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('day', EntityType::class, array(
-                'class' => 'AppBundle:Day',
-                'choice_label' => 'name',
-                'placeholder' => 'Choisissez ...',
-                'multiple' => true,
-                'choice_translation_domain' => true
-            ))
+            ->add('day',null, array())
             ->add('session', null, array())
             ->add('bookingType', EntityType::class, array(
                 'class' => 'AppBundle:BookingType',

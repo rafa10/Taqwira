@@ -50,15 +50,15 @@
                                 <p><i class="material-icons left">event</i>{{ booking.date|date('m/d/Y') }}</p>
                                 <p><i class="material-icons left">timer</i><b>{{ booking.timeStart|date('H:i') }}</b></p>
                                 <p>{{ loop.index }}</p>
-                                <p><b>{{ booking.price }} €</b></p>
+                                <p><b>{{ booking.price }} TND</b></p>
                             </div>
                         </div>
                         {% set total = total + booking.price %}
                     {% endfor %}
                     <div class="row">
                         <hr class="style10">
-                        {#<div class="col s6 right-align">TVA </div><div class="col s6 right-align"><b>7.36 €</b></div>#}
-                        <div class="col s6 right-align"><b>Prix TTC</b> </div><div class="col s6 right-align"><b>{{ total }} €</b></div>
+                        {#<div class="col s6 right-align">TVA </div><div class="col s6 right-align"><b>7.36 TND</b></div>#}
+                        <div class="col s6 right-align"><b>Prix TTC</b> </div><div class="col s6 right-align"><b>{{ total }} TND</b></div>
                     </div>
                 </div>
             </div>

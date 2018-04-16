@@ -30,12 +30,6 @@ class Event
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\NotBlank(message="Please provide an event date")
      */
-    private $date_start;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank(message="Please provide an event date")
-     */
     private $date_end;
 
     /**
@@ -52,7 +46,6 @@ class Event
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="event")
      * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
-     *
      */
     private $center;
 
@@ -140,30 +133,6 @@ class Event
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Set dateStart
-     *
-     * @param \DateTime $dateStart
-     *
-     * @return Event
-     */
-    public function setDateStart($dateStart)
-    {
-        $this->date_start = $dateStart;
-
-        return $this;
-    }
-
-    /**
-     * Get dateStart
-     *
-     * @return \DateTime
-     */
-    public function getDateStart()
-    {
-        return $this->date_start;
     }
 
     /**

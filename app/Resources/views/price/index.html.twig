@@ -43,6 +43,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Terrain</th>
                                     <th>Type</th>
                                     <th>Jours</th>
                                     <th>Temps</th>
@@ -56,10 +57,11 @@
                                 {% for price in prices %}
                                     <tr>
                                         <td>{{ price.id }}</td>
+                                        <td>{{ price.field.name }}</td>
                                         <td>{{ price.bookingType }}</td>
                                         <td> {% for item in price.day %}<div class="chip">{{ item|trans }}</div>&nbsp;{% endfor %} </td>
                                         <td> <div class="chip">De <b>{{ price.Session|first }}</b> à <b>{{ price.Session|last }}</b></div> </td>
-                                        <td>{{ price.amount }} €</td>
+                                        <td>{{ price.amount }} TND</td>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ price.center.name }}</div></td>{% endif %}
                                         <td class="center-align">
                                             <button type="button" data-href="{{ path('price_edit', { 'id': price.id }) }}" class="btn-floating waves-effect waves-light grey lighten-3 modal_trigger"><i class="mdi-editor-mode-edit grey-text"></i></button>

@@ -8,13 +8,12 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 /*== form validation style ==================================================================*/
 /*===========================================================================================*/
 
-
 .input-field div.error{
     position: relative;
     top: -1rem;
     left: 0rem;
     font-size: 0.8rem;
-    color:#FF4081;
+    color:#d32f2f ;
     -webkit-transform: translateY(0%);
     -ms-transform: translateY(0%);
     -o-transform: translateY(0%);
@@ -57,6 +56,7 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 /*===========================================================================================*/
 /*== Datepicker style =======================================================================*/
 /*===========================================================================================*/
+
 .picker__date-display {
     background-color:#616161 !important;
 }
@@ -66,6 +66,56 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
     background-color:#757575  !important;
 }
+
+/*===========================================================================================*/
+/*== Checkbox style =========================================================================*/
+/*===========================================================================================*/
+
+.red:checked + label:before {
+    top: -4px;
+    left: -3px;
+    width: 12px;
+    height: 22px;
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid red; /* You need to change the colour here */
+    border-bottom: 2px solid red; /* And here */
+    -webkit-transform: rotate(40deg);
+    -moz-transform: rotate(40deg);
+    -ms-transform: rotate(40deg);
+    -o-transform: rotate(40deg);
+    transform: rotate(40deg);
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-origin: 100% 100%;
+    -moz-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
+    -o-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}
+
+/*===========================================================================================*/
+/*== Switch style ===========================================================================*/
+/*===========================================================================================*/
+
+.switch label input[type=checkbox]:checked+.lever {
+    background-color: #a5d6a7;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+    background-color: #4caf50 ;
+}
+
+/*.switch  label input[type=checkbox]:checked+.lever {*/
+    /*background-color: #b0bec5;*/
+
+
+/*.switch label input[type=checkbox]:checked+.lever:after {*/
+    /*background-color: #607d8b ;*/
+/*}*/
+
+/*===========================================================================================*/
+/*===========================================================================================*/
+/*===========================================================================================*/
 
 /*.slider .indicators .indicator-item.active{ background-color:#ef6c00 ;}*/
 

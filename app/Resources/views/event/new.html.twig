@@ -17,15 +17,10 @@
                     <input type="hidden" id="event_center" name="event[center]" required="required" value="{{ app.user.center.id }}"/>
                 </div>
             {% endif %}
-            <div class="input-field col s12">
+            <div class="input-field col s6">
                 <label for="title" class="active">Titre*</label>
                 {{ form_widget(form.title, {'attr': {'data-error': '.title'}}) }}
                 <div class="title"></div>
-            </div>
-            <div class="input-field col s6">
-                <label for="date_start">Date de début*</label>
-                {{ form_widget(form.date_start, {'attr': {'data-error': '.date_start'}}) }}
-                <div class="date_start"></div>
             </div>
             <div class="input-field col s6">
                 <label for="date_end">Date de fin*</label>
@@ -56,10 +51,6 @@
                 'event[title]' : {
                     required: true
                 },
-                'event[date_start]': {
-                    required: true,
-                    minlength: 2
-                },
                 'event[date_end]': {
                     required: true,
                     minlength: 2
@@ -71,9 +62,6 @@
             //For custom messages
             messages: {
                 'event[title]' : {
-                    required: "Champs requis"
-                },
-                'event[date_start]': {
                     required: "Champs requis"
                 },
                 'event[date_end]': {

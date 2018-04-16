@@ -45,8 +45,8 @@
                                     <th>#</th>
                                     <th>Titre</th>
                                     {#<th>Contenu</th>#}
-                                    <th>Date</th>
                                     <th>Date de creation</th>
+                                    <th>Date de fin</th>
                                     {% if is_granted('ROLE_SUPER_ADMIN') %}<th>Centre</th>{% endif %}
                                     <th>Publication</th>
                                     <th class="center-align">Actions</th>
@@ -59,15 +59,15 @@
                                         <td>{{ event.id }}</td>
                                         <td>{{ event.title }}</td>
                                         {#<td>{{ event.content|slice(0, 30) }}</td>#}
-                                        <td>De <b>{{ event.dateStart|date("d/m/Y") }}</b> à <b>{{ event.dateEnd|date("d/m/Y") }}</b></td>
-                                        <td>De <b>{{ event.created|date("d/m/Y") }}</td>
+                                        <td><b>{{ event.created|date("d/m/Y") }}</b></td>
+                                        <td>Jusqu'a <b>{{ event.dateEnd|date("d/m/Y") }}</b></td>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ event.center.name }}</div></td>{% endif %}
                                         <td><!-- Switch -->
                                             <div class="switch">
                                                 <label>
                                                     Non
                                                     {% if event.isPublished == true %}
-                                                        <input type="checkbox" class="event_is_published" id="{{ event.id }}"  data-href="{{ path('event_disable_published', {'id': event.id}) }}" checked>
+                                                        <input type="checkbox" class="event_is_published green" id="{{ event.id }}"  data-href="{{ path('event_disable_published', {'id': event.id}) }}" checked>
                                                     {% else %}
                                                         <input type="checkbox" class="event_is_published" id="{{ event.id }}"  data-href="{{ path('event_enable_published', {'id': event.id}) }}">
                                                     {% endif %}

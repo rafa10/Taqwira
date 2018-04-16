@@ -115,8 +115,6 @@ class Center
      */
     private $city;
 
-    // ..........
-
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="center")
      */
@@ -131,11 +129,6 @@ class Center
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Session", mappedBy="center")
      */
     private $session;
-
-    /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Price", mappedBy="center")
-     */
-    private $price;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Customer", mappedBy="center")
@@ -180,7 +173,6 @@ class Center
         $this->user = new \Doctrine\Common\Collections\ArrayCollection();
         $this->field = new \Doctrine\Common\Collections\ArrayCollection();
         $this->session = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->price = new \Doctrine\Common\Collections\ArrayCollection();
         $this->customer = new \Doctrine\Common\Collections\ArrayCollection();
         $this->image = new \Doctrine\Common\Collections\ArrayCollection();
         $this->event = new \Doctrine\Common\Collections\ArrayCollection();
@@ -357,40 +349,6 @@ class Center
     public function getSession()
     {
         return $this->session;
-    }
-
-    /**
-     * Add price
-     *
-     * @param \AppBundle\Entity\Price $price
-     *
-     * @return Center
-     */
-    public function addPrice(\AppBundle\Entity\Price $price)
-    {
-        $this->price[] = $price;
-
-        return $this;
-    }
-
-    /**
-     * Remove price
-     *
-     * @param \AppBundle\Entity\Price $price
-     */
-    public function removePrice(\AppBundle\Entity\Price $price)
-    {
-        $this->price->removeElement($price);
-    }
-
-    /**
-     * Get price
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPrice()
-    {
-        return $this->price;
     }
 
     /**

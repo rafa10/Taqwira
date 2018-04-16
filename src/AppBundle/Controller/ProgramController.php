@@ -63,12 +63,13 @@ class ProgramController extends Controller
      * @Route("/new", name="program_new")
      * @Method({"GET", "POST"})
      * @param Request $request
-     *
      * @return Response
      */
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        // list all days
+        $days = $em->getRepository('AppBundle:Day')->findAll();
         $program = new Program();
 
         $type = $em->getRepository('AppBundle:BookingType')->findOneBy(array('description' => "Académie"));
@@ -88,6 +89,7 @@ class ProgramController extends Controller
             $form = $this->buildFormFields($form, $center);
         }
 
+        $form = $this->buildFormDays($form, $days);
         $form = $this->buildFormSessions($form, $sessions);
 
         $form->handleRequest($request);
@@ -158,7 +160,6 @@ class ProgramController extends Controller
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Program $program
-     *
      * @return Response
      */
     public function editAction(Request $request, Program $program)
@@ -168,6 +169,7 @@ class ProgramController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
+        $days = $em->getRepository('AppBundle:Day')->findAll();
 
         $form = $this->createForm(ProgramType::class, $program, array(
             'action' => $this->generateUrl('program_edit',array('id' => $program->getId()))
@@ -183,6 +185,7 @@ class ProgramController extends Controller
             $form = $this->buildEditFormFields($form, $center);
         }
 
+        $form = $this->buildFormDays($form, $days);
         $form = $this->buildFormSessions($form, $sessions);
 
         $form->handleRequest($request);
@@ -287,33 +290,44 @@ class ProgramController extends Controller
 //    ==================================================================================================================
 
     /**
-     * All Fields
-     * @param $center
-     * @return array
+     * form builder Days
+     * @param $form
+     * @param $days
+     * @return Form
      */
-    private function listAllFields($center)
+    public function buildFormDays($form, $days)
     {
-        $allField = [];
-        $fieldProgram = [] ;
-        $em = $this->getDoctrine()->getManager();
-        $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
-        $programs = $em->getRepository('AppBundle:Program')->findBy(array('field' => $fields));
-        foreach ($programs as $program) {
-            foreach ($fields as $field){
-                if ($field->getId() == $program->getField()->getId()){
-                    $fieldName = $field->getName();
-                    $fieldProgram[$fieldName] = $field;
-                }
-                $fieldName = $field->getName();
-                $allField[$fieldName] = $field;
-            }
-        }
+        /* @var Form $form */
+        $listDays = $this->listAllDays($days);
 
-        return $fieldAll = array_diff($allField, $fieldProgram);
+        $form
+            ->add('day', ChoiceType::class, [
+                    'choices' => $listDays,
+                    'mapped' => false,
+                    'multiple' => true,
+                ]
+            )
+        ;
+
+        return $form;
     }
 
-//    ==================================================================================================================
-//    === Custom Form Builder ==========================================================================================
+    /**
+     * list all days in array
+     * @param $days
+     * @return array
+     */
+    public function listAllDays($days)
+    {
+        $daysAll = [];
+        foreach ($days as $day) {
+            $dayByName = $day->getName();
+            $daysAll[$dayByName] = $day->getId();
+        }
+
+        return $daysAll;
+    }
+
 //    ==================================================================================================================
 
     /**
@@ -404,7 +418,40 @@ class ProgramController extends Controller
         return $form;
     }
 
+//    ==================================================================================================================
 
+    /**
+     * All Fields
+     * @param $center
+     * @return array
+     */
+    private function listAllFields($center)
+    {
+        $fieldNotProgram = [];
+        $fieldProgram = [] ;
+        $em = $this->getDoctrine()->getManager();
+        $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
+        $programs = $em->getRepository('AppBundle:Program')->findBy(array('field' => $fields));
+        if ($fields != null) {
+            foreach ($fields as $field) {
+                if($programs != null) {
+                    foreach ($programs as $program){
+                        if ($field->getId() == $program->getField()->getId()){
+                            $fieldName = $field->getName();
+                            $fieldProgram[$fieldName] = $field;
+                        }
+                        $fieldName = $field->getName();
+                        $fieldNotProgram[$fieldName] = $field;
+                    }
+                } else {
+                    $fieldName = $field->getName();
+                    $fieldNotProgram[$fieldName] = $field;
+                }
+            }
+        }
+
+        return $fieldAll = array_diff($fieldNotProgram, $fieldProgram);
+    }
 
 
 

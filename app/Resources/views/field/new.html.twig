@@ -18,24 +18,24 @@
                 </div>
             {% endif %}
             <div class="input-field col m6 s12">
-                <label for="field_name" class="">Nom*</label>
+                <label for="name" class="">Nom*</label>
                 {{ form_widget(form.name, {'attr': {'data-error': '.name'}}) }}
                 <div class="name"></div>
             </div>
             <div class="input-field col m6 s12">
-                <label for=field_capacity" class="">Capacité*</label>
+                <label for=capacity" class="">Capacité*</label>
                 {{ form_widget(form.capacity, {'attr': {'data-error': '.capacity'}}) }}
                 <div class="capacity"></div>
             </div>
             <div class="input-field col s12">
-                {{ form_widget(form.description, {'attr': {'data-error': '.description'}}) }}
-                <label for="field_description" class="">Description*</label>
-                <div class="description"></div>
+                {{ form_widget(form.session, {'attr': {'data-error': '.session'}}) }}
+                <label for="session">Séances*</label>
+                <div class="session"></div>
             </div>
             <div class="input-field col s12">
-                {{ form_widget(form.session, {'attr': {'data-error': '.session'}}) }}
-                <label for="field_session">Séances*</label>
-                <div class="session"></div>
+                {{ form_widget(form.description, {'attr': {'data-error': '.description'}}) }}
+                <label for="description" class="active">Description*</label>
+                <div class="description"></div>
             </div>
         </div>
     </div>

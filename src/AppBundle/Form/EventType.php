@@ -20,15 +20,6 @@ class EventType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('date_start', DateType::class, array(
-                'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy',
-                'attr' => array(
-                    'class' => 'datepicker',
-                    'data-provide' => 'datepicker',
-                    'data-date-format' => 'dd-mm-yyyy'
-                )
-            ))
             ->add('date_end',DateType::class, array(
                 'widget' => 'single_text',
                 'format' => 'dd-MM-yyyy',

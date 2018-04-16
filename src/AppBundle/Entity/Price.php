@@ -32,11 +32,10 @@ class Price
     private $bookingType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="price")
-     * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
-     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Field", inversedBy="price")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $center;
+    private $field;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Session", mappedBy="price")
@@ -214,5 +213,29 @@ class Price
     public function getDay()
     {
         return $this->day;
+    }
+
+    /**
+     * Set field.
+     *
+     * @param \AppBundle\Entity\Field|null $field
+     *
+     * @return Price
+     */
+    public function setField(\AppBundle\Entity\Field $field = null)
+    {
+        $this->field = $field;
+
+        return $this;
+    }
+
+    /**
+     * Get field.
+     *
+     * @return \AppBundle\Entity\Field|null
+     */
+    public function getField()
+    {
+        return $this->field;
     }
 }

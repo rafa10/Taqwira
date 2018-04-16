@@ -560,7 +560,7 @@ $(document).ready(function(){
             /* initialize the calendar
              -----------------------------------------------------------------*/
             $('#calendar').fullCalendar({
-                locale: 'fr',
+                lang: 'fr',
                 header: {
                     left: 'prev,next today',
                     center: 'title',
@@ -604,7 +604,7 @@ $(document).ready(function(){
             /* initialize the calendar
              -----------------------------------------------------------------*/
             $('#calendar'+ $id).fullCalendar({
-                locale: 'fr',
+                lang: 'fr',
                 header: {
                     left: 'prev,next today',
                     center: 'title',

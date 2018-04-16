@@ -60,6 +60,11 @@ class Field
     private $booking;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Price", mappedBy="field")
+     */
+    private $price;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Program", mappedBy="field")
      */
     private $program;
@@ -73,6 +78,7 @@ class Field
         $this->session = new ArrayCollection();
         $this->planning = new ArrayCollection();
         $this->booking = new ArrayCollection();
+        $this->price = new ArrayCollection();
         $this->program = new ArrayCollection();
     }
 
@@ -291,5 +297,39 @@ class Field
     public function getSession()
     {
         return $this->session;
+    }
+
+    /**
+     * Add program
+     *
+     * @param \AppBundle\Entity\Program $program
+     *
+     * @return Field
+     */
+    public function addProgram(\AppBundle\Entity\Program $program)
+    {
+        $this->program[] = $program;
+
+        return $this;
+    }
+
+    /**
+     * Remove program
+     *
+     * @param \AppBundle\Entity\Program $program
+     */
+    public function removeProgram(\AppBundle\Entity\Program $program)
+    {
+        $this->program->removeElement($program);
+    }
+
+    /**
+     * Get program
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProgram()
+    {
+        return $this->program;
     }
 }

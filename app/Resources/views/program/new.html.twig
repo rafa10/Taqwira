@@ -6,15 +6,12 @@
     {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
         <div class="modal-content">
             <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau programme</h5><br>
-            {#<div class="divider"></div><br>#}
             {{ form_row(form._token) }}
             <div class="row">
-                <div class="input-field col s6">
-                    <label for="type" class="active">Type*</label>
-                    {{ form_widget(form.bookingType) }}
-                    <div class="errorTxt1"></div>
+                <div class="input-field col s12 hide">
+                    <input type="hidden" id="program_bookingType" name="program[bookingType]" required="required" value="3"/>
                 </div>
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                     <label for="field" class="active">Terrain*</label>
                     {{ form_widget(form.field) }}
                     <div class="errorTxt1"></div>

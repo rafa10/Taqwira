@@ -47,7 +47,8 @@ class PriceController extends Controller
         } else {
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
-            $prices = $em->getRepository('AppBundle:Price')->findBy(array('center' => $center));
+            $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
+            $prices = $em->getRepository('AppBundle:Price')->findBy(array('field' => $fields));
 
         }
 
@@ -63,12 +64,13 @@ class PriceController extends Controller
      * @Route("/new", name="price_new")
      * @Method({"GET", "POST"})
      * @param Request $request
-     *
      * @return Response
      */
     public function newAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        // list all days
+        $days = $em->getRepository('AppBundle:Day')->findAll();
         $price = new Price();
 
         $form = $this->createForm(PriceType::class, $price, array(
@@ -84,7 +86,9 @@ class PriceController extends Controller
             $sessions = $em->getRepository('AppBundle:Session')->findBy(array('center' => $center));
         }
 
+        $form = $this->buildFormDays($form, $days);
         $form = $this->buildFormSessions($form, $sessions);
+        $form = $this->buildFormFields($form, $center);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -154,7 +158,6 @@ class PriceController extends Controller
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Price $price
-     *
      * @return Response
      */
     public function editAction(Request $request, Price $price)
@@ -164,6 +167,8 @@ class PriceController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
+        // list all days
+        $days = $em->getRepository('AppBundle:Day')->findAll();
 
         $form = $this->createForm(PriceType::class, $price, array(
             'action' => $this->generateUrl('price_edit',array('id' => $price->getId()))
@@ -178,15 +183,16 @@ class PriceController extends Controller
             $sessions = $em->getRepository('AppBundle:Session')->findBy(array('center' => $center));
         }
 
+        $form = $this->buildFormDays($form, $days);
         $form = $this->buildFormSessions($form, $sessions);
+        $form = $this->buildFormFields($form, $center);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
                 $data = $request->request->all();
-                //=== update days of price ===//
+                //=== update days of price ===========================================================================//
                 if (isset($data['price']['day'])){
                     $daysSelected = $data['price']['day'];
 
@@ -205,7 +211,7 @@ class PriceController extends Controller
                     }
 
                 }
-                //=== Update sessions of price ===//
+                //=== Update sessions of price =======================================================================//
                 if (isset($data['price']['session'])){
                     $sessionsSelected = $data['price']['session'];
 
@@ -277,9 +283,51 @@ class PriceController extends Controller
 
     }
 
+    //================================================================================================================//
+    //=== Other function =============================================================================================//
+    //================================================================================================================//
+
+    /**
+     * form builder Days
+     * @param $form
+     * @param $days
+     * @return Form
+     */
+    public function buildFormDays($form, $days)
+    {
+        /* @var Form $form */
+        $listDays = $this->listAllDays($days);
+
+        $form
+            ->add('day', ChoiceType::class, [
+                    'choices' => $listDays,
+                    'mapped' => false,
+                    'multiple' => true,
+                ]
+            )
+        ;
+
+        return $form;
+    }
+
+    /**
+     * list all days in array
+     * @param $days
+     * @return array
+     */
+    public function listAllDays($days)
+    {
+        $daysAll = [];
+        foreach ($days as $day) {
+            $dayByName = $day->getName();
+            $daysAll[$dayByName] = $day->getId();
+        }
+
+        return $daysAll;
+    }
+
     /**
      * form builder session
-     *
      * @param $form
      * @param $sessions
      * @return Form
@@ -303,7 +351,6 @@ class PriceController extends Controller
 
     /**
      * list all session in array
-     *
      * @param $sessions
      * @return array
      */
@@ -318,29 +365,29 @@ class PriceController extends Controller
         return $sessionsAll;
     }
 
-//    /**
-//     * Form builder field by center
-//     *
-//     * @param $form
-//     * @param $center
-//     * @return \Symfony\Component\Form\Form
-//     */
-//    public function buildFormPrices($form, $center)
-//    {
-//        /* @var Form $form */
-//        $form
-//            ->add('center', EntityType::class, array(
-//                'class' => 'AppBundle:Field',
-//                'query_builder' => function (EntityRepository $er) use ($center){
-//                    return $er->createQueryBuilder('f')
-//                        ->where('f.center = :center')
-//                        ->setParameter('center', $center->getId());
-//                }
-//            ))
-//        ;
-//
-//        return $form;
-//    }
+
+    /**
+     * Form builder field by center
+     * @param $form
+     * @param $center
+     * @return \Symfony\Component\Form\Form
+     */
+    public function buildFormFields($form, $center)
+    {
+        /* @var \Symfony\Component\Form\Form $form */
+        $form
+            ->add('field', EntityType::class, array(
+                'class' => 'AppBundle:Field',
+                'query_builder' => function (EntityRepository $er) use ($center){
+                    return $er->createQueryBuilder('f')
+                        ->where('f.center = :center')
+                        ->setParameter('center', $center->getId());
+                }
+            ))
+        ;
+
+        return $form;
+    }
 
 
 }
