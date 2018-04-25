@@ -4,7 +4,6 @@
     {{ form_start(form, {'attr':{'id': 'formValidate', 'class': 'formValidate', 'novalidate': 'novalidate'}}) }}
     <div class="modal-content">
         <h5 class="flow-text"><i class="small left mdi-content-add-circle"></i> Ajouter un nouveau terrain</h5><br>
-        {#<div class="divider"></div><br>#}
         {{ form_row(form._token) }}
         <div class="row">
             {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -48,8 +47,6 @@
 {% endblock %}
 
 <script>
-
-//    $(document).ready(function(){
 
         $("#formValidate").validate({
             rules: {
@@ -99,8 +96,6 @@
                 }
             }
         });
-
-//    });
 
 </script>
 

@@ -179,7 +179,7 @@
                 {# === Académie ==================================================================================#}
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan {% if app.request.attributes.get('_route') == 'staff_index' or app.request.attributes.get('_route') == 'effective_index' %}active{% endif %}"><i class="mdi-file-folder-shared"></i> Académie</a>
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan {% if app.request.attributes.get('_route') == 'program_index' or app.request.attributes.get('_route') == 'effective_index' %}active{% endif %}"><i class="mdi-file-folder-shared"></i> Académie</a>
                             <div class="collapsible-body">
                                 <ul>
                                     <li class='bold {% if app.request.attributes.get('_route') == 'effective_index' %}active{% endif %}'><a href="{{ path('effective_index') }}">Effectif</a></li>

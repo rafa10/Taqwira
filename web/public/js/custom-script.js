@@ -365,7 +365,10 @@ $(document).ready(function(){
             close: 'Fermer',
             format: 'dd-mm-yyyy'
         });
-        tinymce.init({ selector:'textarea' });
+        tinymce.init({
+            selector:'textarea#editable',
+            theme: modern
+        });
 
     }
 

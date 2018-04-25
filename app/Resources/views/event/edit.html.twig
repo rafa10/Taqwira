@@ -29,7 +29,7 @@
             </div>
             <div class="input-field col s12">
                 <label for="content" class="active">Contenu*</label>
-                {{ form_widget(form.content, {'attr': {'data-error': '.content'}}) }}
+                {{ form_widget(form.content, {'id': 'editable', 'attr': {'data-error': '.content'}}) }}
                 <div class="content"></div>
             </div>
         </div>

@@ -13,18 +13,18 @@
                 </div>
                 <div class="input-field col s12">
                     <label for="field" class="active">Terrain*</label>
-                    {{ form_widget(form.field) }}
-                    <div class="errorTxt1"></div>
+                    {{ form_widget(form.field, {'attr': {'data-error': '.field'}}) }}
+                    <div class="field"></div>
                 </div>
                 <div class="input-field col s12">
                     <label for="jour" class="active">Jour*</label>
-                    {{ form_widget(form.day) }}
-                    <div class="errorTxt1"></div>
+                    {{ form_widget(form.day ,{'attr': {'data-error': '.day'}}) }}
+                    <div class="jour"></div>
                 </div>
                 <div class="input-field col s12">
-                    <label for="séances" class="active">Séances</label>
-                    {{ form_widget(form.session) }}
-                    <div class="errorTxt1"></div>
+                    <label for="session" class="active">Séances</label>
+                    {{ form_widget(form.session, {'attr': {'data-error': '.'}}) }}
+                    <div class="session"></div>
                 </div>
             </div>
         </div>
@@ -36,4 +36,43 @@
 
 {% endblock %}
 
+<script>
 
+    $("#formValidate").validate({
+        rules: {
+            'program[field]' : {
+                required: true
+            },
+            'program[day][]': {
+                required: true,
+                minlength: 2
+            },
+            'program[session][]': {
+                required: true,
+                minlength: 2
+            }
+        },
+        //For custom messages
+        messages: {
+            'program[field]' : {
+                required: "Champs requis"
+            },
+            'program[day][]': {
+                required: "Champs requis",
+            },
+            'program[session][]': {
+                required: "Champs requis",
+            }
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+</script>

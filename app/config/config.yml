@@ -80,9 +80,10 @@ fos_user:
         sender_name: taqwira
 
 # Generating PDF files
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
-#        binary:     "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
-        options:    []
+#knp_snappy:
+#    pdf:
+#        enabled:    true
+#        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+##        binary:     "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
+#        options:    []
+#    temporary_folder:    %kernel.cache_dir%/snappy

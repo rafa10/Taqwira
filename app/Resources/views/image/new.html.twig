@@ -46,6 +46,29 @@
             }
         });
 
+        $("#formValidate").validate({
+            rules: {
+                'image[url]' : {
+                    required: true
+                }
+            },
+            //For custom messages
+            messages: {
+                'image[url]' : {
+                    required: "Charger une image"
+                }
+            },
+            errorElement : 'div',
+            errorPlacement: function(error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+
     });
 
 </script>

@@ -54,27 +54,27 @@
             <div class="input-field col s6">
                 <label for="function" class="active">Fonction*</label>
                 {{ form_widget(form.function) }}
-                <div class="errorTxt1"></div>
+                <div class="function"></div>
             </div>
             <div class="input-field col s6">
                 <label for="weight" class="active">Poids*</label>
                 {{ form_widget(form.weight) }}
-                <div class="errorTxt1"></div>
+                <div class="weight"></div>
             </div>
             <div class="input-field col s6">
                 <label for="size" class="active">Taille*</label>
                 {{ form_widget(form.size) }}
-                <div class="errorTxt1"></div>
+                <div class="size"></div>
             </div>
             <div class="input-field col s6">
                 <label for="school_level" class="active">Niveau scolaire*</label>
                 {{ form_widget(form.school_level) }}
-                <div class="errorTxt1"></div>
+                <div class="school_level"></div>
             </div>
             <div class="input-field col s12">
-                <label for="educational_establishment" class="active">Etablissement scolaire*</label>
                 {{ form_widget(form.educational_establishment) }}
-                <div class="errorTxt1"></div>
+                <label for="educational_establishment" class="active">Etablissement scolaire*</label>
+                <div class="educational_establishment"></div>
             </div>
         </div>
     </div>
@@ -88,64 +88,60 @@
 
 <script>
 
-    // $(document).ready(function(){
-    //
-    //     $("#formValidate").validate({
-    //         rules: {
-    //             'customer[sexe]' : {
-    //                 required: true
-    //             },
-    //             'customer[firstname]': {
-    //                 required: true,
-    //                 minlength: 2
-    //             },
-    //             'customer[lastname]': {
-    //                 required: true,
-    //                 minlength: 2
-    //             },
-    //             'customer[email]': {
-    //                 required: true,
-    //                 email: true
-    //             },
-    //             'customer[phone]': {
-    //                 required: true,
-    //                 number: true
-    //             }
-    //         },
-    //         //For custom messages
-    //         messages: {
-    //             'customer[sexe]' : {
-    //                 required: "Selectionner une sexe"
-    //             },
-    //             'customer[firstname]': {
-    //                 required: "Saisier le nom",
-    //                 minlength: "minimum 2 characteres"
-    //             },
-    //             'customer[lastname]': {
-    //                 required: "Saisier le prénom",
-    //                 minlength: "minimum 2 characteres"
-    //             },
-    //             'customer[email]': {
-    //                 required: "Saisier l'adresse mail",
-    //                 email: "format non valide"
-    //             },
-    //             'customer[phone]': {
-    //                 required: "Saisier le numéro de téléphone",
-    //                 number: "format non valide"
-    //             }
-    //         },
-    //         errorElement : 'div',
-    //         errorPlacement: function(error, element) {
-    //             var placement = $(element).data('error');
-    //             if (placement) {
-    //                 $(placement).append(error)
-    //             } else {
-    //                 error.insertAfter(element);
-    //             }
-    //         }
-    //     });
-    //
-    // });
+    $("#formValidate").validate({
+        // rules: {
+        //     'customer[sexe]' : {
+        //         required: true
+        //     },
+        //     'customer[firstname]': {
+        //         required: true,
+        //         minlength: 2
+        //     },
+        //     'customer[lastname]': {
+        //         required: true,
+        //         minlength: 2
+        //     },
+        //     'customer[email]': {
+        //         required: true,
+        //         email: true
+        //     },
+        //     'customer[phone]': {
+        //         required: true,
+        //         number: true
+        //     }
+        // },
+        // //For custom messages
+        // messages: {
+        //     'customer[sexe]' : {
+        //         required: "Selectionner une sexe"
+        //     },
+        //     'customer[firstname]': {
+        //         required: "Saisier le nom",
+        //         minlength: "minimum 2 characteres"
+        //     },
+        //     'customer[lastname]': {
+        //         required: "Saisier le prénom",
+        //         minlength: "minimum 2 characteres"
+        //     },
+        //     'customer[email]': {
+        //         required: "Saisier l'adresse mail",
+        //         email: "format non valide"
+        //     },
+        //     'customer[phone]': {
+        //         required: "Saisier le numéro de téléphone",
+        //         number: "format non valide"
+        //     }
+        // },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
 
 </script>
 

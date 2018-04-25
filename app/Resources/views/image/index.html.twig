@@ -59,7 +59,7 @@
                                     <tr>
                                         <td>{{ image.id }}</td>
                                         <td>{{ image.name }} </td>
-                                        <td><img src="{{ asset('uploads/photos/'~ image.url) }}" width="120" height="100" alt="photo center"></td>
+                                        <td><img src="{{ asset('uploads/photos/'~ image.url) }}" width="80" height="60" alt="photo center"></td>
                                         <td>{{ image.created|date('d/m/Y') }}</td>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{ image.center.name }}</div></td>{% endif %}
                                         <td class="center-align">

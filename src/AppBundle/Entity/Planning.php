@@ -44,6 +44,7 @@ class Planning
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Field", inversedBy="planning")
      * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Please provide field")
      */
     private $field;
 

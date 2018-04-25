@@ -27,16 +27,19 @@ class Program
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Field", inversedBy="program")
      * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Please provide field")
      */
     private $field;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Session", mappedBy="program")
+     * @Assert\NotBlank(message="Please provide session")
      */
     private $session;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Day", mappedBy="program")
+     * @Assert\NotBlank(message="Please provide day")
      */
     private $day;
 

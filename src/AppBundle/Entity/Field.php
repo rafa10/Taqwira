@@ -46,6 +46,7 @@ class Field
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Session", mappedBy="field")
+     * @Assert\NotBlank(message="Please provide an field session")
      */
     private $session;
 

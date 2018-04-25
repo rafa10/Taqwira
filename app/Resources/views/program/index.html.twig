@@ -63,7 +63,7 @@
                                         <td>{{ program.id }}</td>
                                         <td>{{ program.field.name }}</td>
                                         <td>{{ program.bookingType }}</td>
-                                        <td> {% for item in program.day %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %} </td>
+                                        <td> {% for item in program.day %}<div class="chip">{{ item|trans }}</div>&nbsp;{% endfor %} </td>
                                         <td> <div class="chip">De <b>{{ program.Session|first }}</b> à <b>{{ program.Session|last }}</b></div> </td>
                                         <td class="center-align">
                                             <button type="button" data-href="{{ path('program_edit', { 'id': program.id }) }}" class="btn-floating waves-effect waves-light grey lighten-3 modal_trigger"><i class="mdi-editor-mode-edit grey-text"></i></button>

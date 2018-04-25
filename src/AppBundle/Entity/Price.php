@@ -27,23 +27,26 @@ class Price
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\BookingType", inversedBy="price")
      * @ORM\JoinColumn(name="booking_type_id", referencedColumnName="id", onDelete="CASCADE")
-     *
+     * @Assert\NotBlank(message="Please provide booking type")
      */
     private $bookingType;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Field", inversedBy="price")
      * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Please provide field")
      */
     private $field;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Session", mappedBy="price")
+     * @Assert\NotBlank(message="Please provide session")
      */
     private $session;
 
     /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Day", mappedBy="price")
+     * @Assert\NotBlank(message="Please provide day")
      */
     private $day;
 

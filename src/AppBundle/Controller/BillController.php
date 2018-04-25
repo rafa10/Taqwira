@@ -36,7 +36,7 @@ class BillController extends Controller
         $center = $booking->getBill()->getCenter();
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')->findOneBy(array('center' => $center));
-
+        $number = str_pad($booking->getId(), 10, "0", STR_PAD_LEFT);
         $html =  $this->renderView('bill/bill.html.twig', array(
             'booking' => $booking,
             'user' => $user
@@ -44,7 +44,7 @@ class BillController extends Controller
 
         return new PdfResponse(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            'FACTURE-'.$booking->getId().'.pdf'
+            'FACTURE'.$number.'.pdf'
         );
     }
 

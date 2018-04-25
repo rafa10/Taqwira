@@ -21,6 +21,9 @@ class EffectiveType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('sexe', ChoiceType::class, array(
+                'attr' => array(
+                    'class' => 'browser-default'
+                ),
                 'choices' => array(
                     'M.' => 'M.',
                     'Mme/Mlle' => 'Mme/Mlle'
