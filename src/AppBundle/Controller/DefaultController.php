@@ -14,9 +14,8 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -83,7 +82,7 @@ class DefaultController extends Controller
     /**
      * Display basket subscription.
      * @Route("/basket/show", name="basket_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+//     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
      * @Method("GET")
      */
     public function getBasketsAction()

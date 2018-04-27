@@ -1,0 +1,15 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: taqwiracxim.mysql.db
+    database_port: null
+    database_name: taqwiracxim
+    database_user: taqwiracxim
+    database_password: Rafa09312308
+    mailer_transport: smtp
+    mailer_host: ssl0.ovh.net
+    mailer_user: support@taqwira.com
+    mailer_password: taqwira1990
+    mailer_port: 465
+    secret: ThisTokenIsNotSoSecretChangeIt
+    avatar: uploads\avatars
+    photo: uploads\photos

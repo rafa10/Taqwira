@@ -366,8 +366,7 @@ $(document).ready(function(){
             format: 'dd-mm-yyyy'
         });
         tinymce.init({
-            selector:'textarea#editable',
-            theme: modern
+            selector:'textarea#editable'
         });
 
     }

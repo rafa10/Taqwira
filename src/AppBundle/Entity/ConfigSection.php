@@ -26,8 +26,8 @@ class ConfigSection
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Center", inversedBy="configSection")
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", onDelete="CASCADE")
-     * @Assert\NotBlank(message="Please provide a company")
+     * @ORM\JoinColumn(name="center_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Please provide a center")
      */
     private $center;
 
@@ -87,30 +87,6 @@ class ConfigSection
     public function getConfig()
     {
         return $this->config;
-    }
-
-    /**
-     * Set company
-     *
-     * @param \AppBundle\Entity\Company $company
-     *
-     * @return ConfigSection
-     */
-    public function setCompany(\AppBundle\Entity\Company $company = null)
-    {
-        $this->company = $company;
-
-        return $this;
-    }
-
-    /**
-     * Get company
-     *
-     * @return \AppBundle\Entity\Company
-     */
-    public function getCompany()
-    {
-        return $this->company;
     }
 
     /**
