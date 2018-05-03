@@ -1,0 +1,7 @@
+<label for="city" class="active">Ville*</label>
+<select id="fos_user_registration_form_center_city" name="fos_user_registration_form[center][city]">
+    <option value="" disabled selected>Choisissez ...</option>
+    {% for item in city %}
+        <option value="{{ item.id }}">{{ item.name }}</option>
+    {% endfor %}
+</select>

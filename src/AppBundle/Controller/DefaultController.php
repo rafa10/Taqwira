@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\BookingType;
+use AppBundle\Entity\Region;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -58,6 +59,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/help", name="help_index")
+     * @return Response
+     */
+    public function helpAction()
+    {
+        return $this->render('default/help.html.twig', array());
+    }
+
+    /**
      * Display Notification.
      * @Route("/notification/show", name="notification_show")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -82,7 +92,7 @@ class DefaultController extends Controller
     /**
      * Display basket subscription.
      * @Route("/basket/show", name="basket_show")
-//     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER') or has_role('ROLE_USER')")
      * @Method("GET")
      */
     public function getBasketsAction()
@@ -97,7 +107,7 @@ class DefaultController extends Controller
     /**
      * Calculated nb total booking of current user
      * @Route("/booking/chart", name="booking_chart")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @Method("GET")
      * @return Response
      */
@@ -167,7 +177,7 @@ class DefaultController extends Controller
     /**
      * Calculated nb total sessions of current user
      * @Route("/session/chart", name="session_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @Method("GET")
      * @return Response
      */
@@ -240,7 +250,7 @@ class DefaultController extends Controller
     /**
      * Calculated nb total sessions of current user
      * @Route("/booking_type/chart", name="booking_type_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN' ) or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN' ) or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @Method("GET")
      * @return Response
      */

@@ -22,7 +22,7 @@
                 <label for="region" class="active">Région*</label>
                 {{ form_widget(form.region) }}
             </div>
-            <div class="input-field col s12 m6">
+            <div id="city" class="input-field col s12 m6">
                 <label for="city" class="active">Ville*</label>
                 {{ form_widget(form.city) }}
             </div>
@@ -49,7 +49,7 @@
                 {{ form_widget(form.service) }}
             </div>
             <div class="input-field col s12">
-                <div class="right-align">{% for item in center.service %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %}</div>
+                <div class="right-align">{% for item in center.service %}<div class="chip">{{ item }}</div>&nbsp;{% endfor %}</div><br>
             </div>
         </div>
     </div>

@@ -34,12 +34,14 @@ class Center
     /**
      * @ORM\Column(type="integer", length=4, nullable=true)
      * @Assert\NotBlank(message="Please provide an center postal code")
+     * @Assert\Length(min="4", max="4")
      */
     private $cp;
 
     /**
-     * @ORM\Column(type="string", length=8, nullable=true)
+     * @ORM\Column(type="integer", length=8, nullable=true)
      * @Assert\NotBlank(message="Please provide a phone")
+     * @Assert\Length(min="8", max="8")
      * @Assert\Regex(pattern="/^[0-9]*$/")
      */
     private $phone;

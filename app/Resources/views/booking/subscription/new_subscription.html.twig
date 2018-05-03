@@ -30,37 +30,41 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                <!--booking form-->
-                <div class="row">
-                    <div class="col s12 m12 l12">
-                        <div class="card-panel ">
-                            <div class="row form-booking-search">
-                                <form name="form" method="POST" action="{{ path('search_subscription') }}" class="col s12">
-                                    {#<h4 class="header2">Réservation</h4>#}
-                                    {{ form_row(form._token) }}
-                                    <div class="row">
-                                        <div class="input-field col s4 offset-s1">
-                                            {#<i class="mdi-action-view-array prefix"></i>#}
-                                            {{ form_widget(form.field) }}
-                                            {{ form_label(form.field, 'Terrain') }}
-                                        </div>
-                                        <div class="input-field col s4">
-                                            <i class="mdi-action-today prefix"></i>
-                                            {{ form_widget(form.date, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
-                                            {{ form_label(form.date, 'Date') }}
-                                        </div>
-                                        <div class="input-field col s2">
-                                            <div class="input-field col s12">
-                                                <button type="button" class="btn waves-effect waves-light yellow accent-4 black-text" name="action" id="search-match"> Rechecher</button>
+                {% if fields == null %}
+                    <p class="caption"><i class="mdi-action-info left"></i>Pour accéder aux réservations ajoutées <i class="mdi-content-add-circle green-text"></i> au mois terrain.</p>
+                {% else %}
+                    <!--booking form-->
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <div class="card-panel ">
+                                <div class="row form-booking-search">
+                                    <form name="form" method="POST" action="{{ path('search_subscription') }}" class="col s12">
+                                        {#<h4 class="header2">Réservation</h4>#}
+                                        {{ form_row(form._token) }}
+                                        <div class="row">
+                                            <div class="input-field col s4 offset-s1">
+                                                {#<i class="mdi-action-view-array prefix"></i>#}
+                                                {{ form_widget(form.field) }}
+                                                {{ form_label(form.field, 'Terrain') }}
+                                            </div>
+                                            <div class="input-field col s4">
+                                                <i class="mdi-action-today prefix"></i>
+                                                {{ form_widget(form.date, {'attr':{'placeholder': 'jj/mm/aaaa'}}) }}
+                                                {{ form_label(form.date, 'Date') }}
+                                            </div>
+                                            <div class="input-field col s2">
+                                                <div class="input-field col s12">
+                                                    <button type="button" class="btn waves-effect waves-light yellow accent-4 black-text" name="action" id="search-match"> Rechecher</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--end booking form-->
+                    <!--end booking form-->
+                {% endif %}
                 <div class="divider"></div>
 
                 <div id="preloader-page-content" class="card-panel center-align z-depth-0 hide" style="position: absolute; top: 50%; left: 50%;">

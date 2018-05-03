@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Center;
 use AppBundle\Entity\User;
 use AppBundle\Form\CenterType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -60,6 +61,8 @@ class CenterController extends Controller
             'action' => $this->generateUrl('center_new')
         ));
 
+        $form = $this->builderFormService($form);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -114,7 +117,7 @@ class CenterController extends Controller
      *
      * @Route("/{id}/edit", name="center_edit")
      * @Method({"GET", "POST"})
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @param Request $request
      * @param Center $center
      * @return Response
@@ -124,11 +127,14 @@ class CenterController extends Controller
         if (null === $this->getUser()) {
             throw $this->createAccessDeniedException(User::USER_IS_NOT_LOGGED_IN);
         }
+
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(CenterType::class, $center, array(
             'action' => $this->generateUrl('center_edit',array('id'=>$center->getId()))
         ));
+
+        $form = $this->builderFormService($form);
 
         $form->handleRequest($request);
 
@@ -276,6 +282,20 @@ class CenterController extends Controller
         $payload['page']='refresh';
         return new Response(json_encode($payload));
 
+    }
+
+
+    /**
+     * Builder form service for center entity
+     * @param $form
+     * @return Form
+     */
+    function builderFormService($form)
+    {
+        /* @var Form $form */
+        $form->add('service', null, array());
+
+        return $form;
     }
 
 }

@@ -209,8 +209,10 @@
                 </li>
                 {#=== Configurations =====================================================================================#}
                 <li class='bold {% if app.request.attributes.get('_route') == 'configuration_index' %}active{% endif %}'><a href="{{ path('configuration_index') }}" class="waves-effect waves-cyan"><i class="mdi-action-perm-data-setting"></i>Configurations</a></li>
-                {#=== Photos =====================================================================================#}
+                {#=== Photos =============================================================================================#}
                 <li class='bold {% if app.request.attributes.get('_route') == 'image_index' %}active{% endif %}'><a href="{{ path('image_index') }}" class="waves-effect waves-cyan"><i class="mdi-editor-insert-photo"></i>Photos</a></li>
+                {#=== Besoin d’aide ? =====================================================================================#}
+                <li class='bold {% if app.request.attributes.get('_route') == 'help_index' %}active{% endif %}'><a href="{{ path('help_index') }}" class="waves-effect waves-cyan"><i class="mdi-communication-live-help"></i>Besoin d’aide ?</a></li>
             </ul>
         </aside>
         <!-- END LEFT SIDEBAR NAV-->

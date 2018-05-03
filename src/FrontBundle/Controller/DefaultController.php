@@ -65,6 +65,32 @@ class DefaultController extends Controller
     /** ============================================================================================================== */
     /** === Form Builder search ====================================================================================== */
     /** ============================================================================================================== */
+    /**
+     * Get city by region for center.
+     * @Route("/register/region/{id}", name="get_city_by_region")
+     * @Method("GET")
+     * @return Response
+     */
+    function getCityByRegionAction($id)
+    {
+        $city = null;
+        $em = $this->getDoctrine()->getManager();
+//        $city = $em->getRepository('AppBundle:Region')->findBy(array('region' => $region));
 
+//        if ($request->get('id')) {
+//            $regionId = $request->get('id');
+            $region = $em->getRepository('AppBundle:Region')->find($id);
+            $city = $em->getRepository('AppBundle:City')->findBy(array('region' => $region));
+//        }
+
+        $payload=array();
+        $payload['status']='ok';
+        $payload['page']='show';
+        $payload['html'] = $this->renderView('FrontBundle:Default:form_city.html.twig', [
+            'city' => $city,
+        ]);
+
+        return new Response(json_encode($payload));
+    }
 
 }

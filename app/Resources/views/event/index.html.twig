@@ -19,7 +19,7 @@
                         <h5 class="breadcrumbs-title">Événements</h5>
                         <ol class="breadcrumbs">
                             <li><a href="/">Dashboard</a></li>
-                            <li class="active">Evénements</li>
+                            <li class="active">Événements</li>
                         </ol>
                     </div>
                 </div>
@@ -30,7 +30,9 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
+                {% if events == null %}
+                    <p class="caption"><i class="mdi-action-info left"></i>Ajouter  <i class="mdi-content-add-circle green-text"></i>  un événnement.</p>
+                {% endif %}
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">

@@ -18,7 +18,7 @@
                     <div class="col s12 m12 l12">
                         <h5 class="breadcrumbs-title">Effectifs</h5>
                         <ol class="breadcrumbs">
-                            <li><a href="/">Dashboard</a></li>
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
                             <li><a href="/">Académie</a></li>
                             <li class="active">Effectifs</li>
                         </ol>
@@ -32,7 +32,9 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
+                {% if effectives == null %}
+                    <p class="caption"><i class="mdi-action-info left"></i>Ajouter <i class="mdi-content-add-circle green-text"></i> un effectif.</p>
+                {% endif %}
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">

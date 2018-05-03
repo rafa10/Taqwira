@@ -31,7 +31,11 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                <p class="caption">Vous avez le droit de charger 5 photos au maximum.</p>
+                <p class="caption">
+                    {% if images == null %}
+                         <i class="mdi-action-info left"></i>Ajouter  <i class="mdi-content-add-circle green-text"></i>  des photos pour votre center.<br>
+                    {% endif %}
+                    <i class="mdi-action-info left"></i>Vous avez le droit de charger 5 photos au maximum.</p>
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">
