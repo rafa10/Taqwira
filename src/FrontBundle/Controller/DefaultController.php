@@ -3,6 +3,7 @@
 namespace FrontBundle\Controller;
 
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\Notification;
 use AppBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -52,6 +53,9 @@ class DefaultController extends Controller
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', 'Le message a bien été envoyé!');
+
+            // Create notification for dashboard admin center
+            $this->container->get('app.notification')->newNotificationMessage($subject=Notification::MESSAGE, $link=Notification::CONTACT_LINK);
 
             return $this->redirect('contact_us');
 

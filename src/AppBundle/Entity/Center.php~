@@ -166,6 +166,11 @@ class Center
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Service", mappedBy="center")
      */
     private $service;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="center")
+     */
+    private $notification;
     
     /**
      * Constructor
@@ -182,6 +187,7 @@ class Center
         $this->configSection = new \Doctrine\Common\Collections\ArrayCollection();
         $this->bill = new \Doctrine\Common\Collections\ArrayCollection();
         $this->service = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->notification = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

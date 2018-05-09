@@ -4,6 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Session;
 use AppBundle\Form\SessionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -25,7 +28,6 @@ class SessionController extends Controller
 
     /**
      * Lists all session entities.
-     *
      * @Route("/", name="session_index")
      * @Method("GET")
      */
@@ -52,11 +54,9 @@ class SessionController extends Controller
 
     /**
      * Creates a new session entity.
-     *
      * @Route("/new", name="session_new")
      * @Method({"GET", "POST"})
      * @param Request $request
-     *
      * @return Response
      */
     public function newAction(Request $request)
@@ -110,14 +110,74 @@ class SessionController extends Controller
         return new Response(json_encode($payload));
     }
 
+
+    /**
+     * Creates a new all session entity.
+     * @Route("/all/new", name="all_session_new")
+     * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return Response
+     */
+    public function newAllAction(Request $request)
+    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $form = $this->formBuilderSession();
+//
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//
+//            $data = $request->request->get('form');
+//            $time_start = isset($data['time_start']) ? $data['time_start'] : null;
+//            $time_end = isset($data['time_end']) ? $data['time_end'] : null;
+//            $step = isset($data['step']) ? $data['step'] : null;
+//            $center = isset($data['center']) ? $data['center'] : null;
+//
+//            $em->persist($session);
+//            $em->flush();
+//
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The session successfully created!');
+//
+//            $payload=array();
+//            $payload['status']='ok';
+//            $payload['page']='refresh';
+//            return new Response(json_encode($payload));
+//
+//        } else {
+//            $validator = $this->get('validator');
+//            $errors = $validator->validate($session);
+//
+//            if (count($errors) > 0) {
+//                $payload=array();
+//                $payload['status']='ok';
+//                $payload['page']='new';
+//                $payload['html'] = $this->renderView('session/new.html.twig', array(
+//                    'form' => $form->createView(),
+//                    'errors' => $errors,
+//                ));
+//                return new Response(json_encode($payload));
+//            }
+//        }
+//
+//        $payload=array();
+//        $payload['status']='ok';
+//        $payload['page']='new';
+//        $payload['html'] = $this->renderView('session/new.html.twig', array(
+//            'form' => $form->createView(),
+//        ));
+//
+//        return new Response(json_encode($payload));
+    }
+
+
     /**
      * Displays a form to edit an existing session entity.
-     *
      * @Route("/{id}/edit", name="session_edit")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @param Session $session
-     *
      * @return Response
      */
     public function editAction(Request $request, Session $session)
@@ -165,7 +225,6 @@ class SessionController extends Controller
 
     /**
      * Deletes a session entity.
-     *
      * @Route("/{id}/delete", name="session_delete")
      * @Method("GET")
      * @param Session $session
@@ -186,6 +245,53 @@ class SessionController extends Controller
         $payload['status']='ok';
         $payload['page']='refresh';
         return new Response(json_encode($payload));
+
+    }
+
+    //==================================================================================================================
+    //==================================================================================================================
+    //==================================================================================================================
+    /**
+     * form builder new all session
+     * @return mixed
+     */
+    public function formBuilderSession()
+    {
+        $form = $this->createFormBuilder()
+            ->add('time_start', TimeType::class, array(
+                'widget' => 'single_text',
+                'attr' => array(
+                    'class' => 'timepicker'
+                )
+            ))
+            ->add('time_end', TimeType::class,  array(
+                'widget' => 'single_text',
+                'attr' => array(
+                    'class' => 'timepicker'
+                )
+            ))
+            ->add('step', ChoiceType::class, array(
+                'placeholder' => 'Choisissez ...',
+                'empty_data' => null,
+                'choices' => array(
+                    '1h00' => '1:00',
+                    '1h10' => '1:10',
+                    '1h20' => '1:20',
+                    '1h30' => '1:30',
+                    '1h40' => '1:40',
+                    '1h50' => '1:50',
+                    '2h00' => '2:00',
+                )
+            ))
+            ->add('center', EntityType::class, array(
+                'class' => 'AppBundle:Center',
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez ...',
+                'empty_data' => null
+            ))
+            ->getForm();
+
+        return $form;
 
     }
 

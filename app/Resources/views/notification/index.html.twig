@@ -1,0 +1,46 @@
+<li style="width: 18rem">
+    <h5>NOTIFICATIONS {#<span class="new badge">{{ notifications|length }}</span>#}</h5>
+</li>
+<li class="divider"></li>
+{% for notification in notifications %}
+    {% if notification.subject == 'Message' %}
+        <li class="message-notification">
+            <button type="button" data-href="{{ path('notification_delete', { 'id': notification.id }) }}" class="btn-close-notification btn-floating white black-text right z-depth-0" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <a href="{{ path(notification.link) }}" class="blue-text"><i class="mdi-communication-email"></i> Nouveau message </a>
+            <time class="media-meta" datetime="">{{ notification.created|date('d/m/Y')~' à '~notification.created|date('H:i') }}</time>
+        </li>
+        <li class="divider"></li>
+    {% elseif notification.subject == 'Booking' %}
+        <li class="booking-notification">
+            <button type="button" data-href="{{ path('notification_delete', { 'id': notification.id }) }}" class="btn-close-notification btn-floating white black-text right z-depth-0" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <a href="{{ path(notification.link) }}" class="pink-text text-darken-2"><i class="mdi-notification-event-available"></i> Nouvelle réservation </a>
+            <time class="media-meta" datetime="">{{ notification.created|date('d/m/Y')~' à '~notification.created|date('H:i') }}</time>
+        </li>
+        <li class="divider"></li>
+    {% endif %}
+{% endfor %}
+
+<script>
+
+    $('.btn-close-notification').click(function(){
+        that = $(this);
+        // On lance la suppression
+        $.get(that.attr("data-href"), function() {
+            that.parent().remove();
+            //On lance un ajax pour refresh les notification
+            // $.getJSON('/plateforme/notification/show', function(data) {})
+            //     .done(function(data) {
+            //         if (data.status=="ok") {
+            //             if (data.page=="show") {
+            //                 $('#notification').removeClass('hide').append(data.length);
+            //             }
+            //         }
+            //     });
+        });
+    });
+
+</script>

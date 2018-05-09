@@ -148,14 +148,20 @@
         <h1 class="flow-text grey lighten-3 z-depth-0 card-panel">INFORMATIONS DU CENTRE</h1>
         <!-- Carousel image du centre -->
         <div class="col s12 m6">
-            <div class="card">
-                <div class="carousel carousel-slider">
-                    {% for image in center.image %}
-                        <a class="carousel-item"><img src="{{ asset('uploads/photos/'~ image.url) }}"></a>
-                    {% endfor %}
+            {% if center.image is empty %}
+                <div class="card grey lighten-2 z-depth-0">
+                    <div style="padding: 10rem 12rem;"><i class="left medium material-icons">add_a_photo</i><br>Ajouter des photos</div>
                 </div>
-            </div>
-            <p style="font-size:0.8rem;font-weight: 300">Note: Ceci est également compatible avec le tactile! Essayez de glisser avec votre doigt ou souris pour faire défiler le carrousel.</p>
+            {% else %}
+                <div class="card">
+                    <div class="carousel carousel-slider">
+                        {% for image in center.image %}
+                            <a class="carousel-item"><img src="{{ asset('uploads/photos/'~ image.url) }}"></a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <p style="font-size:0.8rem;font-weight: 300">Note: Ceci est également compatible avec le tactile! Essayez de glisser avec votre doigt ou souris pour faire défiler le carrousel.</p>
+            {% endif %}
         </div>
         <!-- informations centre -->
         <div class="col s12 m6">
@@ -164,7 +170,11 @@
                     <span class="card-title">
                         <div class="row valign-wrapper">
                             <div class="col s2">
-                                <img class="circle responsive-img" src="{{ asset('uploads/avatars/'~center.avatar) }}" alt="avatar"> <!-- notice the "circle" class -->
+                                {% if center.avatar is empty %}
+                                    <i class="left medium material-icons">business</i>
+                                {% else %}
+                                    <img class="circle responsive-img" src="{{ asset('uploads/avatars/'~center.avatar) }}" alt="avatar"> <!-- notice the "circle" class -->
+                                {% endif %}
                             </div>
                             <div class="col s10">
                                 <span class="black-text">
@@ -199,6 +209,8 @@
             </div>
         </div>
         <!--/end map-->
+    </div>
+    <div class="row">
         <h1 class="flow-text grey lighten-3 z-depth-0 card-panel">ÉVÉNEMENTS</h1>
         <!-- Bloc event center -->
         {% for event in events|sort %}

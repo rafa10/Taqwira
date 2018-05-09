@@ -381,7 +381,7 @@ $(document).ready(function(){
         // Dashboard load element ======================================================================================
         // =============================================================================================================
         //On lance un ajax pour refresh le baskets =====================================================================
-        $.getJSON('/plateforme/basket/show', function(data) {})
+        $.getJSON('/plateforme/notification/basket/show', function(data) {})
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {

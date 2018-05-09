@@ -1,5 +1,5 @@
 <li>
-    <h5>Pannier</h5>
+    <h5>PANNIER</h5>
 </li>
 <li class="divider"></li>
 {% set total = null %}
@@ -7,9 +7,9 @@
     <li>
         <a href="#!" class="red-text text-accent-3">
             <i class="medium mdi-image-timer"></i> Séance : {{ loop.index }}
-            <i class="medium mdi-action-view-array"></i> Terrain : {{ basket.field.name }}
-            <span class="black-text" style="margin-left: 3rem"><b>{{ basket.price }} €</b></span></a>
-        <time class="media-meta"> {{ basket.date|date('d-m-Y') }} <b>à</b> {{ basket.timeStart|date('H:i') }}</time></a>
+            {#<i class="medium mdi-action-view-array"></i> Terrain : {{ basket.field.name }}#}
+            <span class="black-text" style="float: right"><b>{{ basket.price }} €</b></span></a>
+        <time class="media-meta"> {{ basket.date|date('d/m/Y') }} <b>à</b> {{ basket.timeStart|date('H:i') }}</time></a>
     </li>
     <li class="divider"></li>
     {% set total = total + basket.price %}
