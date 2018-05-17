@@ -92,9 +92,9 @@ class EventController extends Controller
             $em->persist($event);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The session successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The session successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -140,9 +140,9 @@ class EventController extends Controller
                 $em->persist($event);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The Event successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The Event successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';

@@ -118,9 +118,9 @@ class FieldController extends Controller
             $em->persist($field);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The center successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The center successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -200,9 +200,9 @@ class FieldController extends Controller
                 $em->persist($field);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The center successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The center successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -237,9 +237,9 @@ class FieldController extends Controller
         $em->remove($field);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The field successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The field successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

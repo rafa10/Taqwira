@@ -67,9 +67,9 @@ class NotificationController extends Controller
         $em->remove($notification);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The notification successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The notification successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

@@ -78,11 +78,9 @@ class VideoController extends Controller
 
     /**
      * Creates a new video entity.
-     *
      * @Route("/new", name="video_new")
      * @Method({"GET", "POST"})
      * @param Request $request
-     *
      * @return Response
      */
     public function newAction(Request $request)
@@ -105,20 +103,15 @@ class VideoController extends Controller
         $form = $this->buildFormBooking($form, $center);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em->persist($video);
             $em->flush();
-
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The video successfully created!');
 
             $payload=array();
             $payload['status']='ok';
             $payload['page']='refresh';
             return new Response(json_encode($payload));
+
 
         } else {
             $validator = $this->get('validator');
@@ -157,9 +150,9 @@ class VideoController extends Controller
      */
     public function editAction(Request $request, Video $video)
     {
-//        if (null === $this->getUser()) {
-//            throw $this->createAccessDeniedException(User::USER_IS_NOT_LOGGED_IN);
-//        }
+        if (null === $this->getUser()) {
+            throw $this->createAccessDeniedException(User::USER_IS_NOT_LOGGED_IN);
+        }
         $em = $this->getDoctrine()->getManager();
 
         $form = $this->createForm(VideoType::class, $video, array(
@@ -173,10 +166,6 @@ class VideoController extends Controller
 
                 $em->persist($video);
                 $em->flush();
-
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The video successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -213,9 +202,9 @@ class VideoController extends Controller
         $em->remove($video);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The video successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The video successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
@@ -258,12 +247,19 @@ class VideoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $fields = $em->getRepository('AppBundle:Field')->findBy(array('center' => $center));
-        $bookings = $em->getRepository('AppBundle:Booking')->findBy(array('field' => $fields));
+        $bookings = $em->getRepository('AppBundle:Booking')->findBy(array('field' => $fields), array('id' => 'DESC'));
+        $videos = $em->getRepository('AppBundle:Video')->findBy(array('booking' => $bookings));
 
         $bookingsAll = [];
         foreach ($bookings as $booking) {
-            $sessionByRefrence = $booking->getReference().' == '.$booking->getCustomer()->getFirstname().' '.$booking->getCustomer()->getLastname().' == '.$booking->getDate()->format('d/m/Y');
-            $bookingsAll[$sessionByRefrence] = $booking;
+            foreach ($videos as $video ) {
+                if ($booking->getId() != $video->getBooking()->getId() ){
+                    if ($booking->getBill() != null ){
+                        $sessionByRefrence = $booking->getReference().' == '.$booking->getCustomer()->getEmail().' == '.$booking->getDate()->format('d/m/Y');
+                        $bookingsAll[$sessionByRefrence] = $booking;
+                    }
+                }
+            }
         }
 
         return $bookingsAll;

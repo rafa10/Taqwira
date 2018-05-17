@@ -66,9 +66,9 @@ class EffectiveController extends Controller
             $em->persist($effective);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The effective successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The effective successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -114,9 +114,9 @@ class EffectiveController extends Controller
                 $em->persist($effective);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The effective successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The effective successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -151,9 +151,9 @@ class EffectiveController extends Controller
         $em->remove($effective);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The effective successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The effective successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

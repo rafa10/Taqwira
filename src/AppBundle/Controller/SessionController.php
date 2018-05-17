@@ -75,9 +75,9 @@ class SessionController extends Controller
             $em->persist($session);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The session successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The session successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -192,16 +192,15 @@ class SessionController extends Controller
         ));
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
                 $em->persist($session);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The session successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The session successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -237,9 +236,9 @@ class SessionController extends Controller
         $em->remove($session);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The session successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The session successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

@@ -39,7 +39,8 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Client</th>
+                                    <th>Réference</th>
+                                    <th>Email</th>
                                     <th>Date</th>
                                     <th>Temps</th>
                                     <th>Url</th>
@@ -52,7 +53,8 @@
                                 {% for video in videos %}
                                     <tr>
                                         <td>{{ video.id }}</td>
-                                        <td>{{ video.booking.customer.firstname }} {{ video.booking.customer.lastname }}</td>
+                                        <td>{{ video.booking.reference }}</td>
+                                        <td>{{ video.booking.customer.email }}</td>
                                         <td>{{ video.booking.date|date('d/m/Y') }}</td>
                                         <td>{{ video.booking.timeStart|date('H:i') }}</td>
                                         <td>{{ video.url }}</td>

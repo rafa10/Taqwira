@@ -91,9 +91,9 @@ class CenterController extends Controller
             $em->persist($center);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The center successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The center successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -174,9 +174,9 @@ class CenterController extends Controller
                 $em->persist($center);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The center successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The center successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -215,9 +215,9 @@ class CenterController extends Controller
         $em->persist($center);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The center successfully disabled!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The center successfully disabled!');
 
         $payload = [];
         $payload['status'] = 'ok';
@@ -245,9 +245,9 @@ class CenterController extends Controller
         $em->persist($center);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The center successfully enabled!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The center successfully enabled!');
 
         $payload = [];
         $payload['status'] = 'ok';
@@ -273,9 +273,9 @@ class CenterController extends Controller
         $em->remove($center);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The company successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The company successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

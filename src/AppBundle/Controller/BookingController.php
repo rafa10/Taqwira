@@ -198,9 +198,9 @@ class BookingController extends Controller
             // Create notification for dashboard admin center
             $this->container->get('app.notification')->newNotification($center, $subject=Notification::BOOKING, $link=Notification::BOOKING_LINK);
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The booking successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The booking successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -234,9 +234,9 @@ class BookingController extends Controller
         $em->remove($booking);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking match successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The booking match successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
@@ -466,9 +466,9 @@ class BookingController extends Controller
 
             $session->remove('basket');
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The booking subscription successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The booking subscription successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -501,9 +501,9 @@ class BookingController extends Controller
         $em->remove($booking);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking subscription successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The booking subscription successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
@@ -531,9 +531,9 @@ class BookingController extends Controller
             }
         }
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The basket subscription successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The basket subscription successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

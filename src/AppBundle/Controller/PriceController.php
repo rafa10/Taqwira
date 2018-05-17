@@ -116,9 +116,9 @@ class PriceController extends Controller
             $em->persist($price);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The price successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The price successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -233,9 +233,9 @@ class PriceController extends Controller
                 $em->persist($price);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The price successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The price successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -272,9 +272,9 @@ class PriceController extends Controller
         $em->remove($price);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The price successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The price successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
