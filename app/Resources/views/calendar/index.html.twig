@@ -31,7 +31,14 @@
         <div class="container">
             <div class="section">
                 {% if fields == null %}
-                    <p class="caption"><i class="mdi-action-info left"></i> Ajouter un terrain pour consulter le calendrier .</p>
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Ajouter au moins terrain pour consulter le calendrier .</p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                     <div class="divider"></div>
                 {% else %}
                 <div class="row">

@@ -29,18 +29,20 @@
     $('.btn-close-notification').click(function(){
         that = $(this);
         // On lance la suppression
-        $.get(that.attr("data-href"), function() {
-            that.parent().remove();
-            //On lance un ajax pour refresh les notification
-            // $.getJSON('/plateforme/notification/show', function(data) {})
-            //     .done(function(data) {
-            //         if (data.status=="ok") {
-            //             if (data.page=="show") {
-            //                 $('#notification').removeClass('hide').append(data.length);
-            //             }
-            //         }
-            //     });
-        });
+        $.getJSON(that.attr("data-href"), function(data) {})
+            .done(function(data) {
+                if (data.status=="ok") {
+                    if (data.page=="refresh") {
+                        that.parent().remove();
+                        if(data.length != 0){
+                            $('#notification').empty();
+                            $('#notification').append(data.length);
+                        } else {
+                            $('#notification').addClass('hide');
+                        }
+                    }
+                }
+            });
     });
 
 </script>

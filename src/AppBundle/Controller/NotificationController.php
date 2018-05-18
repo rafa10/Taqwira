@@ -56,24 +56,29 @@ class NotificationController extends Controller
      * @Route("/delete/{id}", name="notification_delete")
      * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER') or has_role('ROLE_USER')")
      * @Method("GET")
-     * @param Request $request
      * @param Notification $notification
      * @return Response
      */
-    public function deleteAction(Request $request, Notification $notification)
+    public function deleteAction(Notification $notification)
     {
         $em = $this->getDoctrine()->getManager();
-
         $em->remove($notification);
         $em->flush();
 
-//        $request->getSession()
-//            ->getFlashBag()
-//            ->add('success', 'The notification successfully deleted!');
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            $notifications = $em->getRepository('AppBundle:Notification')->findBy(array('center' => null), array('created' => 'DESC'));
+
+        } else {
+            $userLogin = $this->get('security.token_storage')->getToken()->getUser();
+            $center = $userLogin->getCenter();
+            $notifications = $em->getRepository('AppBundle:Notification')->findBy(array('center' => $center), array('created' => 'DESC'));
+
+        }
 
         $payload=array();
         $payload['status']='ok';
         $payload['page']='refresh';
+        $payload['length']= count($notifications);
         return new Response(json_encode($payload));
     }
 

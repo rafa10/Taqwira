@@ -394,7 +394,9 @@ $(document).ready(function(){
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {
-                        $('#notification').removeClass('hide').append(data.length);
+                        if(data.length != 0){
+                            $('#notification').removeClass('hide').append(data.length);
+                        }
                         $('#notifications-dropdown').html(data.html);
                     }
                 }

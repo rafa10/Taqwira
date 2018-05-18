@@ -30,7 +30,14 @@
         <div class="container">
             <div class="section">
                 {% if fields == null %}
-                    <p class="caption"><i class="mdi-action-info left"></i>Pour commencer ajoutez  <i class="mdi-content-add-circle green-text"></i>  au moins terrain et disponibilité séances de votre centre.</p>
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Pour commencer ajoutez  <i class="mdi-content-add-circle green-text"></i>  au moins terrain.</p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                 {% endif %}
                <div class="divider"></div>
                 <!--DataTables example-->

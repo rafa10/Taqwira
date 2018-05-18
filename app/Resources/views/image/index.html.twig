@@ -31,11 +31,17 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                <p class="caption">
-                    {% if images == null %}
-                         <i class="mdi-action-info left"></i>Ajouter  <i class="mdi-content-add-circle green-text"></i>  des photos pour votre center.<br>
-                    {% endif %}
-                    <i class="mdi-action-info left"></i>Vous avez le droit de charger 5 photos au maximum.</p>
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            {% if images == null %}
+                                <p><i class="mdi-action-info "></i> INFO : Ajouter  <i class="mdi-content-add-circle green-text"></i>  des photos pour votre center.</p>
+                            {% endif %}
+                            <p><i class="mdi-action-info "></i> INFO : Vous avez le droit de charger 5 photos au maximum.</p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">
