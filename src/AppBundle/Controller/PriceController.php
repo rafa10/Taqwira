@@ -84,11 +84,11 @@ class PriceController extends Controller
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
             $sessions = $em->getRepository('AppBundle:Session')->findBy(array('center' => $center));
+            $form = $this->buildFormFields($form, $center);
         }
 
         $form = $this->buildFormDays($form, $days);
         $form = $this->buildFormSessions($form, $sessions);
-        $form = $this->buildFormFields($form, $center);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -181,11 +181,11 @@ class PriceController extends Controller
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
             $sessions = $em->getRepository('AppBundle:Session')->findBy(array('center' => $center));
+            $form = $this->buildFormFields($form, $center);
         }
 
         $form = $this->buildFormDays($form, $days);
         $form = $this->buildFormSessions($form, $sessions);
-        $form = $this->buildFormFields($form, $center);
 
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
