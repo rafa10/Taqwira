@@ -74,9 +74,9 @@ class BillController extends Controller
         $em->persist($booking);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking of match  successfully paid!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The booking of match  successfully paid!');
 
         $payload = [];
         $payload['status'] = 'ok';
@@ -120,9 +120,9 @@ class BillController extends Controller
 
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking of subscription  successfully paid!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The booking of subscription  successfully paid!');
 
         $payload = [];
         $payload['status'] = 'ok';

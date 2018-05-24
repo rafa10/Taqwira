@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Bill;
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\Customer;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\Session;
 use AppBundle\Form\CustomerType;
 use AppBundle\Form\BookingType;
@@ -29,6 +30,11 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class BookingController extends Controller
 {
+    /**
+     * constant
+     */
+    const MESSAGE = 'Message';
+    const BOOKING = 'Booking';
     /** ============================================================================================================== */
     /** =========================================== Booking Match ==================================================== */
     /** ============================================================================================================== */
@@ -189,9 +195,12 @@ class BookingController extends Controller
             // Send mail confirmation booking to customer
             $this->container->get('app.mailer')->sendBookingMessage($booking);
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The booking successfully created!');
+            // Create notification for dashboard admin center
+            $this->container->get('app.notification')->newNotification($center, $subject=Notification::BOOKING, $link=Notification::BOOKING_LINK);
+
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The booking successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -225,9 +234,9 @@ class BookingController extends Controller
         $em->remove($booking);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking match successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The booking match successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
@@ -457,9 +466,9 @@ class BookingController extends Controller
 
             $session->remove('basket');
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The booking subscription successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The booking subscription successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -492,9 +501,9 @@ class BookingController extends Controller
         $em->remove($booking);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The booking subscription successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The booking subscription successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
@@ -522,9 +531,9 @@ class BookingController extends Controller
             }
         }
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The basket subscription successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The basket subscription successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

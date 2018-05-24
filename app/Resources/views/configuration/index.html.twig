@@ -29,26 +29,31 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                <h4 class="header">Paratager programme du centre</h4>
-                <div class="divider"></div>
-                <div id="input-switches" class="section">
-                    <div class="row">
-                        <div class="col s12 m8 l9">
-                            <p><i class="left mdi-action-label"></i> Dans cette option le stadier partager son planning terrains au public et autorise la réservation en ligne de la part du client</p>
-                        </div>
-                        <div class="col s12 m4 l3">
-                            <!-- Enable Switch -->
-                            <div class="switch right-align" style="margin-top: 1.2rem">
-                                <label class="switch-col-blue-grey">
-                                    Non
-                                    {% if center.shareProgram == true %}
-                                        <input type="checkbox" class="center_share_program" data-href="{{ path('share_program_disable', {'id': center.id}) }}" checked>
-                                    {% else %}
-                                        <input type="checkbox" class="center_share_program" data-href="{{ path('share_program_enable', {'id': center.id}) }}">
-                                    {% endif %}
-                                    <span class="lever"></span>
-                                    Oui
-                                </label>
+                <div class="card">
+                    <div class="card-content">
+                        <h5>PARTAGER PROGRAMME</h5>
+                    </div>
+                    <div class="card-action">
+                        <div id="input-switches" class="section">
+                            <div class="row">
+                                <div class="col s12 m8 l9">
+                                    <i class="left mdi-action-info"></i> Dans cette option le stadier partager son planning terrains au public et autorise la réservation en ligne de la part du client
+                                </div>
+                                <div class="col s12 m4 l3">
+                                    <!-- Enable Switch -->
+                                    <div class="switch right-align">
+                                        <label class="switch-col-blue-grey">
+                                            Non
+                                            {% if center.shareProgram == true %}
+                                                <input type="checkbox" class="center_share_program" data-href="{{ path('share_program_disable', {'id': center.id}) }}" checked>
+                                            {% else %}
+                                                <input type="checkbox" class="center_share_program" data-href="{{ path('share_program_enable', {'id': center.id}) }}">
+                                            {% endif %}
+                                            <span class="lever"></span>
+                                            Oui
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

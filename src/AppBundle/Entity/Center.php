@@ -34,12 +34,14 @@ class Center
     /**
      * @ORM\Column(type="integer", length=4, nullable=true)
      * @Assert\NotBlank(message="Please provide an center postal code")
+     * @Assert\Length(min="4", max="4")
      */
     private $cp;
 
     /**
-     * @ORM\Column(type="string", length=8, nullable=true)
+     * @ORM\Column(type="integer", length=8, nullable=true)
      * @Assert\NotBlank(message="Please provide a phone")
+     * @Assert\Length(min="8", max="8")
      * @Assert\Regex(pattern="/^[0-9]*$/")
      */
     private $phone;
@@ -164,6 +166,11 @@ class Center
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Service", mappedBy="center")
      */
     private $service;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="center")
+     */
+    private $notification;
     
     /**
      * Constructor
@@ -180,6 +187,7 @@ class Center
         $this->configSection = new \Doctrine\Common\Collections\ArrayCollection();
         $this->bill = new \Doctrine\Common\Collections\ArrayCollection();
         $this->service = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->notification = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -829,5 +837,41 @@ class Center
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Add notification.
+     *
+     * @param \AppBundle\Entity\Notification $notification
+     *
+     * @return Center
+     */
+    public function addNotification(\AppBundle\Entity\Notification $notification)
+    {
+        $this->notification[] = $notification;
+
+        return $this;
+    }
+
+    /**
+     * Remove notification.
+     *
+     * @param \AppBundle\Entity\Notification $notification
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeNotification(\AppBundle\Entity\Notification $notification)
+    {
+        return $this->notification->removeElement($notification);
+    }
+
+    /**
+     * Get notification.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNotification()
+    {
+        return $this->notification;
     }
 }

@@ -65,6 +65,7 @@ $(document).ready(function(){
                         $('#form_modal').html(data.html);
                         $('#form_modal').attr('data-href', url);
                         refresh_Materialize_compound();
+                        getCityByRegion();
                         $('#form_modal').openModal();
                     }
                 }
@@ -366,8 +367,7 @@ $(document).ready(function(){
             format: 'dd-mm-yyyy'
         });
         tinymce.init({
-            selector:'textarea#editable',
-            theme: modern
+            selector:'textarea#editable'
         });
 
     }
@@ -381,7 +381,7 @@ $(document).ready(function(){
         // Dashboard load element ======================================================================================
         // =============================================================================================================
         //On lance un ajax pour refresh le baskets =====================================================================
-        $.getJSON('/plateforme/basket/show', function(data) {})
+        $.getJSON('/plateforme/notification/basket/show', function(data) {})
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {
@@ -394,7 +394,9 @@ $(document).ready(function(){
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {
-                        $('#notification').removeClass('hide').append(data.length);
+                        if(data.length != 0){
+                            $('#notification').removeClass('hide').append(data.length);
+                        }
                         $('#notifications-dropdown').html(data.html);
                     }
                 }
@@ -706,7 +708,7 @@ $(document).ready(function(){
                             swal("", "Réservation bien ajouté dans le pannier!");
                         });
                         //On lance un ajax pour refresh le baskets
-                        $.getJSON('/plateforme/basket/show', function(data) {})
+                        $.getJSON('/plateforme/notification/basket/show', function(data) {})
                             .done(function(data) {
                                 if ( isNaN( parseInt($('.basket-badget').text()) )){
                                     $('.basket-badget').removeClass('hide');
@@ -745,6 +747,37 @@ $(document).ready(function(){
                 }
             })
     });
+
+    //==================================================================================================================
+    // Form inscription center =========================================================================================
+    //==================================================================================================================
+    function getCityByRegion()
+    {
+        $('#center_region').on('change',function(){
+            var regionID = $(this).val();
+            console.log(regionID);
+            $.ajax({
+                type:'GET',
+                url:'/register/region/'+regionID,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function(data_json){
+                    data = $.parseJSON(data_json);
+                    if (data.status=="ok") {
+                        if (data.page=="show") {
+                            $('#city').empty();
+                            $('#city').html(data.html);
+                            $('select').material_select();
+
+                        } else {
+                            swal("", "Une erreur est survenue");
+                        }
+                    }
+                }
+            });
+        });
+    }
 
 // === End =============================================================================================================
 });

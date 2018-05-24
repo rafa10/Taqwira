@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- START CONTENT -->
+    <section id="content">
+
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            <div class="header-search-wrapper grey hide-on-large-only">
+                <i class="mdi-action-search active"></i>
+                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <h5 class="breadcrumbs-title">Besoin d’aide ?</h5>
+                        <ol class="breadcrumbs">
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
+                            <li class="active">Besoin d’aide ?</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs end-->
+
+        <!--start container-->
+        <div class="container">
+            <div class="section">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="flow-text">Comment ça marche</span>
+                    </div>
+                    <div class="card-action">
+                        <div id="input-switches" class="section">
+                            <div class="row">
+                                <p class="caption"><i class="left mdi-action-label"></i> 1. Création de la disponiblité du center
+                                    {#<p>#}
+                                        {#- Ajoutez toute sénaces possible pour pouvoir l'affecter à chaque terrain crée#}
+                                    {#</p>#}
+                                </p>
+                                <p class="caption"><i class="left mdi-action-label"></i>2. Créez de terrain
+                                    <ul>
+                                        <ol></ol>
+                                    </ul>
+                                </p>
+                                <p class="caption"><i class="left mdi-action-label"></i>3. Créez une période pour chaque terrain ajouter
+                                    <ul>
+                                        <ol></ol>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end container-->
+
+    </section>
+    <!-- END CONTENT -->
+
+
+{% endblock body %}

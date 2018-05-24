@@ -118,9 +118,9 @@ class ProgramController extends Controller
             $em->persist($program);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The program successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The program successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -235,9 +235,9 @@ class ProgramController extends Controller
                 $em->persist($program);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The program successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The program successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -274,9 +274,9 @@ class ProgramController extends Controller
         $em->remove($program);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The program successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The program successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

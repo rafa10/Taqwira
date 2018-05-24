@@ -97,9 +97,9 @@ class PlanningController extends Controller
             $em->persist($planning);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The planning successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The planning successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -169,9 +169,9 @@ class PlanningController extends Controller
                 $em->persist($planning);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The planning successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The planning successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -208,9 +208,9 @@ class PlanningController extends Controller
         $em->remove($planning);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The planning successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The planning successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

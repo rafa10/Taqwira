@@ -33,14 +33,14 @@
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">
-                    <p class= "tools"><button type="button" data-href="{{ path('video_new') }}" class="btn-floating waves-effect waves-light green modal_trigger"><i class="mdi-content-add-circle green-text text-lighten-4"></i></button></p>
                     <div class="row">
                         <div class="col s12">
                             <table id="data-table-simple" class="responsive-table display" cellspacing="0">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Client</th>
+                                    <th>Réference</th>
+                                    <th>Email</th>
                                     <th>Date</th>
                                     <th>Temps</th>
                                     <th>Url</th>
@@ -53,7 +53,8 @@
                                 {% for video in videos %}
                                     <tr>
                                         <td>{{ video.id }}</td>
-                                        <td>{{ video.booking.customer.firstname }} {{ video.booking.customer.lastname }}</td>
+                                        <td>{{ video.booking.reference }}</td>
+                                        <td>{{ video.booking.customer.email }}</td>
                                         <td>{{ video.booking.date|date('d/m/Y') }}</td>
                                         <td>{{ video.booking.timeStart|date('H:i') }}</td>
                                         <td>{{ video.url }}</td>
@@ -77,6 +78,11 @@
 
     </section>
     <!-- END CONTENT -->
+
+    <!-- Btn Add Trigger -->
+    <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
+        <button type="button" data-href="{{ path('video_new') }}" class="btn-floating waves-effect waves-light green modal_trigger"><i class="mdi-content-add-circle green-text text-lighten-4"></i></button>
+    </div>
 
     <!-- Loader -->
     {% include 'AppBundle:loader:loader_form.html.twig' %}

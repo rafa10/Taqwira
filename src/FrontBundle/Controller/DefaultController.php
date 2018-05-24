@@ -3,6 +3,7 @@
 namespace FrontBundle\Controller;
 
 use AppBundle\Entity\Contact;
+use AppBundle\Entity\Notification;
 use AppBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -53,6 +54,9 @@ class DefaultController extends Controller
                 ->getFlashBag()
                 ->add('success', 'Le message a bien été envoyé!');
 
+            // Create notification for dashboard admin center
+            $this->container->get('app.notification')->newNotificationMessage($subject=Notification::MESSAGE, $link=Notification::CONTACT_LINK);
+
             return $this->redirect('contact_us');
 
         }
@@ -65,6 +69,32 @@ class DefaultController extends Controller
     /** ============================================================================================================== */
     /** === Form Builder search ====================================================================================== */
     /** ============================================================================================================== */
+    /**
+     * Get city by region for center.
+     * @Route("/register/region/{id}", name="get_city_by_region")
+     * @Method("GET")
+     * @return Response
+     */
+    function getCityByRegionAction($id)
+    {
+        $city = null;
+        $em = $this->getDoctrine()->getManager();
+//        $city = $em->getRepository('AppBundle:Region')->findBy(array('region' => $region));
 
+//        if ($request->get('id')) {
+//            $regionId = $request->get('id');
+            $region = $em->getRepository('AppBundle:Region')->find($id);
+            $city = $em->getRepository('AppBundle:City')->findBy(array('region' => $region));
+//        }
+
+        $payload=array();
+        $payload['status']='ok';
+        $payload['page']='show';
+        $payload['html'] = $this->renderView('FrontBundle:Default:form_city.html.twig', [
+            'city' => $city,
+        ]);
+
+        return new Response(json_encode($payload));
+    }
 
 }

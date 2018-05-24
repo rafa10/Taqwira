@@ -83,9 +83,9 @@ class ImageController extends Controller
             $em->persist($image);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The image successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The image successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -119,9 +119,9 @@ class ImageController extends Controller
         $em->remove($image);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The image successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The image successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

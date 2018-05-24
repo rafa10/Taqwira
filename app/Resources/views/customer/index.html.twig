@@ -18,7 +18,7 @@
                     <div class="col s12 m12 l12">
                         <h5 class="breadcrumbs-title">Clients</h5>
                         <ol class="breadcrumbs">
-                            <li><a href="/">Dashboard</a></li>
+                            <li><a href="{{ path('homepage') }}">Dashboard</a></li>
                             <li class="active">Clients</li>
                         </ol>
                     </div>
@@ -35,9 +35,6 @@
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">
-                    <div class= "tools">
-                        <button type="button" data-href="{{ path('customer_new') }}" class="btn-floating waves-effect waves-light green modal_trigger"><i class="mdi-content-add-circle green-text text-lighten-4"></i></button>
-                    </div>
                     <div class="row">
                         <div class="col s12">
                             <table id="data-table-simple" class="responsive-table display" cellspacing="0">
@@ -89,6 +86,11 @@
 
     </section>
     <!-- END CONTENT -->
+
+    <!-- Btn Add Trigger -->
+    <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
+        <button type="button" data-href="{{ path('customer_new') }}" class="btn-floating waves-effect waves-light green modal_trigger"><i class="medium mdi-content-add-circle green-text text-lighten-4"></i></button>
+    </div>
 
     <!-- Loader -->
     {% include 'AppBundle:loader:loader_form.html.twig' %}

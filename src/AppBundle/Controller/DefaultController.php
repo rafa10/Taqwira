@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\BookingType;
+use AppBundle\Entity\Region;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -14,9 +15,8 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -59,46 +59,18 @@ class DefaultController extends Controller
     }
 
     /**
-     * Display Notification.
-     * @Route("/notification/show", name="notification_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN')")
-     * @Method("GET")
+     * @Route("/help", name="help_index")
+     * @return Response
      */
-    public function getNotificationAction()
+    public function helpAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $notifications = $em->getRepository('AppBundle:Contact')->findBy(array('is_locked' => null), array('created' => 'DESC'));
-
-        $payload=array();
-        $payload['status']='ok';
-        $payload['page']='show';
-        $payload['length']= count($notifications);
-        $payload['html'] = $this->renderView('default/notification.html.twig', array(
-            'notifications' => $notifications
-        ));
-        return new Response(json_encode($payload));
-    }
-
-    /**
-     * Display basket subscription.
-     * @Route("/basket/show", name="basket_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
-     * @Method("GET")
-     */
-    public function getBasketsAction()
-    {
-        $payload=array();
-        $payload['status']='ok';
-        $payload['page']='show';
-        $payload['html'] = $this->renderView('default/baskets.html.twig');
-        return new Response(json_encode($payload));
+        return $this->render('default/help.html.twig', array());
     }
 
     /**
      * Calculated nb total booking of current user
      * @Route("/booking/chart", name="booking_chart")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @Method("GET")
      * @return Response
      */
@@ -168,7 +140,7 @@ class DefaultController extends Controller
     /**
      * Calculated nb total sessions of current user
      * @Route("/session/chart", name="session_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @Method("GET")
      * @return Response
      */
@@ -241,7 +213,7 @@ class DefaultController extends Controller
     /**
      * Calculated nb total sessions of current user
      * @Route("/booking_type/chart", name="booking_type_show")
-     * @Security("has_role('ROLE_SUPER_ADMIN' ) or has_role('ROLE_ADMIN')")
+     * @Security("has_role('ROLE_SUPER_ADMIN' ) or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
      * @Method("GET")
      * @return Response
      */

@@ -21,6 +21,11 @@ services:
             class : AppBundle\Services\Mailer
             arguments: [ "@mailer" , "@templating"]
 
+    # service notification
+    app.notification:
+            class : AppBundle\Services\NotificationManager
+            arguments: [ "@doctrine.orm.entity_manager" ]
+
     # authentication success event listener
     app.authentication_listener:
             class: AppBundle\EventListener\AuthenticationListener

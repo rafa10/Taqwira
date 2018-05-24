@@ -90,6 +90,10 @@
                                                                 {% else %}
                                                                     <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a>
                                                                 {% endif %}
+                                                            {% else %}
+                                                                {% if loop.first %}
+                                                                    <span class="red-text"> <i class="mdi-action-info"></i> Penser à ajouter les tarifs du séances </span>
+                                                                {% endif %}
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
@@ -123,6 +127,10 @@
                                                                 {% endfor %}
                                                                 <!--==== Session available for booking ==================-->
                                                                 {{ bookSelected }}
+                                                            {% else %}
+                                                                {% if loop.first %}
+                                                                    <span class="red-text"> <i class="mdi-action-info"></i> Penser à ajouter les tarifs du séances </span>
+                                                                {% endif %}
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
@@ -235,6 +243,10 @@
                                                                 <!--==== Session passed =================================-->
                                                                 <a class="disabled"><div class="chip"><i class="mdi-action-alarm"></i>  {{ sessionF.timeStart|date('H:i') }}</div></a>
                                                             {% endif %}
+                                                        {% else %}
+                                                            {% if loop.first %}
+                                                                <span class="red-text"> <i class="mdi-action-info"></i> Penser à ajouter les tarifs du séances </span>
+                                                            {% endif %}
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endfor %}
@@ -268,6 +280,10 @@
                                                             {% endfor %}
                                                             <!--==== Session available for booking ======================-->
                                                             {{ bookSelected }}
+                                                        {% else %}
+                                                            {% if loop.first %}
+                                                                <span class="red-text"> <i class="mdi-action-info"></i> Penser à ajouter les tarifs du séances </span>
+                                                            {% endif %}
                                                         {% endif %}
                                                     {% endif %}
                                                 {% endfor %}

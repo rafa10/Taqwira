@@ -30,62 +30,60 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                {#<div class="divider"></div>#}
-                    <div class="row">
-                        <div class="col s12 m12 l12">
-
-                            <div class="row">
-                                <div class="col s12">
-                                    <ul class="tabs tab-demo z-depth-1 grey darken-3" style="width: 100%;">
-                                        {% for field in fields %}
-                                            <li class="tab col s3"><a class="white-text active" href="#field{{ loop.index }}" data-route="{{ path('calendar_show', { 'id': field.id}) }}" data-id="{{ field.id }}"><i class="mdi-action-view-array"></i> {{ field.name }}</a></li>
-                                        {% endfor %}
-                                        <div class="indicator" style="right: -1px; left: 693px;"></div><div class="indicator" style="right: -1px; left: 693px;"></div>
-                                    </ul>
-                                </div>
-                                <div class="col s12">
-                                    {% for field in fields %}
-                                        <div id="field{{ loop.index }}" class="col s12 white z-depth-1" style="display: block;">
-
-                                            <div id="preloader-page-content" class="card-panel center-align z-depth-0" style="position: absolute; top: 50%; left: 50%;">
-                                                <div class="preloader-wrapper small active">
-                                                    <div class="spinner-layer spinner-blue-only">
-                                                        <div class="circle-clipper left">
-                                                            <div class="circle"></div>
-                                                        </div><div class="gap-patch">
-                                                            <div class="circle"></div>
-                                                        </div><div class="circle-clipper right">
-                                                            <div class="circle"></div>
-                                                        </div>
-                                                    </div>
-                                                </div><br>S'il vous plaît, attendez...
-                                            </div>
-
-                                            <div id="full-calendar" data-route="{{ path('calendar_show', { 'id': field.id}) }}">
-                                                <div id="calendar"></div>
-                                                <div id="calendar{{ field.id }}"></div>
-                                            </div>
-
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
+                {% if fields == null %}
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Ajouter au moins terrain pour consulter le calendrier .</p>
                         </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
+                    <div class="divider"></div>
+                {% else %}
+                <div class="row">
+                    <div class="col s12 m12 l12">
 
-                    {#<div class="section">#}
-                        {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
-                        {#<div class="col s2">#}
-                            {#<div id='external-events' style="padding-top: 0px">#}
-                                {#<h4 class="header">Draggable Events</h4>#}
-                                {#<div class='fc-event cyan'>Match</div>#}
-                                {#<div class='fc-event teal'>Abonnement</div>#}
-                                {#<div class='fc-event pink lighten-1'>Académie</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<div class="divider"></div>#}
-                    {#</div>#}
+                        <div class="row">
+                            <div class="col s12">
+                                <ul class="tabs tab-demo z-depth-1 grey darken-3" style="width: 100%;">
+                                    {% for field in fields %}
+                                        <li class="tab col s3"><a class="white-text active" href="#field{{ loop.index }}" data-route="{{ path('calendar_show', { 'id': field.id}) }}" data-id="{{ field.id }}"><i class="mdi-action-view-array"></i> {{ field.name }}</a></li>
+                                    {% endfor %}
+                                    <div class="indicator" style="right: -1px; left: 693px;"></div><div class="indicator" style="right: -1px; left: 693px;"></div>
+                                </ul>
+                            </div>
+                            <div class="col s12">
+                                {% for field in fields %}
+                                    <div id="field{{ loop.index }}" class="col s12 white z-depth-1" style="display: block;">
+
+                                        <div id="preloader-page-content" class="card-panel center-align z-depth-0" style="position: absolute; top: 50%; left: 50%;">
+                                            <div class="preloader-wrapper small active">
+                                                <div class="spinner-layer spinner-blue-only">
+                                                    <div class="circle-clipper left">
+                                                        <div class="circle"></div>
+                                                    </div><div class="gap-patch">
+                                                        <div class="circle"></div>
+                                                    </div><div class="circle-clipper right">
+                                                        <div class="circle"></div>
+                                                    </div>
+                                                </div>
+                                            </div><br>S'il vous plaît, attendez...
+                                        </div>
+
+                                        <div id="full-calendar" data-route="{{ path('calendar_show', { 'id': field.id}) }}">
+                                            <div id="calendar"></div>
+                                            <div id="calendar{{ field.id }}"></div>
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
         <!--end container-->

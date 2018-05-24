@@ -58,9 +58,9 @@ class ConfigurationController extends Controller
         $em->persist($center);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The share program center successfully enabled!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The share program center successfully enabled!');
 
         $payload = [];
         $payload['status'] = 'ok';
@@ -86,9 +86,9 @@ class ConfigurationController extends Controller
         $em->persist($center);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The share program center successfully disabled!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The share program center successfully disabled!');
 
         $payload = [];
         $payload['status'] = 'ok';

@@ -5,6 +5,7 @@ namespace FrontBundle\Controller;
 use AppBundle\Entity\Booking;
 use AppBundle\Entity\Center;
 use AppBundle\Entity\Field;
+use AppBundle\Entity\Notification;
 use AppBundle\Form\BookingType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -153,6 +154,9 @@ class BookingSearchController extends Controller
 
                 // Send mail confirmation booking to customer
                 $this->container->get('app.mailer')->sendBookingMessage($booking);
+
+                // Create notification for dashboard admin center
+                $this->container->get('app.notification')->newNotification($center, $subject=Notification::BOOKING, $link=Notification::BOOKING_LINK);
 
                 $request->getSession()
                     ->getFlashBag()

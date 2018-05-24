@@ -73,9 +73,9 @@ class CustomerController extends Controller
             $em->persist($customer);
             $em->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'The session successfully created!');
+//            $request->getSession()
+//                ->getFlashBag()
+//                ->add('success', 'The session successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -121,9 +121,9 @@ class CustomerController extends Controller
                 $em->persist($customer);
                 $em->flush();
 
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('success', 'The customer successfully updated!');
+//                $request->getSession()
+//                    ->getFlashBag()
+//                    ->add('success', 'The customer successfully updated!');
 
                 $payload=array();
                 $payload['status']='ok';
@@ -159,9 +159,9 @@ class CustomerController extends Controller
         $em->remove($customer);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The customer successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The customer successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
