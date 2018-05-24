@@ -6,21 +6,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e1d1a43-e67b-41dc-b147-8ac9efdf2041" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/MailController.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/MatchKoora.com.iml" afterPath="$PROJECT_DIR$/.idea/MatchKoora.com.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/match/new_match.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/booking/match/new_match.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/booking/subscription/new_subscription.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/booking/subscription/new_subscription.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/calendar/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/calendar/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/configuration/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/configuration/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/default/help.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/default/help.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/event/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/event/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/field/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/field/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/image/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/image/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/notification/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/notification/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/planning/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/planning/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/price/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/price/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/session/index.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/session/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php" />
-      <change beforePath="$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig" />
+      <change beforePath="$PROJECT_DIR$/app/AppKernel.php" afterPath="$PROJECT_DIR$/app/AppKernel.php" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/mail/booking_mail.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/mail/booking_mail.html.twig" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/mail/booking_subscription_mail.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/mail/booking_subscription_mail.html.twig" />
+      <change beforePath="$PROJECT_DIR$/app/config/routing_dev.yml" afterPath="$PROJECT_DIR$/app/config/routing_dev.yml" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change beforePath="$PROJECT_DIR$/web/public/js/custom-script.js" afterPath="$PROJECT_DIR$/web/public/js/custom-script.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,21 +51,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="new_subscription.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/booking/subscription/new_subscription.html.twig">
+      <file leaf-file-name="NotificationController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="806">
-              <caret line="35" column="167" lean-forward="false" selection-start-line="35" selection-start-column="167" selection-end-line="35" selection-end-column="167" />
+            <state relative-caret-position="1767">
+              <caret line="63" column="49" lean-forward="false" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="new_match.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Resources/views/booking/match/new_match.html.twig">
+      <file leaf-file-name="custom-script.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/public/js/custom-script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="37" column="167" lean-forward="false" selection-start-line="37" selection-start-column="167" selection-end-line="37" selection-end-column="167" />
+            <state relative-caret-position="4945">
+              <caret line="704" column="29" lean-forward="false" selection-start-line="704" selection-start-column="29" selection-end-line="704" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -89,8 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Price</find>
-      <find>removePrice</find>
       <find>day</find>
       <find>TND</find>
       <find>€</find>
@@ -119,6 +112,8 @@
       <find>noti</find>
       <find>card</find>
       <find>card-move-up .move-up</find>
+      <find>footer</find>
+      <find>Calendar</find>
     </findStrings>
     <replaceStrings>
       <replace>asset</replace>
@@ -132,6 +127,7 @@
       <replace>Event</replace>
       <replace>content</replace>
       <replace>TND</replace>
+      <replace>Mail</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -140,15 +136,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/FrontBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/default/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/customer/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/effective/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/program/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/center/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/contact/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/BillController.php" />
-        <option value="$PROJECT_DIR$/src/AppBundle/Controller/BookingController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/CenterController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/ConfigurationController.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/CustomerController.php" />
@@ -172,8 +159,6 @@
         <option value="$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig" />
         <option value="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Registration/register.html.twig" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="$PROJECT_DIR$/web/public/js/custom-script.js" />
         <option value="$PROJECT_DIR$/app/Resources/views/notification/index.html.twig" />
         <option value="$PROJECT_DIR$/web/public/css/style.css" />
         <option value="$PROJECT_DIR$/web/public/css/style.min.css" />
@@ -191,6 +176,17 @@
         <option value="$PROJECT_DIR$/app/Resources/views/calendar/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/booking/subscription/new_subscription.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/booking/match/new_match.html.twig" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
+        <option value="$PROJECT_DIR$/app/AppKernel.php" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/app/config/routing_dev.yml" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/FrontBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/src/AppBundle/Controller/MailController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/mail/booking_mail.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/mail/booking_subscription_mail.html.twig" />
+        <option value="$PROJECT_DIR$/web/public/js/custom-script.js" />
       </list>
     </option>
   </component>
@@ -249,11 +245,12 @@
       <path value="$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-snappy-bundle" />
+      <path value="$PROJECT_DIR$/vendor/coresphere/console-bundle" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2608" />
-    <option name="y" value="40" />
+    <option name="x" value="2593" />
+    <option name="y" value="37" />
     <option name="width" value="1918" />
     <option name="height" value="1078" />
   </component>
@@ -273,6 +270,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -297,39 +295,6 @@
               <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Taqwira" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="booking" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Taqwira" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="booking" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="match" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Taqwira" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="calendar" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Taqwira" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Resources" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="field" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
@@ -362,13 +327,6 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Form" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Taqwira" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="AppBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Services" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Taqwira" type="b2602c69:ProjectViewProjectNode" />
@@ -466,7 +424,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -476,19 +433,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\AppBundle\Controller" />
-      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\AppBundle\Services" />
-      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\AppBundle\Entity" />
-      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\app\Resources\views\center" />
-      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\app\config" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\app\Resources\views\notification" />
       <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\app\Resources\views\default" />
       <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\FrontBundle\Resources\views\Default" />
       <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\web\bundles\stfalcontinymce\vendor" />
       <recent name="C:\Users\PC-RAFA\Desktop\Projects\Takwira\web\public" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\AppBundle\Controller" />
+      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\AppBundle\Services" />
+      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\src\AppBundle\Entity" />
+      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\app\Resources\views\center" />
+      <recent name="C:\Users\PC-RAFA\Desktop\Projects\Taqwira\app\config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -715,25 +672,28 @@
       <workItem from="1526285875068" duration="5074000" />
       <workItem from="1526308570264" duration="17000" />
       <workItem from="1526546682044" duration="19241000" />
-      <workItem from="1526631242174" duration="14295000" />
+      <workItem from="1526631242174" duration="14906000" />
+      <workItem from="1526976162711" duration="6747000" />
+      <workItem from="1527063112253" duration="9944000" />
+      <workItem from="1527149014321" duration="628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1808529000" />
+    <option name="totallyTimeSpent" value="1826459000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="2391" y="-9" width="2418" height="1368" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1586354" sideWeight="0.9207673" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16375266" sideWeight="0.9149291" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981315" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15991472" sideWeight="0.07923269" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16204691" sideWeight="0.08507089" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16006424" sideWeight="0.5043956" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -760,136 +720,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/PlanningController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="211" column="27" lean-forward="false" selection-start-line="211" selection-start-column="16" selection-end-line="211" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/PriceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="275" column="27" lean-forward="false" selection-start-line="275" selection-start-column="16" selection-end-line="275" selection-end-column="27" />
-          <folding>
-            <marker date="1526548150341" expanded="true" signature="2329:2380" ph="SELECT s FRO... AppBundle" />
-            <marker date="1526548150341" expanded="true" signature="5818:5869" ph="SELECT s FRO... AppBundle" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/ProgramController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3049">
-          <caret line="278" column="68" lean-forward="true" selection-start-line="276" selection-start-column="10" selection-end-line="278" selection-end-column="68" />
-          <folding>
-            <marker date="1526548150617" expanded="true" signature="2571:2622" ph="SELECT s FRO... AppBundle" />
-            <marker date="1526548150617" expanded="true" signature="6085:6136" ph="SELECT s FRO... AppBundle" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/SessionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="239" column="27" lean-forward="false" selection-start-line="239" selection-start-column="16" selection-end-line="239" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1021">
-          <caret line="319" column="0" lean-forward="true" selection-start-line="319" selection-start-column="0" selection-end-line="319" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/booking/match/booking_match_details.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1488">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Resources/views/Booking_search/content_result.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="19" column="159" lean-forward="false" selection-start-line="19" selection-start-column="159" selection-end-line="19" selection-end-column="159" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/booking/subscription/search_subscription.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="279" column="56" lean-forward="false" selection-start-line="279" selection-start-column="56" selection-end-line="279" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Resources/views/Booking_search/search.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1657">
-          <caret line="17" column="22" lean-forward="true" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/css/materialize.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="0" column="31761" lean-forward="false" selection-start-line="0" selection-start-column="31761" selection-end-line="0" selection-end-column="31761" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/css/materialize.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="9040" column="31" lean-forward="false" selection-start-line="9040" selection-start-column="31" selection-end-line="9040" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/css/materialize_front.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="5885" column="21" lean-forward="true" selection-start-line="5885" selection-start-column="21" selection-end-line="5885" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/js/materialize.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/js/materialize_front.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="4765" column="42" lean-forward="false" selection-start-line="4765" selection-start-column="30" selection-end-line="4765" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/FieldController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="109" column="98" lean-forward="true" selection-start-line="107" selection-start-column="12" selection-end-line="109" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/js/custom-script-front.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="651">
-          <caret line="63" column="237" lean-forward="true" selection-start-line="63" selection-start-column="192" selection-end-line="63" selection-end-column="237" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Entity/Booking.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="372">
           <caret line="30" column="17" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -897,7 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
           <caret line="17" column="24" lean-forward="false" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -905,7 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
           <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -927,26 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1690">
           <caret line="257" column="116" lean-forward="false" selection-start-line="257" selection-start-column="116" selection-end-line="257" selection-end-column="116" />
-          <folding>
-            <element signature="e#749#861#0#PHP" expanded="false" />
-            <element signature="e#866#1720#0#PHP" expanded="false" />
-            <element signature="e#1727#1903#0#PHP" expanded="false" />
-            <element signature="e#1908#2224#0#PHP" expanded="false" />
-            <element signature="e#4180#4416#0#PHP" expanded="false" />
-            <element signature="e#4421#5532#0#PHP" expanded="false" />
-            <element signature="e#5539#5712#0#PHP" expanded="false" />
-            <element signature="e#5717#6171#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1891">
-          <caret line="50" column="6" lean-forward="false" selection-start-line="50" selection-start-column="6" selection-end-line="50" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#iframe#0;n#noscript#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -954,7 +766,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -962,7 +773,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -970,29 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1643">
-          <caret line="59" column="0" lean-forward="true" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
-          <folding>
-            <marker date="1525703618991" expanded="true" signature="1518:1572" ph="SELECT b FRO... AppBundle" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1023">
-          <caret line="61" column="60" lean-forward="false" selection-start-line="61" selection-start-column="60" selection-end-line="61" selection-end-column="60" />
-          <folding>
-            <element signature="e#832#1761#0#PHP" expanded="false" />
-            <element signature="e#2080#2945#0#PHP" expanded="false" />
-            <element signature="e#3564#3834#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1000,23 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1116">
           <caret line="36" column="45" lean-forward="false" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="67" column="55" lean-forward="false" selection-start-line="67" selection-start-column="55" selection-end-line="67" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/public/js/custom-script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="395" column="44" lean-forward="false" selection-start-line="395" selection-start-column="44" selection-end-line="398" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1024,7 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="866">
           <caret line="0" column="31369" lean-forward="false" selection-start-line="0" selection-start-column="31369" selection-end-line="0" selection-end-column="31369" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1032,7 +801,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="1158" column="1" lean-forward="false" selection-start-line="1158" selection-start-column="1" selection-end-line="1158" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,7 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1178">
           <caret line="38" column="34" lean-forward="false" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1048,7 +815,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1056,7 +822,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="682">
           <caret line="54" column="24" lean-forward="false" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,7 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-279">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1072,9 +836,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="655">
           <caret line="41" column="0" lean-forward="true" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <marker date="1526642295566" expanded="false" signature="1075:1115" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1082,7 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1090,7 +850,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="651">
           <caret line="33" column="37" lean-forward="false" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1098,7 +857,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="775">
           <caret line="31" column="33" lean-forward="false" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1106,7 +864,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="868">
           <caret line="40" column="26" lean-forward="true" selection-start-line="33" selection-start-column="20" selection-end-line="40" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1114,7 +871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1122,7 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="744">
           <caret line="42" column="26" lean-forward="true" selection-start-line="35" selection-start-column="19" selection-end-line="42" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1130,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="730">
           <caret line="32" column="33" lean-forward="false" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1138,7 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-930">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1146,7 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3968">
           <caret line="128" column="82" lean-forward="false" selection-start-line="128" selection-start-column="82" selection-end-line="132" selection-end-column="75" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1154,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="39" column="26" lean-forward="true" selection-start-line="32" selection-start-column="20" selection-end-line="39" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1162,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="35" column="87" lean-forward="false" selection-start-line="35" selection-start-column="87" selection-end-line="35" selection-end-column="87" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1170,14 +920,163 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="806">
           <caret line="35" column="167" lean-forward="false" selection-start-line="35" selection-start-column="167" selection-end-line="35" selection-end-column="167" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/booking/match/new_match.html.twig">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3751">
+          <caret line="133" column="58" lean-forward="true" selection-start-line="133" selection-start-column="58" selection-end-line="133" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters-prod.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="2" column="19" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bin/console">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="899">
+          <caret line="29" column="42" lean-forward="false" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="11" column="63" lean-forward="true" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
-          <caret line="37" column="167" lean-forward="false" selection-start-line="37" selection-start-column="167" selection-end-line="37" selection-end-column="167" />
+          <caret line="16" column="69" lean-forward="false" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="872">
+          <caret line="35" column="89" lean-forward="false" selection-start-line="35" selection-start-column="89" selection-end-line="35" selection-end-column="89" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Controller/VideoManagementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1732">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Controller/BookingSearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7330">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Controller/BookingManagementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1151">
+          <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="238" column="53" lean-forward="false" selection-start-line="238" selection-start-column="20" selection-end-line="238" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="97" column="5" lean-forward="true" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FrontBundle/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="68" column="100" lean-forward="false" selection-start-line="68" selection-start-column="75" selection-end-line="68" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/MailController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1023">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Services/Mailer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="67" column="48" lean-forward="false" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/mail/booking_mail.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="841">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="96" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/mail/booking_subscription_mail.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/NotificationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1767">
+          <caret line="63" column="49" lean-forward="false" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/public/js/custom-script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4945">
+          <caret line="704" column="29" lean-forward="false" selection-start-line="704" selection-start-column="29" selection-end-line="704" selection-end-column="29" />
           <folding />
         </state>
       </provider>

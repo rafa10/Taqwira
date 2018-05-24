@@ -708,7 +708,7 @@ $(document).ready(function(){
                             swal("", "Réservation bien ajouté dans le pannier!");
                         });
                         //On lance un ajax pour refresh le baskets
-                        $.getJSON('/plateforme/basket/show', function(data) {})
+                        $.getJSON('/plateforme/notification/basket/show', function(data) {})
                             .done(function(data) {
                                 if ( isNaN( parseInt($('.basket-badget').text()) )){
                                     $('.basket-badget').removeClass('hide');
