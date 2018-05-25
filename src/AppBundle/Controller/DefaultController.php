@@ -18,21 +18,27 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-
+        $centers = null;
+        $lastBookings = null;
+        $toDayBookings = null;
+        $now = new \DateTime('now');
+        $now->setTime(00, 00);
         $em = $this->getDoctrine()->getManager();
 
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             $fields = $em->getRepository('AppBundle:Field')->findAll();
             $customers = $em->getRepository('AppBundle:Customer')->findAll();
-            $users = $em->getRepository('AppBundle:User')->findAll();
+            $centers = $em->getRepository('AppBundle:Center')->findAll();
             $match = $em->getRepository('AppBundle:BookingType')->findBy(array('description' => 'Match'));
             $matchs = $em->getRepository('AppBundle:Booking')->findBy(array('bookingType' => $match));
             $subscription = $em->getRepository('AppBundle:BookingType')->findBy(array('description' => 'Abonnement'));
             $subscriptions = $em->getRepository('AppBundle:Booking')->findBy(array('bookingType' => $subscription));
-            // last 5 bookings =============================================================================================
-            $lastbookings = $em->createQuery(' SELECT b FROM AppBundle:Booking b ORDER BY b.date DESC')
+            // last 5 bookings =========================================================================================
+            $lastBookings = $em->createQuery(' SELECT b FROM AppBundle:Booking b ORDER BY b.date DESC')
                 ->setMaxResults(5)
                 ->getResult();
+            // bookings today ==========================================================================================
+            $toDayBookings = $em->getRepository('AppBundle:Booking')->findBy(array('date'=> $now), array('date' => 'ASC'));
 
         } else {
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
@@ -43,18 +49,21 @@ class DefaultController extends Controller
             $matchs = $em->getRepository('AppBundle:Booking')->findBy(array('field' => $fields ,'bookingType' => $match));
             $subscription = $em->getRepository('AppBundle:BookingType')->findBy(array('description' => 'Abonnement'));
             $subscriptions = $em->getRepository('AppBundle:Booking')->findBy(array('field' => $fields,'bookingType' => $subscription));
-            // last 5 bookings =============================================================================================
-            $lastbookings = $em->getRepository('AppBundle:Booking')->findBy(array('field'=> $fields, 'bookingType' => $match), array('date' => 'DESC'), 5);
+            // last 5 bookings =========================================================================================
+            $lastBookings = $em->getRepository('AppBundle:Booking')->findBy(array('field'=> $fields, 'bookingType' => $match), array('date' => 'DESC'), 5);
+            // bookings today ==========================================================================================
+            $toDayBookings = $em->getRepository('AppBundle:Booking')->findBy(array('field'=> $fields, 'date'=> $now), array('date' => 'ASC'));
 
         }
 
         return $this->render('default/index.html.twig', array(
             'fields' => $fields,
             'customers' => $customers,
+            'centers' => $centers,
             'matchs' => $matchs,
             'subscriptions' => $subscriptions,
-            'last_bookings' => $lastbookings,
-
+            'last_bookings' => $lastBookings,
+            'toDayBookings' => $toDayBookings
         ));
     }
 
@@ -247,5 +256,6 @@ class DefaultController extends Controller
 
         return new Response(json_encode($payload));
     }
+
 
 }

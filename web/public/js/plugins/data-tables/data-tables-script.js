@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // table date form all entity
     $('#data-table-simple').DataTable({
         colReorder: true,
         stateSave: true,
@@ -31,7 +32,40 @@ $(document).ready(function(){
             }
         }
     });
-    
+    //Table data for display to day bookings
+    $('#data-table-today-booking').DataTable({
+        "searching": false,
+        colReorder: true,
+        stateSave: true,
+        scrollY: '20vh',
+        scrollCollapse: true,
+        paging: false,
+        "order": [[ 0, "desc" ]],
+        "language": {
+            "decimal":        "",
+            "emptyTable":     "Aucune donnée disponible",
+            "info":           "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+            "infoEmpty":      "Affiche 0 à 0 de 0 entrées",
+            "infoFiltered":   "(filtered from _MAX_ total entries)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Afficher  _MENU_ entrées",
+            "loadingRecords": "Loading...",
+            "processing":     "Processing...",
+            "search":         "Chercher:",
+            "zeroRecords":    "Aucun enregistrements correspondants trouvés",
+            "paginate": {
+                "first":      "Premier",
+                "last":       "Prochain",
+                "next":       "Dernier",
+                "previous":   "Précédent"
+            },
+            "aria": {
+                "sortAscending":  ": activate to sort column ascending",
+                "sortDescending": ": activate to sort column descending"
+            }
+        }
+    });
     
     // var table = $('#data-table-row-grouping').DataTable({
     //     "columnDefs": [

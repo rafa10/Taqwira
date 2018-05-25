@@ -29,7 +29,16 @@
         <!--start container-->
         <div class="container">
             <div class="section">
-                {#<p class="caption">Tables are a nice way to organize a lot of data. We provide a few utility classes to help you style your table as easily as possible. In addition, to improve mobile experience, all tables on mobile-screen widths are centered automatically.</p>#}
+                {% if videos == null %}
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Ajouter <i class="mdi-content-add-circle green-text"></i> une vidéo du match jouée sur un terreain équipé par caméra.</p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                {% endif %}
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">

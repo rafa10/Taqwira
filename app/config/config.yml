@@ -77,7 +77,7 @@ fos_user:
     user_class: AppBundle\Entity\User
     from_email:
         address: support@taqwira.com
-        sender_name: taqwira
+        sender_name: Taqwira
 
 # Generating PDF files
 #knp_snappy:

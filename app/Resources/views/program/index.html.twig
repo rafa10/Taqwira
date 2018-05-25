@@ -33,7 +33,14 @@
         <div class="container">
             <div class="section">
                 {% if programs == null %}
-                    <p class="caption"><i class="mdi-action-info left"></i> Ajouter <i class="mdi-content-add-circle green-text"></i> au moins un terrain pour pouvoir ajouter un programme.</p>
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Ajouter au moins un terrain pour pouvoire ajouter un programme académie.</p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                 {% endif %}
                 <div class="divider"></div>
                 <!--DataTables example-->

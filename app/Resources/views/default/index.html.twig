@@ -68,6 +68,44 @@
             <!--chart dashboard start-->
             <div id="chart-dashboard">
                 <div class="row">
+                    <!-- bookings Today -->
+                    <div class="col s12 m6 l6">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">Matchs d'aujourd'hui</span>
+                            </div>
+                            <div class="card-action">
+                                <table id="data-table-today-booking" class="responsive-table display" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Terrain</th>
+                                            <th>Temps</th>
+                                            <th>status</th>
+                                            {#{% if is_granted('ROLE_SUPER_ADMIN') %}<th>Centre</th>{% endif %}#}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in toDayBookings %}
+                                            <tr>
+                                                <td>{{ booking.field.name }}</td>
+                                                <td><b>{{ booking.timeStart|date('H:i') }}</b></td>
+                                                <td>
+                                                    {% if booking.timeStart|date('H:i') < 'now'|date('H:i') and 'now'|date('H:i') < booking.timeEnd|date('H:i') %}
+                                                        <span class="task-cat green"><i class="mdi-action-restore "></i> En cours</span>
+                                                    {% elseif booking.timeStart|date('H:i') > 'now'|date('H:i') %}
+                                                        <span class="task-cat grey"><i class="mdi-action-restore"></i> En attente</span>
+                                                    {% else %}
+                                                        <span class="task-cat red"><i class="mdi-action-restore"></i> Achevé</span>
+                                                    {% endif %}
+                                                </td>
+                                                {#{% if is_granted('ROLE_SUPER_ADMIN') %}<td><div class="chip"><i class="mdi-communication-business"></i> {{booking.field.center.name }}</div></td>{% endif %}#}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Chart booking -->
                     <div class="col s12 m6 l6">
                         <div class="card">
@@ -82,7 +120,18 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Chart -->
+
+
+                </div>
+            </div>
+            <!--chart dashboard end-->
+
+            <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+            <!--chart dashboard start-->
+            <div id="chart-dashboard">
+                <div class="row">
+                    <!-- Session -->
                     <div class="col s12 m6 l6">
                         <div class="card">
                             <div class="card-content">
@@ -95,10 +144,61 @@
                             </div>
                         </div>
                     </div>
+                    <!-- % match & subscription -->
+                    <div class="col s12 m12 l6">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">% Réservation match & abonnement</span>
+                            </div>
+                            <div class="card-action">
+                                <div class="sample-chart-wrapper">
+                                    <canvas id="doughnut-chart-sample"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
             <!--chart dashboard end-->
+
+            <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+            <!--work collections start-->
+            <div id="chart-dashboard">
+                <div class="row">
+                    <!-- The last 5 booking -->
+                    <div class="col s12 m12 l6" id="work-collections">
+                        <ul id="projects-collection" class="collection z-depth-1">
+                            <li class="collection-item avatar">
+                                <i class="mdi-notification-event-available circle pink lighten-1"></i>
+                                <span class="collection-header">Matchs</span>
+                                <p>Les 5 dernières réservations</p>
+                                <a href="#" class="secondary-content"><i class="mdi-action-grade green-text"></i></a>
+                            </li>
+                            {% for match in last_bookings %}
+                                <li class="collection-item">
+                                    <div class="row">
+                                        <div class="col s3">
+                                            <p class="collections-title">Terrain</p>
+                                            <p class="collections-content">{{ match.field.name }}</p>
+                                        </div>
+                                        <div class="col s5">
+                                            {#<p class="collections-title">Date</p>#}
+                                            <p class="collections-content">{{ match.date|date('d/m/Y') }} à {{ match.timeStart|date('H:i') ~' -|- '~ match.timeEnd|date('H:i') }}</p>
+                                        </div>
+                                        <div class="col s4">
+                                            {#<p class="collections-title">Client</p>#}
+                                            <span class="task-cat grey">{{ match.customer.firstname ~' '~ match.customer.lastname}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--work collections end-->
 
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
@@ -320,56 +420,7 @@
                 {#</div>#}
                 <!--card widgets end-->
 
-                <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-                <!--work collections start-->
-                <div id="chart-dashboard">
-                    <div class="row">
-                        <!-- % match & subscription -->
-                        <div class="col s12 m12 l6">
-                            <div class="card">
-                                <div class="card-content">
-                                    <span class="card-title activator grey-text text-darken-4">% Réservation match & abonnement</span>
-                                </div>
-                                <div class="card-action">
-                                    <div class="sample-chart-wrapper">
-                                        <canvas id="doughnut-chart-sample"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- The last 5 booking -->
-                        <div class="col s12 m12 l6" id="work-collections">
-                            <ul id="projects-collection" class="collection z-depth-1">
-                                <li class="collection-item avatar">
-                                    <i class="mdi-notification-event-available circle pink lighten-1"></i>
-                                    <span class="collection-header">Matchs</span>
-                                    <p>Les 5 dernières réservations</p>
-                                    <a href="#" class="secondary-content"><i class="mdi-action-grade green-text"></i></a>
-                                </li>
-                                {% for match in last_bookings %}
-                                <li class="collection-item">
-                                    <div class="row">
-                                        <div class="col s3">
-                                            <p class="collections-title">Terrain</p>
-                                            <p class="collections-content">{{ match.field.name }}</p>
-                                        </div>
-                                        <div class="col s5">
-                                            {#<p class="collections-title">Date</p>#}
-                                            <p class="collections-content">{{ match.date|date('d/m/Y') }} à {{ match.timeStart|date('H:i') ~' -|- '~ match.timeEnd|date('H:i') }}</p>
-                                        </div>
-                                        <div class="col s4">
-                                            {#<p class="collections-title">Client</p>#}
-                                            <span class="task-cat grey">{{ match.customer.firstname ~' '~ match.customer.lastname}}</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!--work collections end-->
 
             </div>
             <!--end container-->

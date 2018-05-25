@@ -33,7 +33,14 @@
         <div class="container">
             <div class="section">
                 {% if effectives == null %}
-                    <p class="caption"><i class="mdi-action-info left"></i>Ajouter <i class="mdi-content-add-circle green-text"></i> un effectif.</p>
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Ajouter <i class="mdi-content-add-circle green-text"></i> l'effecif de l'académie.</p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
                 {% endif %}
                 <div class="divider"></div>
                 <!--DataTables example-->

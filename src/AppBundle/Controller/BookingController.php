@@ -174,10 +174,10 @@ class BookingController extends Controller
             'action' => $this->generateUrl('booking_match_details')
         ));
 
-        if (empty($this->isGranted('ROLE_SUPER_ADMIN'))){
+//        if (empty($this->isGranted('ROLE_SUPER_ADMIN'))){
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
-        }
+//        }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -421,10 +421,10 @@ class BookingController extends Controller
             'action' => $this->generateUrl('booking_subscription_details')
         ));
 
-        if (empty($this->isGranted('ROLE_SUPER_ADMIN'))){
+//        if (empty($this->isGranted('ROLE_SUPER_ADMIN'))){
             $userLogin = $this->get('security.token_storage')->getToken()->getUser();
             $center = $userLogin->getCenter();
-        }
+//        }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
