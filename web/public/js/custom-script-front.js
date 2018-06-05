@@ -179,19 +179,20 @@
     // Content display if on load page =================================================================================
     // =================================================================================================================
     jQuery(window).load(function () {
-
-        // On lance un ajax pour charger le booking match to day =================================================
-        $.getJSON('/booking/form/search', function(data) {})
-            .done(function(data) {
-                if (data.status == "ok"){
-                    if (data.page == "show") {
-                        getRegion(data.region_city);
-                        getCenter(data.center);
-                    } else {
-                        swal("", "Une erreur est survenue");
+        if ($('#form-booking-search').length) {
+            // On lance un ajax pour charger le booking match to day =================================================
+            $.getJSON('/booking/form/search', function(data) {})
+                .done(function(data) {
+                    if (data.status == "ok"){
+                        if (data.page == "show") {
+                            getRegion(data.region_city);
+                            getCenter(data.center);
+                        } else {
+                            swal("", "Une erreur est survenue");
+                        }
                     }
-                }
-            });
+                });
+        }
 
     });
     // Input Autocomplete Region & Ville ===============================================================================

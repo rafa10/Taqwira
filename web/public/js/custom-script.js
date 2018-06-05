@@ -381,7 +381,7 @@ $(document).ready(function(){
         // Dashboard load element ======================================================================================
         // =============================================================================================================
         //On lance un ajax pour refresh le baskets =====================================================================
-        $.getJSON('/plateforme/notification/basket/show', function(data) {})
+        $.getJSON('/notification/basket/show', function(data) {})
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {
@@ -390,7 +390,7 @@ $(document).ready(function(){
                 }
             });
         //On lance un ajax pour refresh les notification ===============================================================
-        $.getJSON('/plateforme/notification/show', function(data) {})
+        $.getJSON('/notification/show', function(data) {})
             .done(function(data) {
                 if (data.status=="ok") {
                     if (data.page=="show") {
@@ -403,7 +403,7 @@ $(document).ready(function(){
             });
         // Booking Bar Chart ===========================================================================================
         if ($('#bar-chart-sample').length) {
-            $.getJSON('/plateforme/booking/chart', function(data) {})
+            $.getJSON('/booking/chart', function(data) {})
                 .done(function(data) {
                     if (data.status == "ok") {
                         if (data.page == "show") {
@@ -431,6 +431,7 @@ $(document).ready(function(){
                             window.BarChartSample = new Chart(document.getElementById("bar-chart-sample").getContext("2d")).Bar(BarChartSampleData,{
                                 responsive:true
                             });
+
                         } else {
                             swal("", "Une erreur est survenue");
 
@@ -440,7 +441,7 @@ $(document).ready(function(){
         }
         //Sessions Line Chart ===========================================================================================
         if ($('#line-chart-sample').length) {
-            $.getJSON('/plateforme/session/chart', function(data) {})
+            $.getJSON('/session/chart', function(data) {})
                 .done(function(data) {
                     if (data.status == "ok") {
                         if (data.page == "show") {
@@ -479,27 +480,31 @@ $(document).ready(function(){
         }
         //total booking type Pie Doughnut Chart ========================================================================
         if ($('#doughnut-chart-sample').length) {
-            $.getJSON('/plateforme/booking_type/chart', function(data) {})
+            $.getJSON('/booking_type/chart', function(data) {})
                 .done(function(data) {
                     if (data.status == "ok") {
                         if (data.page == "show") {
-                            var PieDoughnutChartSampleData = [
-                                {
-                                    value: data.match,
-                                    color:"#f06292",
-                                    highlight: "#f48fb1",
-                                    label: "Match"
-                                },
-                                {
-                                    value: data.abonnement,
-                                    color: "#90a4ae",
-                                    highlight: "#b0bec5",
-                                    label: "Abonnement"
-                                }
-                            ];
-                            window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
-                                responsive:true
-                            });
+                            if (data.match == null && data.abonnement == null ){
+                                $('#doughnut-chart-sample').remove();
+                            } else {
+                                var PieDoughnutChartSampleData = [
+                                    {
+                                        value: data.match,
+                                        color:"#f06292",
+                                        highlight: "#f48fb1",
+                                        label: "Match"
+                                    },
+                                    {
+                                        value: data.abonnement,
+                                        color: "#90a4ae",
+                                        highlight: "#b0bec5",
+                                        label: "Abonnement"
+                                    }
+                                ];
+                                window.DoughnutChartSample = new Chart(document.getElementById("doughnut-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+                                    responsive:true
+                                });
+                            }
 
                         } else {
                             swal("", "Une erreur est survenue");
@@ -708,7 +713,7 @@ $(document).ready(function(){
                             swal("", "Réservation bien ajouté dans le pannier!");
                         });
                         //On lance un ajax pour refresh le baskets
-                        $.getJSON('/plateforme/notification/basket/show', function(data) {})
+                        $.getJSON('/notification/basket/show', function(data) {})
                             .done(function(data) {
                                 if ( isNaN( parseInt($('.basket-badget').text()) )){
                                     $('.basket-badget').removeClass('hide');
@@ -751,8 +756,7 @@ $(document).ready(function(){
     //==================================================================================================================
     // Form inscription center =========================================================================================
     //==================================================================================================================
-    function getCityByRegion()
-    {
+    function getCityByRegion() {
         $('#center_region').on('change',function(){
             var regionID = $(this).val();
             console.log(regionID);

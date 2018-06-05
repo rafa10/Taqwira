@@ -257,5 +257,32 @@ class DefaultController extends Controller
         return new Response(json_encode($payload));
     }
 
+    /** ============================================================================================================== */
+    /** === Form Builder search ====================================================================================== */
+    /** ============================================================================================================== */
+
+    /**
+     * Get city by region for center.
+     * @Route("/register/region/{id}", name="get_city_by_region")
+     * @Method("GET")
+     * @return Response
+     */
+    function getCityByRegionAction($id)
+    {
+        $city = null;
+        $em = $this->getDoctrine()->getManager();
+        $region = $em->getRepository('AppBundle:Region')->find($id);
+        $city = $em->getRepository('AppBundle:City')->findBy(array('region' => $region));
+
+        $payload=array();
+        $payload['status']='ok';
+        $payload['page']='show';
+        $payload['html'] = $this->renderView('Default/form_city.html.twig', [
+            'city' => $city,
+        ]);
+
+        return new Response(json_encode($payload));
+    }
+
 
 }

@@ -31,8 +31,8 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/back_office/, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN] }
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN] }
+#        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
