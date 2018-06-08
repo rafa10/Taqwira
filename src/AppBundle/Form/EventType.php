@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,6 +29,12 @@ class EventType extends AbstractType
                     'data-provide' => 'datepicker',
                     'data-date-format' => 'dd-mm-yyyy'
                 )
+            ))
+            ->add('image', FileType::class, array(
+                'data_class'=> null,
+                'attr' => array(
+                    'class' => 'dropify'
+                ),
             ))
             ->add('content', TextareaType::class)
             ->add('center', EntityType::class, array(

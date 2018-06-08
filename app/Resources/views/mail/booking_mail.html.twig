@@ -26,42 +26,47 @@
     <div class="row">
         <div class="col s12 m10 offset-m1" style="margin-top: 1rem">
             <div class="row">
-                <div class="col s12 card-panel z-depth-1">
-                    <h5 class="flow-text"><i class="small material-icons left">receipt</i>Réservation Réf°: <span><b>{{ booking.reference }}</b></span></h5>
+                <div class="col s12 card-panel z-depth-0">
+                    <h5 class="flow-text"><i class="small material-icons left">receipt</i>Réservation Réf°: <span class="lime-text"><b>{{ booking.reference }}</b></span></h5>
                 </div>
                 {# == Coordonnées du client ======================================================================#}
-                <div class="col s12 m4 card-panel z-depth-1 info-row hide-on-small-only">
-                    <h2 class="flow-text">Coordonnées du client</h2><hr class="style10">
-                    <div class="row">
-                        <div class="col s3">Nom:</div><div class="col s9"><b>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</b></div>
-                        <div class="col s3">E-mail:</div><div class="col s9"><b>{{ booking.customer.email }}</b></div>
-                        <div class="col s3">Téléphone:</div><div class="col s9"><b>{{ booking.customer.phone }}</b></div>
-                    </div>
+                <div class="col s12 m5 hide-on-small-only" style="padding: 0px">
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h5 class="flow-text">Coordonnées du client</h5></li>
+                        <li class="collection-item"><i class="fas fa-user left"></i>{{ booking.customer.firstname }} {{ booking.customer.lastname }}</li>
+                        <li class="collection-item"><i class="fas fa-envelope left"></i>{{ booking.customer.email }}</li>
+                        <li class="collection-item"><i class="fas fa-phone-volume left"></i>{{ booking.customer.phone }}</li>
+                    </ul>
                 </div>
                 {#=== Détails de ma réservation ==================================================================#}
-                <div class="col s12 m8 card-panel z-depth-1">
-                    <h2 class="flow-text">Détails de ma réservation</h2><hr class="style10">
-                    <div class="row card-panel z-depth-0 grey lighten-3 booking-row">
-                        <div class="col s6">
-                            <h5 class=""><i class="small material-icons left">business</i> {{ booking.field.center.name }}</h5>
-                            <i class="material-icons left">view_array</i> {{ booking.field.name }}
-                        </div>
-                        <div class="col s6 datetime-col">
-                            <p><i class="material-icons left">event</i>{{ booking.date|date('m/d/Y') }}</p>
-                            <p><i class="material-icons left">timer</i><b>{{ booking.timeStart|date('H:i') }}</b></p>
-                        </div>
-                        <div class="col s12 m6 ">
-                            <p class="bold"><b>Bénéficiaire</b></p>
-                        </div>
-                        <div class="col s12 m6">
-                            <p><i class="material-icons left">person</i> {{ booking.customer.firstname }} {{ booking.customer.lastname }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <hr class="style10">
-                        {#<div class="col s6 right-align">TVA </div><div class="col s6 right-align"><b>7.36 TND</b></div>#}
-                        <div class="col s6 right-align"><b>Prix TTC</b> </div><div class="col s6 right-align"><b>{{ booking.price }} TND</b></div>
-                    </div>
+                <div class="col s12 m7" style="padding: 0px">
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h5 class="flow-text">Détails de ma réservation</h5></li>
+                        <li class="collection-item grey lighten-3">
+                            <div class="row">
+                                <div class="col s6">
+                                    <h5 class=""><i class="small material-icons left">business</i> {{ booking.field.center.name }}</h5>
+                                    <i class="material-icons left">view_array</i> {{ booking.field.name }}
+                                </div>
+                                <div class="col s6 datetime-col">
+                                    <p><i class="material-icons left">event</i>{{ booking.date|date('m/d/Y') }}</p>
+                                    <p><i class="material-icons left">timer</i><b>{{ booking.timeStart|date('H:i') }}</b></p>
+                                </div>
+                                <div class="col s12 m6">
+                                    <p class="bold"><b>Bénéficiaire</b></p>
+                                </div>
+                                <div class="col s12 m6">
+                                    <p><i class="material-icons left">person</i> {{ booking.customer.firstname }} {{ booking.customer.lastname }}</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                {#<div class="col s6 right-align">TVA </div><div class="col s6 right-align"><b>7.36 €</b></div>#}
+                                <div class="col s6 right-align"><b>Prix TTC</b> </div><div class="col s6 right-align"><b>{{ booking.price }} TND</b></div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -69,23 +74,6 @@
 </div>
 
 <footer class="page-footer grey lighten-4">
-    {#<div class="container">#}
-        {#<div class="row">#}
-            {#<div class="col l6 s12">#}
-                {#<h5 class="white-text">Footer Content</h5>#}
-                {#<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>#}
-            {#</div>#}
-            {#<div class="col l4 offset-l2 s12">#}
-                {#<h5 class="white-text">Links</h5>#}
-                {#<ul>#}
-                    {#<li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>#}
-                    {#<li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>#}
-                    {#<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>#}
-                    {#<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>#}
-                {#</ul>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
     <div class="footer-copyright grey lighten-4">
         <div class="container grey-text">
             © 2015 - {{ 'now'|date('Y') }} Taqwira, All rights reserved.

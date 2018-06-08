@@ -39,6 +39,11 @@ class Event
     private $content;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
      */
     private $is_published;

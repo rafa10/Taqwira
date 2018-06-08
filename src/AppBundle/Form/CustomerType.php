@@ -25,7 +25,6 @@ class CustomerType extends AbstractType
                     'Mme/Mlle' => 'Mme/Mlle'
                 ),
                 'required'    => true,
-                'placeholder' => 'Sexe',
                 'empty_data'  => null
             ))
             ->add('email')

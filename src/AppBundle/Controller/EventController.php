@@ -58,7 +58,6 @@ class EventController extends Controller
      */
     public function showAction(Event $event)
     {
-
         $payload=array();
         $payload['status']='ok';
         $payload['page']='show';
@@ -86,8 +85,19 @@ class EventController extends Controller
         ));
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // upload image for event
+            $imgName = null;
+            $imgExtension = null;
+            $img = $request->files->all();
+            $dataImg = isset($img['event']['image'])? $img['event']['image'] : [];
+
+            $originName = $dataImg->getClientOriginalName();
+            $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
+            $dataImg->move( $this->container->getParameter('event_img'), $imgName );
+            // $file->setName($dataName);
+            $event->setImage($imgName);
 
             $em->persist($event);
             $em->flush();
@@ -136,6 +146,23 @@ class EventController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+
+                // delete the old image for event
+                $file_path = $this->container->getParameter('event_img').'/'.$event->getImage();
+                if(file_exists($file_path)){
+                    unlink($file_path);
+                }
+                // update image for event uploaded
+                $imgName = null;
+                $imgExtension = null;
+                $img = $request->files->all();
+                if (isset($img['event']['image'])){
+                    // upload the new image for event
+                    $dataImg = $img['event']['image'];
+                    $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
+                    $dataImg->move( $this->container->getParameter('event_img'), $imgName );
+                    $event->setImage($imgName);
+                }
 
                 $em->persist($event);
                 $em->flush();
@@ -229,6 +256,11 @@ class EventController extends Controller
     public function deleteAction(Request $request, Event $event)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $file_path = $this->container->getParameter('event_img').'/'.$event->getImage();
+        if(file_exists($file_path)){
+            unlink($file_path);
+        }
 
         $em->remove($event);
         $em->flush();

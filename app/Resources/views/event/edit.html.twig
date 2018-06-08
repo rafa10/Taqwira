@@ -27,6 +27,13 @@
                 {{ form_widget(form.date_end, {'attr': {'data-error': '.date_end'}}) }}
                 <div class="date_end"></div>
             </div>
+            <div class="input-field col s12 m12 ">
+                <div class="image-exist">
+                    <input type="text" id="input-file-now" name="event[image]" class="dropify" value="{{ event.image }}" data-disable-remove="true" data-default-file="{% if event.image is empty %}{% else %}{{ asset('uploads/event/'~event.image) }}{% endif %}" />
+                </div>
+                <div class="image-edit"></div>
+                <br><button type="button" class="btn-clear waves-effect waves-light blue lighten-4 blue-text btn z-depth-0 right" id="btn-edit">Modifier</button>
+            </div>
             <div class="input-field col s12">
                 <label for="content" class="active">Contenu*</label>
                 {{ form_widget(form.content, {'id': 'editable', 'attr': {'data-error': '.content'}}) }}
@@ -41,5 +48,25 @@
     {{ form_end(form, { 'render_rest': false } ) }}
 
 {% endblock %}
+
+<script>
+    $(document).ready(function() {
+        // avatar
+        var $imgEdit = '<input type="file" id="input-file-now" name="event[image]" class="dropify" data-default-file="" />';
+        $('.btn-clear').on('click', function () {
+            $('.image-exist').remove();
+            $('.image-edit').append($imgEdit);
+            $('#btn-edit').remove();
+            $('.dropify').dropify({
+                messages: {
+                    default: 'Glissez-déposez une image ici ou cliquez',
+                    replace: 'Glissez-déposez une image ou cliquez pour remplacer',
+                    remove:  'Supprimer',
+                    error:   'Désolé, le fichier trop volumineux'
+                }
+            });
+        });
+    });
+</script>
 
 

@@ -116,6 +116,11 @@ class ImageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $file_path = $this->container->getParameter('photo').'/'.$image->getUrl();
+        if(file_exists($file_path)){
+            unlink($file_path);
+        }
+
         $em->remove($image);
         $em->flush();
 

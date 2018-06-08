@@ -30,6 +30,17 @@
         <!--start container-->
         <div class="container">
             <div class="section">
+                {% if events == null %}
+                    <div id="card-alert" class="card deep-purple lighten-5">
+                        <div class="card-content deep-purple-text">
+                            <p><i class="mdi-action-info "></i> INFO : Ici vous pouvez ajouter les événements.</p>
+                            <p><i class="mdi-action-info "></i> MENU : <i class="mdi-notification-event-note"></i> Événements <i class="mdi-navigation-chevron-right"></i> <i class="mdi-content-add-circle green-text"></i></p>
+                        </div>
+                        <button type="button" class="close deep-purple-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                {% endif %}
                 <div class="divider"></div>
                 <!--DataTables example-->
                 <div id="table-datatables" class="card-panel">

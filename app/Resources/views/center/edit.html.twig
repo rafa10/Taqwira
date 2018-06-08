@@ -12,7 +12,7 @@
                     <input type="text" id="input-file-now" name="center[avatar]" class="dropify" value="{{ center.avatar }}" data-disable-remove="true" data-default-file="{% if center.avatar is empty %}{% else %}{{ asset('uploads/avatars/'~center.avatar) }}{% endif %}" />
                 </div>
                 <div class="avatar-edit"></div>
-                <br><button type="button" class="btn-clear waves-effect waves-light blue lighten-4 blue-text btn z-depth-0 right">Modifier</button>
+                <br><button type="button" class="btn-clear waves-effect waves-light blue lighten-4 blue-text btn z-depth-0 right" id="btn-edit">Modifier</button>
             </div>
             <div class="input-field col s12 m6">
                 <label for=name" class="">Nom*</label>
@@ -69,6 +69,7 @@
         $('.btn-clear').on('click', function () {
             $('.avatar-exist').remove();
             $('.avatar-edit').append($avataEdit);
+            $('#btn-edit').remove();
             $('.dropify').dropify({
                 messages: {
                     default: 'Glissez-déposez un logo ici ou cliquez',

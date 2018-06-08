@@ -39,6 +39,11 @@ class Event
     private $content;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    /**
      * @ORM\Column(type="boolean", length=1, nullable=true)
      */
     private $is_published;
@@ -278,5 +283,29 @@ class Event
     public function getIsPublished()
     {
         return $this->is_published;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param string|null $image
+     *
+     * @return Event
+     */
+    public function setImage($image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image.
+     *
+     * @return string|null
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

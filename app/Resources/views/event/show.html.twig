@@ -27,10 +27,9 @@
                     </div>
                 </div>
             </div>
-            {#<div class="card-image profile-small">#}
-                {#<img src="images/gallary/1.jpg" alt="sample" class="responsive-img profile-post-image">#}
-                {#<span class="card-title">Card Title</span>#}
-            {#</div>#}
+            <div class="card-image profile-small">
+                <img src="{{ asset('uploads/event/'~event.image) }}" alt="sample" class="responsive-img profile-post-image">
+            </div>
             <div class="card-content">
                 <p>{{ event.content|raw }}</p>
             </div>

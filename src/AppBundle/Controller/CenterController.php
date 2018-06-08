@@ -140,6 +140,12 @@ class CenterController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+
+                // delete the old avatar
+                $file_path = $this->container->getParameter('event_img').'/'.$center->getAvatar();
+                if(file_exists($file_path)){
+                    unlink($file_path);
+                }
                 // update avatar uploaded
                 $imgName = null;
                 $imgExtension = null;
@@ -269,6 +275,11 @@ class CenterController extends Controller
     public function deleteAction(Request $request, Center $center)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $file_path = $this->container->getParameter('event_img').'/'.$center->getAvatar();
+        if(file_exists($file_path)){
+            unlink($file_path);
+        }
 
         $em->remove($center);
         $em->flush();
