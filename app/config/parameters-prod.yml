@@ -1,0 +1,16 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: taqwiracxim.mysql.db
+    database_port: null
+    database_name: taqwiracxim
+    database_user: taqwiracxim
+    database_password: Rafa09312308
+    mailer_transport: smtp
+    mailer_host: ssl0.ovh.net
+    mailer_user: support@taqwira.com
+    mailer_password: bccf30d8cb045599f3aaa742579a1128
+    mailer_port: 465
+    secret: 70d4974a074fdbb4e33aa4a0199a3c11b694d767
+    avatar: uploads\avatars
+    photo: uploads\photos
+    event_img: uploads\event
