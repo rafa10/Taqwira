@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Center;
 use AppBundle\Entity\User;
 use AppBundle\Form\CenterType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,7 +27,6 @@ class CenterController extends Controller
 
     /**
      * Lists all Center entities.
-     *
      * @Route("/", name="center_index")
      * @Method("GET")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -45,7 +45,6 @@ class CenterController extends Controller
 
     /**
      * Creates a new Center entity.
-     *
      * @Route("/new", name="center_new")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -61,7 +60,9 @@ class CenterController extends Controller
             'action' => $this->generateUrl('center_new')
         ));
 
-        $form = $this->builderFormService($form);
+        // Liste all services
+        $services = $em->getRepository('AppBundle:Service')->findAll();
+        $form = $this->builderFormService($form, $services);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -74,7 +75,7 @@ class CenterController extends Controller
 
             $originName = $dataImg->getClientOriginalName();
             $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
-            $dataImg->move( $this->container->getParameter('avatar'), $imgName );
+            $dataImg->move( $this->container->getParameter('avatar_directory'), $imgName );
             // $file->setName($dataName);
             $center->setAvatar($imgName);
 
@@ -114,7 +115,6 @@ class CenterController extends Controller
 
     /**
      * Displays a form to edit an existing Center entity.
-     *
      * @Route("/{id}/edit", name="center_edit")
      * @Method({"GET", "POST"})
      * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
@@ -134,26 +134,27 @@ class CenterController extends Controller
             'action' => $this->generateUrl('center_edit',array('id'=>$center->getId()))
         ));
 
-        $form = $this->builderFormService($form);
+        // Liste all services
+        $services = $em->getRepository('AppBundle:Service')->findAll();
+        $form = $this->builderFormService($form, $services);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
 
-                // delete the old avatar
-                $file_path = $this->container->getParameter('event_img').'/'.$center->getAvatar();
-                if(file_exists($file_path)){
-                    unlink($file_path);
-                }
                 // update avatar uploaded
                 $imgName = null;
                 $imgExtension = null;
                 $img = $request->files->all();
                 if (isset($img['center']['avatar'])){
+                    // delete the old avatar
+                    $file_path = $this->container->getParameter('avatar_directory').'/'.$center->getAvatar();
+                    if(file_exists($file_path)){
+                        unlink($file_path);
+                    }
                     $dataImg = $img['center']['avatar'];
                     $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
-                    $dataImg->move( $this->container->getParameter('avatar'), $imgName );
+                    $dataImg->move( $this->container->getParameter('avatar_directory'), $imgName );
                     $center->setAvatar($imgName);
                 }
 
@@ -205,7 +206,6 @@ class CenterController extends Controller
 
     /**
      * disable existing Center entity.
-     *
      * @Route("/{id}/disable", name="center_disable")
      * @Method({"GET"})
      * @Security("has_role('ROLE_SUPER_ADMIN')")
@@ -276,7 +276,7 @@ class CenterController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $file_path = $this->container->getParameter('event_img').'/'.$center->getAvatar();
+        $file_path = $this->container->getParameter('avatar_directory').'/'.$center->getAvatar();
         if(file_exists($file_path)){
             unlink($file_path);
         }
@@ -295,16 +295,68 @@ class CenterController extends Controller
 
     }
 
+//    ==================================================================================================================
+//    Form Builder =====================================================================================================
+//    ==================================================================================================================
+
+    /**
+     * form builder Days
+     * @param $form
+     * @param $days
+     * @return Form
+     */
+    public function buildFormDays($form, $days)
+    {
+        /* @var Form $form */
+        $listDays = $this->listAllDays($days);
+
+        $form
+            ->add('day', ChoiceType::class, [
+                    'choices' => $listDays,
+                    'mapped' => false,
+                    'multiple' => true,
+                ]
+            )
+        ;
+
+        return $form;
+    }
+
+    /**
+     * list all services in array
+     * @param $services
+     * @return array
+     */
+    public function listAllServices($services)
+    {
+        $servicesAll = [];
+        foreach ($services as $service) {
+            $serviceByName = $service->getName();
+            $servicesAll[$serviceByName] = $service->getId();
+        }
+
+        return $servicesAll;
+    }
+
 
     /**
      * Builder form service for center entity
      * @param $form
      * @return Form
      */
-    function builderFormService($form)
+    function builderFormService($form, $services)
     {
         /* @var Form $form */
-        $form->add('service', null, array());
+        $listServices = $this->listAllServices($services);
+
+        $form
+            ->add('service', ChoiceType::class, [
+                    'choices' => $listServices,
+                    'mapped' => false,
+                    'multiple' => true,
+                ]
+            )
+        ;
 
         return $form;
     }

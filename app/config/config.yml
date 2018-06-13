@@ -7,6 +7,9 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    avatar_directory: '%kernel.root_dir%/../web/uploads/avatars'
+    photo_directory: '%kernel.root_dir%/../web/uploads/photos'
+    event_directroy: '%kernel.root_dir%/../web/uploads/event'
 
 framework:
     #esi:             ~

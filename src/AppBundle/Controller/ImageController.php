@@ -75,17 +75,13 @@ class ImageController extends Controller
 
             $originName = $dataImg->getClientOriginalName();
             $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
-            $dataImg->move( $this->container->getParameter('photo'), $imgName );
+            $dataImg->move( $this->container->getParameter('photo_directory'), $imgName );
 
             $image->setName($originName);
             $image->setUrl($imgName);
 
             $em->persist($image);
             $em->flush();
-
-//            $request->getSession()
-//                ->getFlashBag()
-//                ->add('success', 'The image successfully created!');
 
             $payload=array();
             $payload['status']='ok';
@@ -116,17 +112,13 @@ class ImageController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $file_path = $this->container->getParameter('photo').'/'.$image->getUrl();
+        $file_path = $this->container->getParameter('photo_directory').'/'.$image->getUrl();
         if(file_exists($file_path)){
             unlink($file_path);
         }
 
         $em->remove($image);
         $em->flush();
-
-//        $request->getSession()
-//            ->getFlashBag()
-//            ->add('success', 'The image successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';

@@ -95,7 +95,7 @@ class EventController extends Controller
 
             $originName = $dataImg->getClientOriginalName();
             $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
-            $dataImg->move( $this->container->getParameter('event_img'), $imgName );
+            $dataImg->move( $this->container->getParameter('event_directory'), $imgName );
             // $file->setName($dataName);
             $event->setImage($imgName);
 
@@ -116,7 +116,7 @@ class EventController extends Controller
         $payload=array();
         $payload['status']='ok';
         $payload['page']='new';
-        $payload['html'] = $this->renderView('Event/new.html.twig', array(
+        $payload['html'] = $this->renderView('event/new.html.twig', array(
             'form' => $form->createView(),
         ));
 
@@ -148,7 +148,7 @@ class EventController extends Controller
             if ($form->isValid()) {
 
                 // delete the old image for event
-                $file_path = $this->container->getParameter('event_img').'/'.$event->getImage();
+                $file_path = $this->container->getParameter('event_directory').'/'.$event->getImage();
                 if(file_exists($file_path)){
                     unlink($file_path);
                 }
@@ -160,7 +160,7 @@ class EventController extends Controller
                     // upload the new image for event
                     $dataImg = $img['event']['image'];
                     $imgName = md5(uniqid()). '.'. $dataImg->guessExtension();
-                    $dataImg->move( $this->container->getParameter('event_img'), $imgName );
+                    $dataImg->move( $this->container->getParameter('event_directory'), $imgName );
                     $event->setImage($imgName);
                 }
 
@@ -206,9 +206,9 @@ class EventController extends Controller
         $em->persist($event);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The event successfully disable to published!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The event successfully disable to published!');
 
         $payload = [];
         $payload['status'] = 'ok';
@@ -234,9 +234,9 @@ class EventController extends Controller
         $em->persist($event);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The center successfully enable to published!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The center successfully enable to published!');
 
         $payload = [];
         $payload['status'] = 'ok';
@@ -257,7 +257,7 @@ class EventController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $file_path = $this->container->getParameter('event_img').'/'.$event->getImage();
+        $file_path = $this->container->getParameter('event_directory').'/'.$event->getImage();
         if(file_exists($file_path)){
             unlink($file_path);
         }
@@ -265,9 +265,9 @@ class EventController extends Controller
         $em->remove($event);
         $em->flush();
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add('success', 'The event successfully deleted!');
+//        $request->getSession()
+//            ->getFlashBag()
+//            ->add('success', 'The event successfully deleted!');
 
         $payload=array();
         $payload['status']='ok';
